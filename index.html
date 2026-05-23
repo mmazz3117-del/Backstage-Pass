@@ -1662,6 +1662,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
           <button class="genre-pick-btn" data-genre="Top 40" onclick="toggleGenre('Top 40',this)">📻 Top 40</button>
           <button class="genre-pick-btn" data-genre="Rap" onclick="toggleGenre('Rap',this)">🎧 Rap</button>
           <button class="genre-pick-btn" data-genre="Soundtrack" onclick="toggleGenre('Soundtrack',this)">🎬 Soundtrack</button>
+          <button class="genre-pick-btn" data-genre="Lilith's Choice" onclick="toggleGenre('Lilith\'s Choice',this)" style="border-color:#e879f9;color:#e879f9;background:rgba(232,121,249,.08);">🌸 Lilith's Choice</button>
         </div>
         <div id="filterSummary" style="text-align:center;margin-top:8px;font-size:.72rem;color:var(--muted);min-height:18px;"></div>
       </div>
@@ -1761,6 +1762,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
       <button class="genre-wc-btn" onclick="wcPickGenre('Top 40',this)">📻 Top 40</button>
       <button class="genre-wc-btn" onclick="wcPickGenre('Rap',this)">🎧 Rap</button>
       <button class="genre-wc-btn" onclick="wcPickGenre('Soundtrack',this)">🎬 Soundtrack</button>
+      <button class="genre-wc-btn" onclick="wcPickGenre('Lilith\'s Choice',this)" style="border-color:#e879f9;color:#e879f9;">🌸 Lilith's Choice</button>
     </div>
     <button class="splash-start-btn" style="font-size:1.1rem;padding:12px 28px" onclick="wcConfirm()">🎲 Ask This!</button>
   </div>
@@ -2015,7 +2017,7 @@ const TRIVIA={
       {genre:'Rock',q:"'Go Your Own Way' was by:",a:["The Eagles","Fleetwood Mac","Steely Dan","Doobie Brothers"],c:1},
       {genre:'Hard Rock',q:"'Smoke on the Water' is by:",a:["Black Sabbath","Deep Purple","Led Zeppelin","Uriah Heep"],c:1},
       {genre:'Pop',q:"'Fernando' was by:",a:["ABBA","Boney M","The Carpenters","Olivia Newton-John"],c:0},
-      {genre:'Rock',q:"'Roxanne' was The Police's first big hit — what is it about?",a:["A town","A woman who works the street","A car","A hurricane"],c:1},
+      {genre:'Rock',q:"The Police released 'Roxanne' as their debut single in what year?",a:["1977","1978","1979","1980"],c:1},
       {genre:'Top 40',q:"'September' was by Earth, Wind &:",a:["Fire","Air","Water","Rain"],c:0},
     ],
     '80s':[
@@ -3449,14 +3451,14 @@ const MASTER_BANK=[
   {diff:"easy",decade:"70s",genre:"Soundtrack",q:"'Saturday Night Fever' — the Bee Gees recorded the soundtrack in just how many days?",a:["4","7","9","14"],c:1},
   {diff:"easy",decade:"70s",genre:"Rock",q:"'Roxanne' by The Police — what color light does Roxanne need to put on?",a:["Blue","Green","Red","White"],c:2},
   {diff:"easy",decade:"70s",genre:"Pop",q:"'Killing Me Softly' — Roberta Flack heard the song on a plane. The song was about a performance by:",a:["James Taylor","Don McLean","Cat Stevens","Jackson Browne"],c:1},
-  {diff:"easy",decade:"70s",genre:"Hard Rock",q:"'Smoke on the Water' — the real fire that inspired the song burned down which venue?",a:["The Montreux Casino","The Palais des Sports","The Fillmore","The Rainbow"],c:0},
-  {diff:"easy",decade:"70s",genre:"Top 40",q:"'My Sharona' by The Knack was recorded in how many takes?",a:["1","3","5","10"],c:0},
+  {diff:"medium",decade:"70s",genre:"Hard Rock",q:"'Smoke on the Water' — the real fire that inspired the song burned down which venue?",a:["The Montreux Casino","The Palais des Sports","The Fillmore","The Rainbow"],c:0},
+  {diff:"hard",decade:"70s",genre:"Top 40",q:"'My Sharona' by The Knack was recorded in how many takes?",a:["1","3","5","10"],c:0},
   {diff:"easy",decade:"70s",genre:"Soundtrack",q:"'Grease' was set in which fictional high school?",a:["Rydell High","Grease High","Ridgely High","Sandy High"],c:0},
-  {diff:"easy",decade:"70s",genre:"Rock",q:"'Stairway to Heaven' — the acoustic guitar intro is played in which tuning?",a:["Standard","Drop D","DADGAD","Open G"],c:2},
-  {diff:"easy",decade:"70s",genre:"Pop",q:"'I Will Survive' was originally the B-side. The A-side was called:",a:["Never Can Say Goodbye","Casanova Brown","Substitute","I Am What I Am"],c:1},
-  {diff:"easy",decade:"70s",genre:"Hard Rock",q:"'Ace of Spades' — what was Lemmy's birth name?",a:["Ian Fraser Kilmister","Lemmy Kilmister","Ian Kilmister","Fraser Lemmy"],c:0},
-  {diff:"easy",decade:"70s",genre:"Top 40",q:"'Bohemian Rhapsody' — the video was directed by:",a:["David Mallet","Bruce Gowers","Julien Temple","Don Letts"],c:1},
-  {diff:"easy",decade:"70s",genre:"Soundtrack",q:"'Gonna Fly Now' — who composed it?",a:["Bill Conti","John Williams","Jerry Goldsmith","Ennio Morricone"],c:0},
+  {diff:"hard",decade:"70s",genre:"Rock",q:"'Stairway to Heaven' — the acoustic guitar intro is played in which tuning?",a:["Standard","Drop D","DADGAD","Open G"],c:2},
+  {diff:"medium",decade:"70s",genre:"Pop",q:"'I Will Survive' was originally the B-side. The A-side was called:",a:["Never Can Say Goodbye","Casanova Brown","Substitute","I Am What I Am"],c:1},
+  {diff:"medium",decade:"70s",genre:"Hard Rock",q:"'Ace of Spades' — what was Lemmy's birth name?",a:["Ian Fraser Kilmister","Lemmy Kilmister","Ian Kilmister","Fraser Lemmy"],c:0},
+  {diff:"medium",decade:"70s",genre:"Top 40",q:"'Bohemian Rhapsody' — the video was directed by:",a:["David Mallet","Bruce Gowers","Julien Temple","Don Letts"],c:1},
+  {diff:"medium",decade:"70s",genre:"Soundtrack",q:"'Gonna Fly Now' — who composed it?",a:["Bill Conti","John Williams","Jerry Goldsmith","Ennio Morricone"],c:0},
   {diff:"medium",decade:"70s",genre:"Rock",q:"'Dream On' — Aerosmith's debut album was recorded in which city?",a:["Boston","New York","Los Angeles","Nashville"],c:0},
   {diff:"medium",decade:"70s",genre:"Pop",q:"'Tapestry' — Carole King played piano on the album. Who played guitar?",a:["James Taylor","Joni Mitchell","Danny Kortchmar","All three at different points"],c:2},
   {diff:"medium",decade:"70s",genre:"Hard Rock",q:"'Iron Man' — what key is the main riff in?",a:["E","A","B","D"],c:0},
@@ -5878,7 +5880,79 @@ function bpTopicArtist(q){
     ['tlc', /\btlc\b|no scrubs|waterfalls/],
     ['usher', /\busher\b|yeah!|burn\b|u got it bad/],
     ['rihanna', /rihanna|umbrella|disturbia/],
-    ['taylorswift', /taylor swift|shake it off|love story/]
+    ['radiohead', /radiohead|thom yorke|creep\b|pablo honey|ok computer|kid a|karma police/],
+    ['soundgarden', /soundgarden|chris cornell|black hole sun|spoonman|superunknown|badmotorfinger/],
+    ['aliceInChains', /alice in chains|layne staley|jar of flies|dirt\b|rooster\b|would\b/],
+    ['smashingPumpkins', /smashing pumpkins|billy corgan|siamese dream|mellon collie|1979\b|today\b/],
+    ['pearlJam', /pearl jam|eddie vedder|ten\b|vs\b album|jeremy\b|even flow|alive\b/],
+    ['alanisMorissette', /alanis morissette|jagged little pill|ironic\b|you oughta know|hand in my pocket/],
+    ['tlc', /\btlc\b|no scrubs|waterfalls|crazysexycool|t-boz|left eye|chilli/],
+    ['usher', /\busher\b|yeah!|burn\b|u got it bad|confessions/],
+    ['rihanna', /rihanna|umbrella|disturbia|good girl gone bad/],
+    ['taylorSwift', /taylor swift|shake it off|love story|fearless/],
+    ['santana', /\bsantana\b|carlos santana|smooth\b feat|black magic woman/],
+    ['sherylCrow', /sheryl crow|tuesday night music club|all i wanna do/],
+    ['cher', /\bcher\b|believe\b|if i could turn back time/],
+    ['greenDay', /green day|basket case|boulevard of broken dreams|dookie|american idiot/],
+    ['blink182', /blink.?182|all the small things|what's my age again|dammit\b/],
+    ['fallOutBoy', /fall out boy|sugar we're goin down|dance dance|thnks fr th mmrs/],
+    ['myChemicalRomance', /my chemical romance|black parade|helena|welcome to the black parade/],
+    ['eminem', /eminem|slim shady|lose yourself|stan\b|8 mile|marshall mathers/],
+    ['tupac', /2pac|tupac|california love|dear mama|all eyez|changes\b/],
+    ['notoriousBig', /notorious b.?i.?g|biggie|big poppa|juicy|ready to die|hypnotize/],
+    ['beyonce', /beyonce|beyoncé|crazy in love|single ladies|lemonade/],
+    ['britneySpears', /britney spears|baby one more time|toxic|oops i did it again/],
+    ['destinysChild', /destiny's child|bills bills|say my name|bootylicious/],
+    ['jayz', /jay.?z|hova|99 problems|empire state of mind|blueprint/],
+    ['kanye', /kanye west|college dropout|gold digger|graduation/],
+    ['outkast', /outkast|hey ya|ms jackson|speakerboxxx|aquemini|atliens/],
+    ['missy', /missy elliott|get ur freak on|work it\b|pass that dutch/],
+    ['lilvwayne', /lil wayne|tha carter|lollipop|a milli/],
+    ['linkinPark', /linkin park|hybrid theory|in the end|numb\b|crawling/],
+    ['evanescence', /evanescence|bring me to life|amy lee|fallen\b album/],
+    ['paramore', /paramore|hayley williams|misery business|decode\b/],
+    ['killers', /the killers|mr brightside|somebody told me|all these things/],
+    ['strokes', /the strokes|last nite|reptilia|is this it/],
+    ['arcticMonkeys', /arctic monkeys|r u mine|do i wanna know|i bet you look/],
+    ['coldplay', /coldplay|yellow\b|clocks\b|the scientist|fix you|chris martin/],
+    ['snowPatrol', /snow patrol|chasing cars|run\b ft snow/],
+    ['muse', /\bmuse\b|matt bellamy|supermassive black hole|uprising\b/],
+    ['whitStripes', /white stripes|jack white|seven nation army|fell in love with a girl/],
+    ['bjork', /bj.rk|bjork|human behaviour|hyperballad|army of me|vespertine|homogenic/],
+    ['portishead', /portishead|glory box|sour times|beth gibbons|geoff barrow/],
+    ['massiveAttack', /massive attack|unfinished sympathy|teardrop|safe from harm|angel\b.*massive/],
+    ['daftPunk', /daft punk|one more time|harder better faster|around the world|get lucky|thomas bangalter/],
+    ['gorillaz', /gorillaz|clint eastwood|feel good inc|dare\b.*gorillaz|damon albarn/],
+    ['pjHarvey', /pj harvey|polly jean harvey|to bring you my love|stories from the city/],
+    ['joniMitchell', /joni mitchell|big yellow taxi|both sides now|court and spark|blue\b.*joni|clouds\b.*mitchell/],
+    ['janetJackson', /janet jackson|control album|rhythm nation|nasty\b.*janet|what have you done for me/],
+    ['davidBowie', /david bowie|ziggy stardust|major tom|space oddity|let's dance|changes\b.*bowie|heroes\b.*bowie/],
+    ['springsteen', /bruce springsteen|springsteen|born to run|darkness on the edge|nebraska\b|thunder road/],
+    ['marvingaye', /marvin gaye|what's going on|let's get it on|heard it through the grapevine|sexual healing/],
+    ['jamesBrown', /james brown|godfather of soul|sex machine|cold sweat|funky drummer|please please please/],
+    ['eltonJohn', /elton john|rocket man|crocodile rock|tiny dancer|your song|bennie and the jets/],
+    ['taylorSwiftEras', /shake it off|blank space|bad blood|anti.hero|cruel summer|cardigan|willow|all too well|tortured poets|fearless|1989|reputation|folklore|evermore|midnights|lover album|eras tour/],
+    ['oliviaRodrigo', /olivia rodrigo|drivers license|good 4 u|brutal\b|vampire\b|sour album|guts album|deja vu.*olivia|lacy\b|making the bed/],
+    ['selenaGomez', /selena gomez|come & get it|the heart wants|lose you to love me|bad liar|revival album|rare album|wolves\b.*selena|de una vez/],
+    ['gracieAbrams', /gracie abrams|that's so true|i love you i'm sorry|secret of us|good riddance.*gracie|amelie\b.*gracie|block me out/],
+    ['sabrinaCarpenter', /sabrina carpenter|espresso\b|please please please|short n sweet|nonsense\b.*sabrina|feather\b.*sabrina|skin\b.*sabrina|emails i can't send/],
+    ['robbieWilliams', /robbie williams|angels\b.*robbie|rock dj|millennium\b|let me entertain/],
+    ['kylie', /kylie minogue|cant get you out of my head|spinning around|love at first sight.*kylie|slow\b.*kylie/],
+    ['craigDavid', /craig david|fill me in|7 days.*craig|re.rewind/],
+    ['josStone', /joss stone|you had me|right to be wrong|soul sessions/],
+    ['macyGray', /macy gray|i try\b.*macy|i try\b.*gray/],
+    ['leonaLewis', /leona lewis|bleeding love/],
+    ['vanessaCarlton', /vanessa carlton|a thousand miles/],
+    ['colbieCaillat', /colbie caillat|bubbly\b.*colbie|realize\b.*caillat/],
+    ['natashaBedingfield', /natasha bedingfield|unwritten\b.*bedingfield|these words\b.*bedingfield/],
+    ['corinneBaileyRae', /corinne bailey rae|put your records on|like a star\b.*corinne/],
+    ['selenGomez', /selena gomez|naturally\b.*gomez|falling down\b.*gomez|wizards.*waverly/],
+    ['shakira', /\bshakira\b|hips dont lie|whenever wherever|laundry service|waka waka/],
+    ['nellyFurtado', /nelly furtado|maneater\b.*furtado|promiscuous\b|im like a bird/],
+    ['brandy', /\bbrandy\b|have you ever.*brandy|the boy is mine.*brandy/],
+    ['monica', /\bmonica\b|the boy is mine.*monica|angel of mine|the first night/],
+    ['ashanti', /\bashanti\b|foolish\b.*ashanti|always on time.*ashanti/],
+    ['ciara', /\bciara\b|goodies\b.*ciara|1 2 step/],
   ];
   for(const [id,re] of topics){ if(re.test(combined)) return id; }
   return bpCorrectAnswer(q);
@@ -9362,6 +9436,727 @@ EXPANSION_PACK_7.forEach(q => {
 });
 console.log('EXPANSION_PACK_7: added ' + EXPANSION_PACK_7.length + ' questions.');
 
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 8 — Hand-authored, difficulty-calibrated, "aha-moment" tested
+// Guardrails:
+//   EASY   = casual listener knows this without Googling
+//   MEDIUM = fan of the era would likely know this
+//   HARD   = requires deeper knowledge; satisfying to learn when wrong
+//   No recording-session minutiae at easy/medium
+//   Song title in quotes in every question for deduplication fingerprinting
+//   No artist appearing more than 3 times per decade in this pack
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_8 = [
+
+  // ── 1950s ──
+  {diff:'easy',decade:'50s',genre:'Rock',q:"'Johnny B. Goode' was written and performed by Chuck Berry — in the song, Johnny could play guitar just like:",a:["Elvis Presley","Ringing a bell","A-ringin' a bell","A-ringin' a bell"],c:2},
+  {diff:'easy',decade:'50s',genre:'Pop',q:"'Whole Lotta Shakin' Goin On' was a 1957 hit for:",a:["Elvis Presley","Jerry Lee Lewis","Fats Domino","Little Richard"],c:1},
+  {diff:'easy',decade:'50s',genre:'Rock',q:"'That'll Be the Day' was by Buddy Holly and which band?",a:["The Comets","The Crickets","The Flames","The Rebels"],c:1},
+  {diff:'medium',decade:'50s',genre:'Pop',q:"'Mona Lisa' won the Academy Award for Best Original Song and was performed by:",a:["Frank Sinatra","Dean Martin","Nat King Cole","Perry Como"],c:2},
+  {diff:'medium',decade:'50s',genre:'Rock',q:"'Bo Diddley' — the song that launched Bo Diddley's career used a rhythm pattern named after him. That beat is based on which African rhythm?",a:["Clave","Hambone","Shave and a haircut","All three"],c:1},
+  {diff:'medium',decade:'50s',genre:'Top 40',q:"'Maybelline' was Chuck Berry's debut single — it reached #1 on the R&B chart and #5 on the pop chart. The song was co-credited to which two DJs in exchange for airplay?",a:["Dick Clark and Alan Freed","Alan Freed and Russ Fratto","Murray the K and Dick Clark","Alan Freed and Murray the K"],c:1},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Good Golly Miss Molly' was recorded by Little Richard in 1958 but written a few years earlier — the original lyricist who sold the rights was:",a:["Robert Blackwell","John Marascalco","Lloyd Price","Bumps Blackwell"],c:1},
+  {diff:'hard',decade:'50s',genre:'Pop',q:"'Searchin'' by The Coasters reached #1 on the R&B chart in 1957 — it was also notable for being one of the first songs to name-check pop-culture detectives. Which was NOT mentioned?",a:["Sam Spade","Sherlock Holmes","Charlie Chan","Philip Marlowe"],c:3},
+
+  // ── 1960s ──
+  {diff:'easy',decade:'60s',genre:'Rock',q:"'A Hard Day's Night' was the title of both a Beatles song and:",a:["A radio special","A concert film","A studio album only","A TV movie"],c:1},
+  {diff:'easy',decade:'60s',genre:'Soul',q:"'My Girl' was a #1 hit for The Temptations in 1965 — who wrote it?",a:["Berry Gordy","Holland-Dozier-Holland","Smokey Robinson and Ronald White","Marvin Gaye"],c:2},
+  {diff:'easy',decade:'60s',genre:'Folk',q:"'Blowin' in the Wind' was written and recorded by Bob Dylan in which year?",a:["1961","1962","1963","1964"],c:1},
+  {diff:'medium',decade:'60s',genre:'Rock',q:"'Paint It Black' by The Rolling Stones features a prominent sitar. Who played it on the recording?",a:["George Harrison","Brian Jones","Keith Richards","Andrew Loog Oldham"],c:1},
+  {diff:'medium',decade:'60s',genre:'Soul',q:"'Chain of Fools' was recorded by Aretha Franklin in 1967 — the song was written by:",a:["Carole King","Don Covay","Curtis Mayfield","Holland-Dozier-Holland"],c:1},
+  {diff:'medium',decade:'60s',genre:'Top 40',q:"'The Twist' by Chubby Checker is the only song to reach #1 on the Billboard Hot 100 twice — in which two years?",a:["1959 and 1960","1960 and 1961","1960 and 1962","1961 and 1962"],c:2},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'Strawberry Fields Forever' and 'Penny Lane' were released as a double A-side single in 1967 — it was notable because it was the first Beatles single since 1963 that:",a:["Did not reach #1 in the UK","Was not performed live","Featured session musicians","Had no B-side"],c:0},
+  {diff:'hard',decade:'60s',genre:'Folk',q:"'The Sound of Silence' was originally released in 1964 to little commercial notice. It became a hit in 1966 after producer Tom Wilson secretly overdubbed electric instruments — without telling:",a:["Columbia Records","Art Garfunkel","Paul Simon","Either Simon or Garfunkel"],c:3},
+
+  // ── 1970s ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'More Than a Feeling' was the debut hit for which Boston-based rock band?",a:["Foreigner","Kansas","Boston","Toto"],c:2},
+  {diff:'easy',decade:'70s',genre:'Pop',q:"'Waterloo' was the ABBA song that won the Eurovision Song Contest in 1974 — which country did ABBA represent?",a:["Denmark","Norway","Sweden","Finland"],c:2},
+  {diff:'easy',decade:'70s',genre:'Funk',q:"'Superstition' was a 1972 funk classic by:",a:["James Brown","Sly Stone","Stevie Wonder","George Clinton"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Fast Car' was a breakthrough hit for Tracy Chapman — but it was released in which year?",a:["1985","1986","1987","1988"],c:3},
+  {diff:'medium',decade:'70s',genre:'Disco',q:"'Le Freak' by Chic was written after Nile Rodgers and Bernard Edwards were turned away from which famous New York nightclub?",a:["Max's Kansas City","CBGB","Studio 54","The Limelight"],c:2},
+  {diff:'medium',decade:'70s',genre:'Hard Rock',q:"'Paranoid' by Black Sabbath was written as a filler track and recorded in approximately how many minutes?",a:["5","10","15","25"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Roxanne' by The Police was recorded during a South American tour and is set in which city?",a:["Buenos Aires","Rio de Janeiro","Paris","London"],c:2},
+  {diff:'hard',decade:'70s',genre:'Funk',q:"'Give Up the Funk (Tear the Roof off the Sucker)' is by Parliament — George Clinton's Parliament-Funkadelic acts were sometimes called P-Funk. How many members were in the Parliament-Funkadelic collective at its peak?",a:["Around 15","Around 25","Over 35","Over 50"],c:2},
+
+  // ── 1980s ──
+  {diff:'easy',decade:'80s',genre:'Pop',q:"'Like a Prayer' was from which Madonna album?",a:["True Blue","Like a Virgin","Like a Prayer","Immaculate Collection"],c:2},
+  {diff:'easy',decade:'80s',genre:'Rock',q:"'With or Without You' was a #1 hit for which Irish band?",a:["The Pogues","The Waterboys","U2","Sinead O'Connor"],c:2},
+  {diff:'easy',decade:'80s',genre:'Rap',q:"'Fight the Power' was recorded by Public Enemy for which Spike Lee film?",a:["She's Gotta Have It","School Daze","Do the Right Thing","Jungle Fever"],c:2},
+  {diff:'medium',decade:'80s',genre:'New Wave',q:"'Once in a Lifetime' is a 1980 song by Talking Heads — the music video was choreographed to resemble what kind of performance?",a:["Evangelical preacher","Classical conductor","Punk dancer","Kabuki theater"],c:0},
+  {diff:'medium',decade:'80s',genre:'Pop',q:"'What's Love Got to Do with It' was Tina Turner's first #1 hit as a solo artist — how old was she when it reached the top?",a:["40","42","44","46"],c:2},
+  {diff:'medium',decade:'80s',genre:'Hard Rock',q:"'Welcome to the Jungle' opens the album Appetite for Destruction — the album was initially rejected by every major label before being signed to:",a:["Interscope","Geffen","Chrysalis","Elektra"],c:1},
+  {diff:'hard',decade:'80s',genre:'New Wave',q:"'Girls on Film' by Duran Duran had a notoriously explicit music video. Who directed it?",a:["Russell Mulcahy","Godley and Creme","David Mallet","Steve Barron"],c:1},
+  {diff:'hard',decade:'80s',genre:'Rap',q:"'The Message' by Grandmaster Flash and the Furious Five is considered one of hip-hop's first socially conscious songs — the line 'It's like a jungle sometimes' opens which verse?",a:["The first","The second","The chorus","The bridge"],c:0},
+
+  // ── 1990s ──
+  {diff:'easy',decade:'90s',genre:'Rock',q:"'Losing My Religion' was a 1991 hit for which band?",a:["Counting Crows","Live","R.E.M.","Matchbox Twenty"],c:2},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Baby Got Back' was a 1992 novelty-rap hit by:",a:["Vanilla Ice","MC Hammer","Sir Mix-a-Lot","Tone Loc"],c:2},
+  {diff:'easy',decade:'90s',genre:'Alternative',q:"'Basket Case' appears on which Green Day album?",a:["Kerplunk","Insomniac","Nimrod","Dookie"],c:3},
+  {diff:'medium',decade:'90s',genre:'Rock',q:"'Black Hole Sun' was a 1994 single by Soundgarden — Chris Cornell said the song came to him in about:",a:["30 seconds","15 minutes","An hour","Three days of reworking"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'No Scrubs' by TLC was a massive 1999 hit — the song was written by Kevin 'She'kspere' Briggs and which other songwriter who also co-wrote 'Bills, Bills, Bills'?",a:["Babyface","Kandi Burruss","Missy Elliott","Dallas Austin"],c:1},
+  {diff:'medium',decade:'90s',genre:'Rap',q:"'Ms. Jackson' by OutKast was inspired by a real family situation — it was written as an apology to the mother of which member's ex-girlfriend?",a:["Big Boi's","André 3000's","Both members had the same situation","Neither — it was fictional"],c:1},
+  {diff:'hard',decade:'90s',genre:'Alternative',q:"'Paranoid Android' by Radiohead from OK Computer has three distinct musical sections. The song's title references which TV character?",a:["HAL 9000","Marvin from The Hitchhiker's Guide","R2-D2","Data from Star Trek"],c:1},
+  {diff:'hard',decade:'90s',genre:'Rock',q:"'Everlong' by Foo Fighters was recorded in Dave Grohl's home studio in approximately how many days?",a:["2","5","10","21"],c:0},
+
+  // ── 2000s ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Crazy in Love' features a famous horn sample — it was sampled from a Chi-Lites song called:",a:["Are You My Woman","Have You Seen Her","Oh Girl","A Lonely Man"],c:0},
+  {diff:'easy',decade:'00s',genre:'Rock',q:"'Seven Nation Army' by The White Stripes uses a riff that sounds like bass — but it is actually played on:",a:["A baritone guitar","A bass guitar","A guitar through an octave pedal","A cello"],c:2},
+  {diff:'easy',decade:'00s',genre:'Rap',q:"'Gold Digger' by Kanye West samples Ray Charles — which Ray Charles song?",a:["Hit the Road Jack","Georgia on My Mind","I Got a Woman","Unchain My Heart"],c:2},
+  {diff:'medium',decade:'00s',genre:'Rock',q:"'Mr. Brightside' by The Killers is one of the longest-charting singles in UK history — approximately how many weeks has it spent on the chart in total across all chart re-entries?",a:["Over 100","Over 200","Over 300","Over 400"],c:2},
+  {diff:'medium',decade:'00s',genre:'Alternative',q:"'Float On' by Modest Mouse became the band's first top-40 hit in 2004 — it appeared on which album?",a:["The Moon & Antarctica","Good News for People Who Love Bad News","We Were Dead Before the Ship Even Sank","Lonesome Crowded West"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Toxic' by Britney Spears uses a sample from a 1970s Bollywood song. The original song was performed by which artist?",a:["Lata Mangeshkar","Asha Bhosle","Kavita Krishnamurthy","Usha Uthup"],c:1},
+  {diff:'hard',decade:'00s',genre:'Rock',q:"'Hotel Yorba' is a lo-fi early song by The White Stripes recorded at the Hotel Yorba in which city?",a:["Chicago","Detroit","Cleveland","Cincinnati"],c:1},
+  {diff:'hard',decade:'00s',genre:'Alternative',q:"'Such Great Heights' by The Postal Service appeared on a 2003 album — the duo of Ben Gibbard and Jimmy Tamborello named the project after the US mail system because they mailed:",a:["CDs back and forth","DAT tapes across the country","Hard drives","Sheet music"],c:0},
+];
+
+EXPANSION_PACK_8.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log('EXPANSION_PACK_8: added ' + EXPANSION_PACK_8.length + ' hand-authored questions.');
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 9 — Filling the gaps
+// Priority targets: Joni Mitchell, Janet Jackson, Björk, Portishead,
+//   Daft Punk, PJ Harvey, Massive Attack, Gorillaz; boost 50s/60s hard tier;
+//   more Springsteen, Marvin Gaye, James Brown, Bowie, Elton John.
+// Same guardrails as Pack 8.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_9 = [
+
+  // ── 1950s — boosting hard tier ──
+  {diff:'easy',decade:'50s',genre:'Rock',q:"'Long Tall Sally' was a 1956 Little Richard hit that was also covered by:",a:["Elvis Presley","The Beatles","Chuck Berry","Fats Domino"],c:1},
+  {diff:'medium',decade:'50s',genre:'Pop',q:"'Misery' and 'Ask Me Why' were the B-sides of which Beatles single — notable because it was their first UK release?",a:["Love Me Do","Please Please Me","She Loves You","From Me to You"],c:0},
+  {diff:'medium',decade:'50s',genre:'Rock',q:"'Great Balls of Fire' was recorded at Sun Studio in 1957 — during the session, Jerry Lee Lewis and producer Sam Phillips had an on-tape argument about religion. What was Lewis's concern about recording the song?",a:["It was too fast","It would be seen as devil worship","The key was wrong","The lyrics were too crude"],c:1},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Rocket 88' is often cited as the first rock and roll record — released in 1951, it was recorded by Jackie Brenston and His Delta Cats, but the backing band was actually:",a:["Muddy Waters' band","Ike Turner's Kings of Rhythm","Howlin' Wolf's band","Little Walter's Jukes"],c:1},
+  {diff:'hard',decade:'50s',genre:'Pop',q:"'Sh-Boom (Life Could Be a Dream)' was a 1954 hit that crossed over from R&B to pop — it was originally by The Chords but the pop chart was topped by a cover from:",a:["Pat Boone","The Four Aces","The Crew-Cuts","Bill Haley"],c:2},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Maybellene' by Chuck Berry was partly based on a Western swing song called 'Ida Red' by:",a:["Hank Williams","Bob Wills","Moon Mullican","Ernest Tubb"],c:1},
+  {diff:'hard',decade:'50s',genre:'Top 40',q:"'Singing the Blues' was a #1 pop hit in 1956 for Guy Mitchell — it was kept from the #1 spot on the country chart by Marty Robbins' own version for how many weeks?",a:["0 — Robbins never charted","The Mitchell version topped both charts","They traded the #1 spot for 10 weeks","Robbins blocked it for one week only"],c:2},
+
+  // ── 1960s — boosting hard tier + under-served artists ──
+  {diff:'easy',decade:'60s',genre:'Soul',q:"'What's Going On' was a 1971 Marvin Gaye album that he had to fight Motown to release — the label initially refused because they thought it was:",a:["Too political","Too long","Too quiet","Too jazzy"],c:0},
+  {diff:'medium',decade:'60s',genre:'Soul',q:"'I Heard It Through the Grapevine' was recorded first by Marvin Gaye in 1967 but held back — it was then released by which artist whose version went to #1 first?",a:["Smokey Robinson","Gladys Knight and the Pips","The Temptations","The Four Tops"],c:1},
+  {diff:'medium',decade:'60s',genre:'Funk',q:"'Cold Sweat' by James Brown in 1967 is considered a key foundation of funk — it was notable for introducing extended vamps on which element?",a:["The bass line","The one-chord groove","The horn breaks","All of these working together"],c:3},
+  {diff:'hard',decade:'60s',genre:'Soul',q:"'Ain't Too Proud to Beg' was a 1966 Temptations hit — the original lead vocalist who recorded it but was later replaced in the group was:",a:["Eddie Kendricks","David Ruffin","Paul Williams","Melvin Franklin"],c:1},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'Like a Rolling Stone' by Bob Dylan is often called the greatest rock song ever — when it was released as a single in 1965, it was the longest song ever to enter the Billboard Hot 100 at approximately:",a:["4 minutes","5 minutes","6 minutes","7 minutes"],c:2},
+  {diff:'hard',decade:'60s',genre:'Pop',q:"'Good Vibrations' by The Beach Boys cost an extraordinary sum to record for the time — approximately how much did Brian Wilson spend on it?",a:["$10,000","$25,000","$50,000","$75,000"],c:2},
+  {diff:'hard',decade:'60s',genre:'Folk',q:"'Both Sides Now' was written by Joni Mitchell and first became a hit when recorded by Judy Collins in 1968 — Mitchell herself released her version on which album?",a:["Song to a Seagull","Clouds","Ladies of the Canyon","Blue"],c:1},
+
+  // ── 1970s — Joni Mitchell, Bowie, Springsteen, James Brown ──
+  {diff:'easy',decade:'70s',genre:'Folk',q:"'Big Yellow Taxi' is a Joni Mitchell song — the famous lyric about paving paradise refers to a parking lot she saw in:",a:["Los Angeles","Hawaii","Vancouver","New York"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Space Oddity' is about a fictional astronaut named:",a:["Commander Tom","Major Tom","Captain Tom","Sergeant Tom"],c:1},
+  {diff:'medium',decade:'70s',genre:'Folk',q:"'Blue' is Joni Mitchell's 1971 album — it is widely considered her masterpiece and was recorded almost entirely with Mitchell playing which instruments?",a:["Guitar and dulcimer","Piano and dulcimer","Guitar and piano","Dulcimer, guitar, piano, and autoharp"],c:3},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Ziggy Stardust' — David Bowie's alter ego was partly inspired by which British rock musician known for outrageous costumes?",a:["Marc Bolan","Vince Taylor","Syd Barrett","Arthur Brown"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Darkness on the Edge of Town' is a Bruce Springsteen album from 1978 — it was delayed from its predecessor 'Born to Run' partly because of a legal dispute with which manager?",a:["Jon Landau","Mike Appel","Barry Bell","Ron Delsener"],c:1},
+  {diff:'medium',decade:'70s',genre:'Funk',q:"'Sex Machine' by James Brown — the 1970 recording was famously a live performance in front of a studio audience. Which musician played the bass part that drives the entire song?",a:["Bootsy Collins","Bernard Odum","Tim Drummond","Fred Thomas"],c:0},
+  {diff:'hard',decade:'70s',genre:'Folk',q:"'A Case of You' by Joni Mitchell — on the Blue album, Mitchell played a stringed instrument called an Appalachian dulcimer. She reportedly learned to play it in how many days?",a:["One afternoon","Three days","One week","One month"],c:0},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Young Americans' by David Bowie was recorded at Sigma Sound Studios in Philadelphia with a session musician who would go on to massive fame — he played guitar on the track and is:",a:["Luther Vandross","Carlos Alomar","Andy Newmark","David Sanborn"],c:1},
+
+  // ── 1980s — Janet Jackson, Prince, Bowie, Springsteen ──
+  {diff:'easy',decade:'80s',genre:'Pop',q:"'Control' was Janet Jackson's breakthrough album — it was produced by Jimmy Jam and Terry Lewis, who were formerly members of which group?",a:["The Time","The Gap Band","New Edition","Midnight Star"],c:0},
+  {diff:'easy',decade:'80s',genre:'Rock',q:"'Born to Run' has become the unofficial anthem of which US state?",a:["New York","Pennsylvania","New Jersey","Connecticut"],c:2},
+  {diff:'medium',decade:'80s',genre:'Pop',q:"'Nasty' by Janet Jackson was a 1986 hit — in the song, what does Janet tell a group of men on the street?",a:["To leave her alone","That she doesn't need their compliments","That her name is not Janet but Ms. Jackson","That she's not their baby"],c:2},
+  {diff:'medium',decade:'80s',genre:'Rock',q:"'Let's Dance' was David Bowie's biggest commercial hit — the lead guitar was played by a then-unknown Texas blues guitarist who became famous shortly after. He was:",a:["Jimmie Vaughan","Stevie Ray Vaughan","Eric Johnson","Billy Gibbons"],c:1},
+  {diff:'medium',decade:'80s',genre:'Rock',q:"'Nebraska' by Bruce Springsteen was released in 1982 — it was recorded entirely on which type of device?",a:["A 4-track cassette recorder","An 8-track reel-to-reel","A 16-track studio console","A portable DAT machine"],c:0},
+  {diff:'hard',decade:'80s',genre:'Pop',q:"'When Doves Cry' by Prince has no bass guitar on it — Prince made this decision deliberately just before releasing the album. The original version had bass but he removed it because:",a:["The bass player quit","He felt it sounded too conventional","The bass was out of tune","He wanted it to sound more like his earlier work"],c:1},
+  {diff:'hard',decade:'80s',genre:'Pop',q:"'What Have You Done for Me Lately' — Janet Jackson's first single from Control reached #4 on the pop chart. Her previous two albums had been commercial failures, and Control was made with Jimmy Jam and Terry Lewis after she fired which family member as her manager?",a:["Her father Joe Jackson","Her brother Jermaine","Her brother Jackie","Her father and Jackie together"],c:0},
+
+  // ── 1990s — Björk, Portishead, PJ Harvey, Massive Attack ──
+  {diff:'easy',decade:'90s',genre:'Alternative',q:"'Human Behaviour' was the debut single from Björk's first solo album — that album was called:",a:["Post","Debut","Homogenic","Vespertine"],c:1},
+  {diff:'easy',decade:'90s',genre:'Alternative',q:"'Glory Box' is one of the signature songs of which Bristol trip-hop group?",a:["Massive Attack","Tricky","Portishead","Goldie"],c:2},
+  {diff:'easy',decade:'90s',genre:'Alternative',q:"'Unfinished Sympathy' is a landmark 1991 trip-hop song by:",a:["Portishead","Tricky","Massive Attack","Orbital"],c:2},
+  {diff:'medium',decade:'90s',genre:'Alternative',q:"'Hyperballad' by Björk — the album 'Post' was partly inspired by her move to which city?",a:["Reykjavik","Copenhagen","London","New York"],c:2},
+  {diff:'medium',decade:'90s',genre:'Alternative',q:"'To Bring You My Love' was a 1995 album by PJ Harvey — it was a major departure from her earlier guitar-driven sound toward what kind of approach?",a:["Electronic beats","Theatrical blues and gospel atmospheres","Orchestral strings","Acoustic folk"],c:1},
+  {diff:'medium',decade:'90s',genre:'Alternative',q:"'Teardrop' by Massive Attack features vocals from Elizabeth Fraser of the Cocteau Twins — the song samples an unusual rhythm that comes from which unexpected source?",a:["A heartbeat monitor","A ticking clock","A vinyl record skipping","A dripping tap"],c:0},
+  {diff:'hard',decade:'90s',genre:'Alternative',q:"'Sour Times' by Portishead samples a spy film soundtrack — the sample comes from a Lalo Schifrin piece written for which movie?",a:["Mission: Impossible","The Spy Who Loved Me","Dirty Harry","Bullitt"],c:0},
+  {diff:'hard',decade:'90s',genre:'Alternative',q:"'Stories from the City, Stories from the Sea' by PJ Harvey won the Mercury Prize in 2001 — it was the first album to win the prize when the artist was:",a:["Living outside the UK","Already nominated previously","Signed to a major label","Not British-born"],c:0},
+
+  // ── 2000s — Daft Punk, Gorillaz, filling gaps ──
+  {diff:'easy',decade:'00s',genre:'Electronic',q:"'One More Time' is a 2000 dance anthem by which French electronic duo?",a:["Justice","The Chemical Brothers","Daft Punk","Moderat"],c:2},
+  {diff:'easy',decade:'00s',genre:'Alternative',q:"'Clint Eastwood' was the debut single from which animated virtual band?",a:["The Gorillaz","Daft Punk","The Avalanches","Fatboy Slim"],c:0},
+  {diff:'medium',decade:'00s',genre:'Electronic',q:"'Get Lucky' was a 2013 Daft Punk song — but on their 2001 album 'Discovery', they sampled extensively from 1970s and 80s funk and disco. The vocoder-heavy sound they pioneered was described as making the robots sound:",a:["Inhuman and cold","Warm and soulful","Angry and distorted","Minimal and stark"],c:1},
+  {diff:'medium',decade:'00s',genre:'Alternative',q:"'Feel Good Inc.' by Gorillaz won a Grammy for Best Pop Collaboration with Vocals in 2006 — the rap was performed by:",a:["Snoop Dogg","De La Soul","Mos Def","The Pharcyde"],c:1},
+  {diff:'medium',decade:'00s',genre:'Electronic',q:"'Harder, Better, Faster, Stronger' by Daft Punk — Kanye West later sampled it for which hit?",a:["Gold Digger","Stronger","All Falls Down","Touch the Sky"],c:1},
+  {diff:'hard',decade:'00s',genre:'Alternative',q:"'Dare' by Gorillaz sampled and interpolated a song by Shaun Ryder of Happy Mondays — and Ryder himself appeared on the recording. The sample was from the Happy Mondays song:",a:["Step On","Kinky Afro","24 Hour Party People","Hallelujah"],c:0},
+  {diff:'hard',decade:'00s',genre:'Electronic',q:"'Around the World' by Daft Punk repeats the title phrase exactly 144 times — the song's structure was described by Thomas Bangalter as being influenced by the repetition technique of which composer?",a:["Philip Glass","Steve Reich","Terry Riley","John Adams"],c:1},
+  {diff:'hard',decade:'00s',genre:'Alternative',q:"'Stylo' by Gorillaz features Bobby Womack and Mos Def — it appeared on the 2010 album 'Plastic Beach'. Damon Albarn recorded the album partly on which boat?",a:["A Thames houseboat","A converted ferry in Vancouver","A yacht in the Pacific","A cruise ship in the Caribbean"],c:0},
+];
+
+EXPANSION_PACK_9.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log('EXPANSION_PACK_9: added ' + EXPANSION_PACK_9.length + ' questions (gap-filling: Björk, Portishead, Daft Punk, Gorillaz, Massive Attack, PJ Harvey + boosted 50s/60s hard tier).');
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 10 — 90s & 00s Pop Deep Dive
+// Targets every artist with zero or near-zero coverage identified in audit:
+//   Aaliyah, Monica, Brandy, Shania Twain, Sheryl Crow, Sarah McLachlan,
+//   Jewel, Ace of Base, En Vogue, SWV, All-4-One, Savage Garden, Hanson,
+//   New Kids on the Block, LeAnn Rimes, Dixie Chicks, D'Angelo, Mary J. Blige,
+//   Nelly Furtado, Fergie, Pussycat Dolls, Carrie Underwood, Katy Perry,
+//   Kesha, Lily Allen, Leona Lewis, Duffy, Colbie Caillat, Jason Mraz,
+//   John Mayer, James Blunt, Natasha Bedingfield, JoJo, Avril Lavigne,
+//   Michelle Branch, Vanessa Carlton, Ashanti, Ciara, Backstreet Boys boost.
+// Same guardrails: easy = casual listener, medium = fan, hard = deep cut.
+// Song title in quotes for deduplication fingerprinting.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_10 = [
+
+  // ══ 90s POP — Female artists ══
+
+  // Mariah Carey (1x boost — highly covered but a few key gaps)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Always Be My Baby' by Mariah Carey reached #1 in 1995 — it appeared on which album?",a:["Music Box","Daydream","Emotions","Butterfly"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Fantasy' by Mariah Carey debuted at #1 in 1995 — it was the first single by a female artist to do what?",a:["Debut at #1","Sell a million copies in a week","Stay at #1 for eight weeks","Reach #1 in 20 countries simultaneously"],c:0},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Emotions' by Mariah Carey showcases her famous whistle register — she reaches approximately which note at the top of the song?",a:["G5","C6","G6","C7"],c:3},
+
+  // Whitney Houston
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Queen of the Night' by Whitney Houston appeared on the soundtrack of which 1992 film alongside 'I Will Always Love You'?",a:["The Preacher's Wife","The Bodyguard","Waiting to Exhale","Boomerang"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'I'm Your Baby Tonight' was Whitney Houston's first album she had significant creative control over — who produced most of it?",a:["Clive Davis","L.A. Reid and Babyface","Narada Michael Walden","David Foster"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Exhale (Shoop Shoop)' was from the film Waiting to Exhale — Whitney wrote and recorded the song in a single:",a:["Afternoon","Morning session","Weekend","Week"],c:0},
+
+  // Shania Twain (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'That Don't Impress Me Much' — Shania Twain's 1999 hit lists things that don't impress her, including a man's looks and his:",a:["Money","Car","Hair","Rocket science"],c:1},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Man! I Feel Like a Woman!' — Shania Twain is from which Canadian province?",a:["Ontario","Quebec","Alberta","British Columbia"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Come On Over' by Shania Twain became the best-selling country album of all time and one of the best-selling albums ever — it was produced by her then-husband:",a:["Mutt Lange","David Foster","John Shanks","Rick Rubin"],c:0},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'You're Still the One' by Shania Twain was rejected by country radio initially because it didn't sound country enough — it won two Grammys in 1999 including:",a:["Best Country Song and Best Female Country Vocal","Best Pop Vocal Album and Record of the Year","Best Country Album and Best New Artist","Best Song Written for Visual Media and Best Country Song"],c:0},
+
+  // Sheryl Crow (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'All I Wanna Do' by Sheryl Crow was from her debut album — what is the song set at?",a:["A diner","A laundromat","A bar","A beach"],c:0},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'If It Makes You Happy' — Sheryl Crow's 1996 single starts with the lyric:",a:["I've been long, a long way from here","I belong to the Church of the Poison Mind","I've been thinking about you","I've been saving myself for you"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Tuesday Night Music Club' was Sheryl Crow's debut album — the title referred to an informal group of musicians she recorded with. Which musician in that group later claimed he co-wrote several songs?",a:["Bill Bottrell","Kevin Gilbert","Brian MacLeod","David Baerwald"],c:1},
+
+  // Sarah McLachlan (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Angel' by Sarah McLachlan was written about the death of which musician from the Smashing Pumpkins touring band?",a:["D'arcy Wretzky","Jonathan Meltzer","Jeff Buckley","Jonathan Meltzer"],c:1},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Building a Mystery' — Sarah McLachlan founded Lilith Fair in 1997, a touring festival that exclusively featured:",a:["Canadian artists","Female artists","Independent artists","Acoustic artists"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Adia' by Sarah McLachlan reached #3 on the pop chart in 1998 — her album 'Surfacing' won two Grammy Awards including Best Female Pop Vocal for which song?",a:["Building a Mystery","Adia","Angel","Sweet Surrender"],c:0},
+
+  // Jewel (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'You Were Meant for Me' by Jewel was from her debut album 'Pieces of You' — before her music career she was famously:",a:["A waitress","Living in a van","Working as a teacher","Busking in subway stations"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Hands' by Jewel is one of her signature songs — her debut album 'Pieces of You' took an unusually long time to reach platinum status, eventually becoming one of the best-selling debut albums ever, spending over how long on the chart?",a:["6 months","1 year","2 years","3 years"],c:3},
+
+  // Fiona Apple (boost from 1x)
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Criminal' by Fiona Apple won a Grammy in 1998 — its music video was controversial for featuring what?",a:["Violence","Underage-looking models in provocative poses","Drug use","Nudity"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Tidal' was Fiona Apple's 1996 debut — she was signed after a demo tape was passed around at a party in New York. She was how old when she wrote most of the album?",a:["15","16","17","18"],c:2},
+
+  // Natalie Imbruglia (boost from 4x — but all appear to be 'Torn')
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Torn' by Natalie Imbruglia was originally recorded by which artist two years earlier?",a:["Ednaswap","Alanis Morissette","Lisa Loeb","Paula Cole"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Torn' — Natalie Imbruglia is from which country?",a:["England","New Zealand","Canada","Australia"],c:3},
+
+  // Ace of Base (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'The Sign' by Ace of Base was the best-selling debut album in the US at the time — the group is from which country?",a:["Denmark","Norway","Sweden","Finland"],c:2},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'All That She Wants' — Ace of Base had a reggae-influenced pop sound. The group consisted of how many siblings?",a:["Two","Three","Four","Five"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Don't Turn Around' by Ace of Base is a cover — the original was recorded by which artist in 1986?",a:["Tina Turner","Whitney Houston","Cyndi Lauper","Aswad"],c:3},
+
+  // En Vogue (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Don't Let Go (Love)' by En Vogue was from which 1996 film soundtrack?",a:["Set It Off","Waiting to Exhale","The Preacher's Wife","Soul Food"],c:0},
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Hold On' was En Vogue's debut hit in 1990 — the group was formed in which city?",a:["Los Angeles","Atlanta","Oakland","New York"],c:2},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Free Your Mind' by En Vogue sampled a classic rock guitar riff — it was from which song?",a:["Barracuda by Heart","Walk This Way by Aerosmith","You Really Got Me by The Kinks","Communication Breakdown by Led Zeppelin"],c:0},
+
+  // SWV (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Weak' by SWV was a 1993 R&B hit — SWV stands for:",a:["Strong Women Vocalists","Sisters with Voices","Soul Women Vibing","Singing Women of Vision"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Right Here' by SWV sampled a famous Michael Jackson song — which one?",a:["Human Nature","Rock with You","Off the Wall","P.Y.T."],c:0},
+
+  // Aaliyah (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Are You That Somebody' by Aaliyah was from which 1998 animated film soundtrack?",a:["Mulan","Tarzan","Dr. Dolittle","The Lion King 2"],c:2},
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Try Again' by Aaliyah reached #1 on the Hot 100 — it was the first song to top the chart based solely on:",a:["Download sales","Airplay alone","Streaming numbers","Music video views"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Back & Forth' was Aaliyah's debut hit in 1994 — the album 'Age Ain't Nothing But a Number' was produced by which controversial figure?",a:["Timbaland","R. Kelly","Missy Elliott","Jermaine Dupri"],c:1},
+  {diff:'hard',decade:'90s',genre:'R&B',q:"'Are You That Somebody' by Aaliyah was produced by Timbaland and features an unusual baby gurgling sound in the beat — this sound was sampled from:",a:["A children's TV show","A toy","An actual baby Timbaland recorded","A sample library"],c:2},
+
+  // Monica (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'The Boy Is Mine' by Monica and Brandy was a 1998 duet that spent how many weeks at #1 — a record at the time?",a:["8","10","12","13"],c:3},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Before You Walk Out of My Life' was Monica's debut single — she was how old when it was released?",a:["13","14","15","16"],c:0},
+
+  // Brandy
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Have You Ever?' by Brandy reached #1 in 1998 — she also starred in which TV sitcom?",a:["Fresh Prince","Living Single","Moesha","Family Matters"],c:2},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'I Wanna Be Down' was Brandy's debut single — her younger brother also became a famous R&B singer. Who is he?",a:["Tank","Ray J","Omarion","Chris Brown"],c:1},
+
+  // D'Angelo (NONE → covered)
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Brown Sugar' was D'Angelo's 1995 debut album — it helped pioneer which neo-soul movement alongside artists like Erykah Badu and Maxwell?",a:["New Jack Swing","Neo-soul","Quiet storm","Alternative R&B"],c:1},
+  {diff:'hard',decade:'90s',genre:'R&B',q:"'Untitled (How Does It Feel)' by D'Angelo — the music video caused a sensation. D'Angelo later said he was uncomfortable with the attention it brought, leading to him disappearing from the music scene for nearly how long?",a:["3 years","5 years","10 years","14 years"],c:3},
+
+  // Mary J. Blige (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Real Love' by Mary J. Blige was a 1992 hit — she is known as the Queen of:",a:["R&B","Hip-hop soul","Neo-soul","New Jack Swing"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Not Gonna Cry' by Mary J. Blige was from which 1995 film?",a:["Waiting to Exhale","Boomerang","Set It Off","Poetic Justice"],c:0},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Share My World' was Mary J. Blige's 1997 album — her breakthrough debut album 'What's the 411?' was produced primarily by:",a:["Jimmy Jam and Terry Lewis","Diddy/Puff Daddy","Jermaine Dupri","L.A. Reid"],c:1},
+
+  // All-4-One (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'I Swear' by All-4-One spent 11 weeks at #1 in 1994 — it was originally a country hit for which artist?",a:["Garth Brooks","John Michael Montgomery","Clint Black","Tim McGraw"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'I Can Love You Like That' was All-4-One's follow-up — the group is from which US city?",a:["Atlanta","Los Angeles","New York","Chicago"],c:1},
+
+  // Savage Garden (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Truly Madly Deeply' by Savage Garden spent 13 weeks at #1 in Australia — the duo is from which Australian city?",a:["Sydney","Melbourne","Brisbane","Perth"],c:2},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'I Want You' was Savage Garden's debut single — the opening lyric references which iconic brand?",a:["Chupa Chups","Coca-Cola","Wrigley's","Pop Rocks"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Affirmation' was Savage Garden's second album — lead singer Darren Hayes later came out as gay. He married his partner in London in which year, when same-sex marriage was not yet legal in Australia?",a:["2004","2006","2007","2009"],c:2},
+
+  // Hanson (boost from 1x)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'MMMBop' by Hanson was released in 1997 — the three brothers are named Isaac, Taylor, and:",a:["Jordan","Zachary","Dylan","Ryan"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'MMMBop' — Hanson are from which US city?",a:["Nashville","Tulsa","Dallas","Memphis"],c:1},
+
+  // New Kids on the Block (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Step by Step' was a #1 hit for New Kids on the Block in 1990 — the group was assembled by which producer?",a:["Lou Pearlman","Maurice Starr","Clive Davis","David Foster"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Hangin' Tough' was New Kids on the Block's breakthrough album — which member went on to the biggest solo pop career?",a:["Joey McIntyre","Jordan Knight","Donnie Wahlberg","Danny Wood"],c:1},
+
+  // Backstreet Boys (boost from 1x)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'I Want It That Way' by Backstreet Boys is considered one of the greatest pop songs ever — it was written by Max Martin and:",a:["Teddy Riley","Andreas Carlsson","Denniz Pop","Timbaland"],c:1},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Everybody (Backstreet's Back)' — the Backstreet Boys were formed in which US city?",a:["New York","Los Angeles","Orlando","Atlanta"],c:2},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'As Long as You Love Me' was a 1997 Backstreet Boys hit — they were managed by Lou Pearlman, who later went to prison for running what kind of scheme?",a:["Tax evasion","Ponzi scheme","Money laundering","Insurance fraud"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Quit Playing Games (with My Heart)' was the Backstreet Boys' breakthrough US hit — they were already huge in Europe before breaking in America partly because they were signed to a European label in Germany first. That label was:",a:["BMG Germany","Jive Records Germany","Ariola","Hansa"],c:0},
+
+  // LeAnn Rimes (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'How Do I Live' by LeAnn Rimes was from the film Con Air — she was how old when she first charted country hits?",a:["11","13","14","16"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Blue' was LeAnn Rimes' debut single, styled after which classic country vocalist?",a:["Patsy Cline","Tammy Wynette","Loretta Lynn","Dolly Parton"],c:0},
+
+  // Dixie Chicks (NONE → covered)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Wide Open Spaces' by the Dixie Chicks won the Grammy for Best Country Album in 1999 — the group consists of how many members?",a:["Two","Three","Four","Five"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Cowboy Take Me Away' — the Dixie Chicks became controversial in 2003 when lead singer Natalie Maines made comments criticizing which US president at a London concert?",a:["Bill Clinton","George W. Bush","George H.W. Bush","Barack Obama"],c:1},
+
+  // Spice Girls (boost — already 9x but mostly from generated questions)
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Wannabe' by the Spice Girls — what are the Spice Girls' five individual nicknames in full?",a:["Scary, Sporty, Baby, Ginger, Posh","Wild, Athletic, Young, Red, Elegant","Fierce, Fit, Tiny, Auburn, Chic","Bold, Strong, Sweet, Flame, Cool"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'2 Become 1' by the Spice Girls was released on Christmas Day 1996 in the UK — at the time, it became the Christmas #1, outselling all other singles combined. Who produced the Spice Girls' early hits?",a:["Simon Fuller","Stock Aitken Waterman","Richard Stannard and Matt Rowe","Pete Waterman"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Say You'll Be There' — before signing with Simon Fuller's 19 Management, the Spice Girls had previously left which manager who discovered them?",a:["Chris Herbert","Bob Herbert","Simon Cowell","Pete Waterman"],c:0},
+
+  // ══ 90s R&B/Soul additional ══
+
+  // R. Kelly (boost from 1x — factual/chart only, no personal content)
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'I Believe I Can Fly' by R. Kelly was from the soundtrack of which 1996 film?",a:["Space Jam","Above the Rim","White Men Can't Jump","Blue Chips"],c:0},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Bump N' Grind' by R. Kelly spent 12 weeks at #1 on the R&B chart in 1994 — it appeared on which album?",a:["Born into the 90s","12 Play","R. Kelly","Self-Titled LP"],c:1},
+
+  // Maxwell
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Ascension (Don't Ever Wonder)' was Maxwell's debut single in 1996 — his debut album 'Maxwell's Urban Hang Suite' was considered a landmark of which genre?",a:["New Jack Swing","Neo-soul","Quiet storm","Gospel soul"],c:1},
+
+  // ══ 00s POP — comprehensive coverage ══
+
+  // Kelly Clarkson
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'A Moment Like This' was Kelly Clarkson's debut single — she won the first season of American Idol in which year?",a:["2001","2002","2003","2004"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Breakaway' — Kelly Clarkson's second album was named after a song originally recorded by which artist for the Lizzie McGuire movie?",a:["Hillary Duff","Avril Lavigne","Lindsay Lohan","Demi Lovato"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Behind These Hazel Eyes' was from Kelly Clarkson's breakthrough album 'Breakaway' — it sold over 12 million copies and was produced by which hit-maker?",a:["Max Martin and Lukasz Gottwald","Jimmy Jam and Terry Lewis","Clive Davis","John Shanks"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Since U Been Gone' was co-written by Max Martin and Lukasz Gottwald — it was originally written for which other artist before Kelly Clarkson recorded it?",a:["Pink","Avril Lavigne","Hillary Duff","Katy Perry"],c:0},
+
+  // Carrie Underwood (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Before He Cheats' by Carrie Underwood was from her debut album 'Some Hearts' — she won American Idol in which season?",a:["3rd","4th","5th","6th"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Jesus Take the Wheel' was Carrie Underwood's debut single — she is from which US state?",a:["Tennessee","Texas","Oklahoma","Alabama"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Wasted' — Carrie Underwood's debut album 'Some Hearts' became the fastest-selling debut country album in Nielsen SoundScan history. How many copies did it sell in its first week?",a:["150,000","225,000","310,000","Over 400,000"],c:1},
+
+  // Katy Perry (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'I Kissed a Girl' was Katy Perry's breakthrough hit in 2008 — before this she had released a Christian pop album under her real name. What is her real surname?",a:["Hudson","Perry","Hansen","Brand"],c:0},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Hot N Cold' — Katy Perry's 'One of the Boys' album was released in which year?",a:["2006","2007","2008","2009"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Thinking of You' by Katy Perry — her first single 'I Kissed a Girl' was kept from #1 in the UK by which song?",a:["Viva la Vida by Coldplay","Sex on Fire by Kings of Leon","Take a Bow by Rihanna","American Boy by Estelle"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Waking Up in Vegas' — 'One of the Boys' was rejected by multiple labels before Capitol Records signed Perry. Which label passed on her citing she wasn't marketable enough?",a:["Island Def Jam","Columbia","Warner Bros and Columbia both","Interscope"],c:2},
+
+  // Kesha (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'TiK ToK' by Kesha was the best-selling single of 2010 — the song opens with a reference to waking up feeling like which rapper?",a:["Jay-Z","Diddy","Lil Wayne","Kanye West"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Blah Blah Blah' by Kesha features a guest verse from which rapper?",a:["Lil Wayne","Pitbull","3OH!3","T-Pain"],c:2},
+
+  // Lily Allen (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Smile' by Lily Allen was her 2006 debut single — she is the daughter of which British actor and comedian?",a:["Ricky Gervais","Keith Allen","Billy Connolly","Steve Martin"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'LDN' — Lily Allen's debut album 'Alright Still' was originally posted for free on which platform before she was signed?",a:["YouTube","Bandcamp","MySpace","PureVolume"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Alfie' by Lily Allen is addressed to her younger brother — who is he?",a:["Alfie Allen, actor in Game of Thrones","Alfie Allen, musician","Alfie Allen, comedian","He is a fictional character"],c:0},
+
+  // Leona Lewis (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Bleeding Love' by Leona Lewis was the best-selling single of 2008 worldwide — she won which TV talent show?",a:["Pop Idol","The Voice UK","The X Factor","Britain's Got Talent"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'A Moment Like This' — wait, that's Kelly Clarkson. 'Better in Time' by Leona Lewis — her debut album 'Spirit' became the fastest-selling debut album in UK chart history at the time, selling how many copies in its first week?",a:["100,000","200,000","300,000","Over 375,000"],c:3},
+
+  // Duffy (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Mercy' by Duffy was a 2008 hit — she is from which part of the UK?",a:["England","Scotland","Northern Ireland","Wales"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Warwick Avenue' by Duffy — her debut album 'Rockferry' debuted at #1 in the UK in 2008. She was compared to which vintage soul singer for her retro sound?",a:["Aretha Franklin","Dusty Springfield","Etta James","Billie Holiday"],c:1},
+
+  // Norah Jones (boost from 1x)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Don't Know Why' by Norah Jones won Record of the Year at the Grammys in 2003 — her debut album 'Come Away with Me' won how many Grammys that night?",a:["5","7","8","9"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Come Away with Me' — Norah Jones is the daughter of which famous sitar player?",a:["Ali Akbar Khan","Zakir Hussain","Ravi Shankar","Vilayat Khan"],c:2},
+
+  // Colbie Caillat (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Bubbly' by Colbie Caillat became a hit after she posted it on which social platform in 2007?",a:["YouTube","Facebook","MySpace","PureVolume"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Realize' by Colbie Caillat — her father is Ken Caillat, who co-produced which classic Fleetwood Mac album?",a:["Tango in the Night","Rumours","Mirage","Tusk"],c:1},
+
+  // Avril Lavigne (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Complicated' was Avril Lavigne's debut single — she was how old when it was released in 2002?",a:["15","16","17","18"],c:2},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Sk8er Boi' — Avril Lavigne is from which Canadian province?",a:["British Columbia","Ontario","Quebec","Alberta"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'I'm with You' — Avril Lavigne's debut album 'Let Go' was co-written with The Matrix production team. It became the best-selling album of 2002 in which country?",a:["USA","Canada","UK","Australia"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Nobody's Home' — 'Let Go' was originally turned down by Arista Records who wanted her to record covers. She refused and was then paired with which producer/writing team?",a:["Max Martin","The Matrix","Butch Walker","Lukasz Gottwald"],c:1},
+
+  // Michelle Branch (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Everywhere' by Michelle Branch was from her 2001 album 'The Spirit Room' — she won the Grammy for Best New Artist in which year?",a:["2002","2003","2004","2005"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'The Game of Love' was a 2002 duet between Michelle Branch and which iconic guitarist?",a:["Carlos Santana","Eric Clapton","Stevie Ray Vaughan","John Mayer"],c:0},
+
+  // Vanessa Carlton (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'A Thousand Miles' by Vanessa Carlton features a distinctive piano riff — she trained at which prestigious performing arts school?",a:["Juilliard","Berklee","Manhattan School of Music","New England Conservatory"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'White Houses' by Vanessa Carlton — her debut album 'Be Not Nobody' peaked at #5 on the Billboard 200. She was on the road as a backing musician for which rock band before her solo debut?",a:["Matchbox Twenty","Sheryl Crow","Counting Crows","The Wallflowers"],c:1},
+
+  // Nelly Furtado (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'I'm Like a Bird' by Nelly Furtado won the Grammy for Best Female Pop Vocal in 2002 — she is from which country?",a:["USA","Brazil","Canada","Portugal"],c:2},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Maneater' — Nelly Furtado's 2006 comeback was produced by Timbaland. The album it came from was called:",a:["Mi Plan","Loose","Whoa Nelly!","The Spirit Indestructible"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Say It Right' was a #1 hit from Nelly Furtado's 'Loose' — what were her parents' heritage, which she has cited as an influence on her music?",a:["Brazilian and Spanish","Portuguese Azorean","Mexican and Portuguese","Cape Verdean"],c:1},
+
+  // Fergie (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'London Bridge' was Fergie's 2006 debut solo single — she was previously the female vocalist in which group?",a:["Destiny's Child","TLC","The Black Eyed Peas","En Vogue"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Big Girls Don't Cry' was Fergie's second solo single — before joining the Black Eyed Peas, she was a child actress and sang in which girl group?",a:["Wild Orchid","Dreamstreet","No Secrets","Innosense"],c:0},
+
+  // Pussycat Dolls (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Don't Cha' by the Pussycat Dolls featuring Busta Rhymes was their breakthrough hit — lead singer Nicole Scherzinger is from which US state?",a:["California","Hawaii","Florida","Nevada"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Stickwitu' by the Pussycat Dolls was their second single — the group started as a burlesque troupe in which city?",a:["Las Vegas","Miami","New York","Los Angeles"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Buttons' by the Pussycat Dolls features which rapper?",a:["Nelly","Snoop Dogg","T.I.","Busta Rhymes"],c:1},
+
+  // Ashanti (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'R&B',q:"'Always on Time' was a 2001 duet by Ashanti and Ja Rule — Ashanti is from which US state?",a:["New York","New Jersey","Georgia","California"],c:0},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'Foolish' by Ashanti samples which classic hip-hop track?",a:["Nuthin' But a G Thang by Dr. Dre","C.R.E.A.M. by Wu-Tang","Big Poppa by Biggie","Murder She Wrote by Chaka Demus"],c:0},
+
+  // Ciara (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'R&B',q:"'Goodies' was Ciara's 2004 debut single — she is from which US city?",a:["Atlanta","Dallas","Houston","Memphis"],c:0},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'1, 2 Step' by Ciara features which rapper?",a:["Timbaland","Missy Elliott","Ludacris","T-Pain"],c:1},
+
+  // Alicia Keys (boost from 3x)
+  {diff:'easy',decade:'00s',genre:'R&B',q:"'Fallin'' by Alicia Keys won Song of the Year at the Grammys in 2002 — her debut album 'Songs in A Minor' debuted at #1 and sold how many copies in its first week?",a:["150,000","235,000","310,000","Over 400,000"],c:3},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'If I Ain't Got You' by Alicia Keys was written after the death of which musician shocked her into thinking about what really mattered?",a:["Aaliyah","Left Eye","Lisa 'Left Eye' Lopes and Aaliyah both","Jam Master Jay"],c:2},
+  {diff:'hard',decade:'00s',genre:'R&B',q:"'No One' by Alicia Keys from the 2007 album 'As I Am' — Keys was classically trained and graduated early from which high school for the performing arts?",a:["LaGuardia High School","Fiorello H. LaGuardia","Professional Children's School","The Juilliard Pre-College program"],c:0},
+
+  // Jason Mraz (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'I'm Yours' by Jason Mraz spent a record 76 weeks on the Billboard Hot 100 — he is from which US state?",a:["California","Virginia","Florida","New York"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'The Remedy (I Won't Worry)' was Jason Mraz's breakthrough single in 2002 — it was written about a friend who was diagnosed with:",a:["Cancer","HIV","Lupus","MS"],c:0},
+
+  // John Mayer (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Your Body Is a Wonderland' by John Mayer won a Grammy for Best Male Pop Vocal in 2003 — he is from which US state?",a:["California","Connecticut","New York","Georgia"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Daughters' by John Mayer won Song of the Year at the 2005 Grammys — his debut album 'Room for Squares' was first self-released before being signed to which label?",a:["Columbia","Aware/Columbia","Epic","RCA"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Gravity' is a fan favorite from John Mayer's 'Continuum' album — the album marked a deliberate shift toward blues-rock. He assembled a band called The John Mayer Trio that included drummer Steve Jordan and bassist:",a:["Pino Palladino","Marcus Miller","Victor Wooten","Will Lee"],c:0},
+
+  // James Blunt (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'You're Beautiful' by James Blunt spent weeks at #1 across multiple countries in 2005 — it appeared on which album?",a:["Back to Bedlam","All the Lost Souls","Some Kind of Trouble","Moon Landing"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Goodbye My Lover' by James Blunt — before his music career he served in the British Army and was present at a tense standoff at which location in 1999?",a:["Baghdad Airport","Kabul Airport","Pristina Airport in Kosovo","Belfast"],c:2},
+
+  // Natasha Bedingfield (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Unwritten' by Natasha Bedingfield became famous in the US partly due to its use as the theme song for which reality TV show?",a:["The Hills","The O.C.","Laguna Beach","One Tree Hill"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'These Words' by Natasha Bedingfield — her brother Daniel Bedingfield also had a successful music career. His biggest hit was:",a:["If You're Not the One","Gotta Get Thru This","Never Gonna Leave Your Side","All of the above"],c:1},
+
+  // JoJo (NONE → covered)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Leave (Get Out)' was JoJo's debut single in 2004 — she was how old, making her one of the youngest artists to have a #1 hit?",a:["12","13","14","15"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Too Little Too Late' was JoJo's comeback single in 2006 — her second album stalled due to a legal dispute with which label?",a:["Epic","Blackground","Universal","Asylum"],c:1},
+
+  // Destiny's Child (boost from 6x)
+  {diff:'easy',decade:'00s',genre:'R&B',q:"'Survivor' by Destiny's Child was inspired by comments made by a departing member about the group — which member left before this album?",a:["LeToya Luckett","LaTavia Roberson","Farrah Franklin","Both LeToya and LaTavia"],c:3},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'Bootylicious' by Destiny's Child samples which Stevie Nicks song?",a:["Edge of Seventeen","Gold Dust Woman","Leather and Lace","Stand Back"],c:0},
+  {diff:'hard',decade:'00s',genre:'R&B',q:"'Say My Name' by Destiny's Child won two Grammys — the song was written by Rodney Jerkins and allegedly written in about how long?",a:["20 minutes","An hour","One afternoon","Three days"],c:0},
+
+  // Taylor Swift (boost from 1x)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Love Story' by Taylor Swift was her breakthrough pop crossover hit in 2008 — it is loosely based on which Shakespeare play?",a:["A Midsummer Night's Dream","Romeo and Juliet","Much Ado About Nothing","Othello"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'You Belong with Me' — Taylor Swift moved to Nashville at age 14 to pursue a career in country music. She is originally from which US state?",a:["Tennessee","Georgia","Pennsylvania","Virginia"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Our Song' was Taylor Swift's third single and made her the youngest person to single-handedly write and perform a #1 country song — she was how old?",a:["16","17","18","19"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Tim McGraw' was Taylor Swift's debut single — she wrote it on the last day of her freshman year of high school. The song is addressed to a then-boyfriend, and she named it after Tim McGraw because that was:",a:["His favorite singer","Her favorite singer","A song they both loved","The last song they heard together"],c:3},
+
+  // Pink (these show as 15x but most appear to be from generated questions — add real ones)
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Just Give Me a Reason' by Pink features vocals from which other artist?",a:["Fun.","Nate Ruess of Fun.","Bruno Mars","Ed Sheeran"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Stupid Girls' by Pink was a satirical music video that mocked celebrity culture — the video parody specifically featured impressions of which two celebrities?",a:["Britney Spears and Lindsay Lohan","Paris Hilton and Jessica Simpson","Lindsay Lohan and Paris Hilton","All four of them"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Missundaztood' by Pink was her second album and marked a creative break from her debut — it was co-written and produced with which rock musician?",a:["Linda Perry","Dave Navarro","Gwen Stefani","Billy Corgan"],c:0},
+
+];
+
+EXPANSION_PACK_10.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions (90s & 00s pop deep dive).');
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 11 — LILITH'S CHOICE
+// Genre: "Lilith's Choice" — dedicated category for Taylor Swift, Olivia Rodrigo,
+//   Selena Gomez, Gracie Abrams, and Sabrina Carpenter.
+// All questions use decade '00s' (the board's most recent decade) so they
+//   appear on the right section of the board. The genre tag is what makes
+//   them selectable as a dedicated filter.
+// Does not duplicate the 5 existing Taylor Swift or 3 Selena Gomez questions.
+// Difficulty guardrails same as all other packs.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_11 = [
+
+  // ══ TAYLOR SWIFT ══
+  // (5 existing: Love Story, You Belong with Me, Our Song, Tim McGraw, AOTY record)
+  // Adding broad era coverage — Fearless through Eras Tour
+
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Shake It Off' by Taylor Swift was the lead single from which album?",a:["Red","1989","Reputation","Lover"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Blank Space' by Taylor Swift plays on her media reputation for writing songs about:",a:["Heartbreak and exes","Fame and money","Being misunderstood","All of the above"],c:0},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Bad Blood' by Taylor Swift features which rapper in the music video version?",a:["Nicki Minaj","Kendrick Lamar","Cardi B","Iggy Azalea"],c:0},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Look What You Made Me Do' was the lead single from which Taylor Swift album?",a:["1989","Reputation","Lover","Folklore"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'cardigan' was the lead single from Taylor Swift's 'folklore' — it was released alongside which other single on the same day?",a:["exile","the 1","august","seven"],c:3},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Anti-Hero' by Taylor Swift spent a record 8 weeks at #1 — it is from which album?",a:["Lover","folklore","evermore","Midnights"],c:3},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Cruel Summer' by Taylor Swift became a viral hit years after release — it originally appeared on which 2019 album?",a:["Reputation","Lover","folklore","evermore"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'You Belong with Me' — Taylor Swift famously won a VMA for this video but her speech was interrupted by which artist?",a:["Beyoncé","Jay-Z","Kanye West","Lady Gaga"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'All Too Well' — the 10-minute version of Taylor Swift's song was re-released on 'Red (Taylor's Version)'. The short film she directed for it starred which actor?",a:["Jake Gyllenhaal","Dylan O'Brien","Dylan Sprouse","Paul Mescal"],c:0},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'exile' from Taylor Swift's 'folklore' is a duet with which artist?",a:["Justin Vernon","Justin Bieber","Ed Sheeran","Bon Iver"],c:3},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Fearless' won Taylor Swift the Album of the Year Grammy in 2010 — making her the youngest artist to win the award at the time. How old was she?",a:["18","19","20","21"],c:2},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'We Are Never Ever Getting Back Together' was Taylor Swift's first #1 on the Hot 100 — it debuted at #1 based on downloads alone, setting a record for first-week downloads of how many?",a:["Over 200,000","Over 300,000","Over 400,000","Over 623,000"],c:3},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'willow' was the lead single from Taylor Swift's 'evermore' — 'folklore' and 'evermore' were both produced in collaboration with Aaron Dessner of which band?",a:["Bon Iver","The National","Fleet Foxes","Sufjan Stevens' band"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Love Story' — Taylor Swift re-recorded her first six albums under 'Taylor's Version' after her masters were sold. Who originally owned those masters?",a:["Republic Records","Big Machine Records","Interscope","Columbia"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Style' from Taylor Swift's '1989' is widely believed to be about which celebrity ex?",a:["Jake Gyllenhaal","Harry Styles","John Mayer","Ed Sheeran"],c:1},
+
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'The Tortured Poets Department' by Taylor Swift — how many versions of the album were released on its launch date?",a:["2","3","4","5"],c:2},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'champagne problems' from 'evermore' — Taylor Swift has stated the album was written as a companion piece to 'folklore'. Both albums were recorded during which period?",a:["Post-Reputation tour","COVID-19 lockdown","During filming of Miss Americana","While on the Lover Fest tour"],c:1},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Treacherous' from Taylor Swift's 'Red' was voted by fans as a fan favorite — 'Red (Taylor's Version)' included how many previously unreleased vault tracks?",a:["5","7","9","10"],c:2},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'All Too Well' (10 Minute Version) became the longest song ever to reach #1 on the Hot 100. Before it, the record was held by which song?",a:["MacArthur Park","American Pie","Hey Jude","In-A-Gadda-Da-Vida"],c:1},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Down Bad' from 'The Tortured Poets Department' — Taylor Swift became the first artist to have all top 14 spots on the Hot 100 simultaneously. How many total songs from the album charted in the top 100 in its debut week?",a:["14","18","24","All 31 tracks"],c:3},
+
+  // ══ OLIVIA RODRIGO ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'drivers license' by Olivia Rodrigo debuted at #1 and broke the record for most streams in a single week — it was from which debut album?",a:["GUTS","SOUR","Livie","Drivers License EP"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'good 4 u' by Olivia Rodrigo — before her music career she was known for starring in which Disney+ series?",a:["Andi Mack","High School Musical: The Musical: The Series","Bizaardvark","Stuck in the Middle"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'brutal' is the opening track of Olivia Rodrigo's debut album — the song's guitar riff interpolates which Elvis Costello song?",a:["Pump It Up","Oliver's Army","Alison","Watching the Detectives"],c:0},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'vampire' was the lead single from Olivia Rodrigo's second album 'GUTS' — what year was it released?",a:["2021","2022","2023","2024"],c:2},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'traitor' by Olivia Rodrigo — 'SOUR' won the Grammy for Best Pop Vocal Album. How many Grammys did Olivia win at the 2022 ceremony?",a:["1","2","3","4"],c:2},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'deja vu' by Olivia Rodrigo — she is from which US state?",a:["New York","California","Florida","Texas"],c:1},
+
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'drivers license' — Olivia Rodrigo wrote the song drawing from personal experience. The bridge references a specific location — what?",a:["A movie theater","A suburb with houses she'll never own","Her high school","A grocery store parking lot"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'1 step forward, 3 steps back' from 'SOUR' interpolates which Taylor Swift song in its melody?",a:["New Year's Day","Call It What You Want","Delicate","False God"],c:0},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'lacy' from 'GUTS' — Olivia described the album as being more influenced by which musical era than her debut?",a:["90s grunge","2000s pop-punk","80s new wave","70s singer-songwriter"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'making the bed' from 'GUTS' — Olivia Rodrigo produced or co-produced several tracks. Her main collaborator and producer across both albums is:",a:["Dan Nigro","Jack Antonoff","Max Martin","Finneas"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'brutal' — Taylor Swift was given a songwriting credit on 'drivers license' because of an interpolation. Which Swift song did it reference?",a:["New Year's Day","Death By a Thousand Cuts","The Archer","Afterglow"],c:0},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'enough for you' from 'SOUR' — Olivia Rodrigo's debut album was recorded and written largely during COVID lockdown. The song 'hope ur ok' closes the album and was written about:",a:["Her own mental health","Friends from different backgrounds she lost touch with","A specific ex-boyfriend","The isolation of quarantine"],c:1},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'ballad of a homeschooled girl' from 'GUTS' — Olivia was homeschooled while filming. 'GUTS' debuted at #1 in how many countries?",a:["12","16","21","Over 25"],c:3},
+
+  // ══ SELENA GOMEZ ══
+  // (3 existing: Naturally, Falling Down band name, Kiss & Tell debut)
+  // Adding: Stars Dance era, solo career, Revival, mental health journey
+
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Come & Get It' was Selena Gomez's breakthrough solo single in 2013 — it debuted at #1 on the US Pop Songs chart. The song has a distinctive sound influenced by which musical tradition?",a:["Bollywood and bhangra","Latin pop","K-pop","Reggaeton"],c:0},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'The Heart Wants What It Wants' by Selena Gomez was widely believed to be about her on-again off-again relationship with which artist?",a:["Nick Jonas","Justin Bieber","The Weeknd","Zedd"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Lose You to Love Me' by Selena Gomez became her first #1 on the Hot 100 in 2019 — she said the song was about finding herself after a painful breakup. It debuted at #1 the same week which artist released a competing single?",a:["Ariana Grande","Taylor Swift","Billie Eilish","Dua Lipa"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Bad Liar' by Selena Gomez samples the bass line from which classic rock song?",a:["Under Pressure by Queen","Psycho Killer by Talking Heads","Fame by David Bowie","Once in a Lifetime by Talking Heads"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Wolves' by Selena Gomez is a duet with which DJ and producer?",a:["Zedd","Marshmello","Kygo","Marshmello"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Revival' was Selena Gomez's second studio album — she took a break from music before its release to deal with a health condition. What condition did she publicly reveal?",a:["Depression","Lupus","Anxiety disorder","Bipolar disorder"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Same Old Love' from 'Revival' was written and produced by which hitmaking team?",a:["Max Martin and Shellback","Stargate and Sia","Charli XCX","Antonina Armato and Tim James"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Rare' — Selena Gomez's 2020 album title track was written partly as a response to feeling undervalued. She underwent a kidney transplant in 2017 — her donor was:",a:["Her mother Mandy","Her best friend Francia Raisa","Her cousin","A stranger"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Single Soon' was a 2023 Selena Gomez single — she launched her beauty brand Rare Beauty in 2020. What percentage of profits does she donate to mental health causes through the Rare Impact Fund?",a:["1%","2%","5%","10%"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Who Says' by Selena Gomez was her first major statement about self-acceptance — the song was partly inspired by a conversation with which superstar who encouraged her to embrace her voice?",a:["Taylor Swift","Katy Perry","Demi Lovato","Lady Gaga"],c:0},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'De Una Vez' was Selena Gomez's first Spanish-language single — it was released in January 2021 and debuted at #2 on which chart?",a:["Latin Pop Airplay","Hot Latin Songs","Regional Mexican","Tropical Airplay"],c:0},
+
+  // ══ GRACIE ABRAMS ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'That's So True' by Gracie Abrams became a viral sleeper hit in 2024 — she is the daughter of which famous film director?",a:["Steven Spielberg","J.J. Abrams","James Cameron","Christopher Nolan"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'I Love You, I'm Sorry' by Gracie Abrams is from which 2024 album?",a:["This Is What It Feels Like","Minor","The Secret of Us","Good Riddance"],c:2},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'21' by Gracie Abrams — she gained wider attention after being selected as the opening act for which artist's Eras Tour?",a:["Olivia Rodrigo","Billie Eilish","Taylor Swift","Sabrina Carpenter"],c:2},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Stay' by Gracie Abrams and Intention — her debut EP was released in which year?",a:["2019","2020","2021","2022"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'amelie' by Gracie Abrams — her debut album 'Good Riddance' was produced by which Taylor Swift collaborator?",a:["Aaron Dessner","Jack Antonoff","Dan Nigro","Justin Tranter"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Block Me Out' from 'The Secret of Us' — Gracie Abrams co-wrote the album's title track with which other artist, who also appears on it as a featured vocalist?",a:["Olivia Rodrigo","Taylor Swift","Sabrina Carpenter","Billie Eilish"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Where do we go now' by Gracie Abrams — 'The Secret of Us' debuted at #1 in the UK, making her the first American woman to do what with a debut UK #1?",a:["Debut at #1 with a second album","Have consecutive #1s on both UK and US","Debut at #1 in the UK with her second album as a solo debut","Outsell a Taylor Swift album in the UK in its debut week"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Full machine' by Gracie Abrams — before 'The Secret of Us' she released 'Good Riddance'. Which music publication called it one of the best albums of 2023?",a:["NME","Pitchfork","Rolling Stone","All three"],c:2},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Risk' from 'The Secret of Us' — Gracie Abrams attended which performing arts college before dropping out to pursue music full time?",a:["Berklee College of Music","NYU Tisch","USC Thornton","Emerson College"],c:3},
+
+  // ══ SABRINA CARPENTER ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Espresso' by Sabrina Carpenter became a massive global hit in 2024 — the song was written and co-produced by Sabrina herself and which producer?",a:["Jack Antonoff","Amy Allen","Julian Bunetta","Max Martin"],c:2},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Please Please Please' by Sabrina Carpenter features a music video co-starring her then-boyfriend — who is he?",a:["Barry Keoghan","Jacob Elordi","Austin Butler","Timothée Chalamet"],c:0},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Short n' Sweet' is Sabrina Carpenter's 2024 album — which Disney Channel show did she star in from 2014?",a:["Andi Mack","Girl Meets World","K.C. Undercover","Best Friends Whenever"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Feather' by Sabrina Carpenter — she opened for which artist on the Eras Tour, significantly boosting her profile?",a:["Olivia Rodrigo","Taylor Swift","Gracie Abrams","Harry Styles"],c:1},
+  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Nonsense' by Sabrina Carpenter became known for its customized endings at live shows — what does she change at every performance?",a:["The key","The outro lyrics","The bridge","The intro"],c:1},
+
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'because i liked a boy' by Sabrina Carpenter was believed to reference a love triangle involving which two other artists?",a:["Olivia Rodrigo and Joshua Bassett","Olivia Rodrigo and Adam Faze","Shawn Mendes and Camila Cabello","Harry Styles and Olivia Wilde"],c:0},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Skin' by Sabrina Carpenter was released as a response record — she wrote and released it within how long of the song she was responding to?",a:["24 hours","3 days","One week","Two weeks"],c:1},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Espresso' — Sabrina Carpenter has said the track was recorded very quickly. The song spent multiple weeks at #1 globally and made her the first solo female artist to achieve what milestone in 2024?",a:["Three simultaneous top-5 hits in the US","Two consecutive #1 debuts","Top 5 in 30 countries in the same week","All three"],c:0},
+  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'email i can't send' by Sabrina Carpenter — her album 'emails i can't send' from 2022 was a breakup album. She co-wrote it primarily with:",a:["Jack Antonoff","Amy Allen","John Mayer","Julia Michaels"],c:1},
+
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Tornado Warnings' from 'Short n' Sweet' — the album debuted at #1 in the US and UK simultaneously. It was co-produced largely by Julian Bunetta who also produced hits for which boy band?",a:["BTS","One Direction","The Jonas Brothers","NSYNC"],c:1},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Read your Mind' by Sabrina Carpenter — before 'Short n' Sweet' she signed to which label imprint?",a:["Interscope","Island","Virgin","Hollywood"],c:3},
+  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Taste' features Jenna Ortega in the music video — Sabrina Carpenter originally auditioned for which role that went to Ortega in Wednesday?",a:["Wednesday Addams","Enid Sinclair","Bianca Barclay","The role of a different character on the show"],c:0},
+];
+
+EXPANSION_PACK_11.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log("EXPANSION_PACK_11: added " + EXPANSION_PACK_11.length + " Lilith's Choice questions (Taylor Swift, Olivia Rodrigo, Selena Gomez, Gracie Abrams, Sabrina Carpenter).");
+
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 10 — 90s & 2000s Pop deep dive
+// Priority: Robbie Williams, Craig David, Kylie, Joss Stone, Macy Gray,
+//   Leona Lewis, Brandy, Vanessa Carlton, Colbie Caillat, Natasha Bedingfield,
+//   Corinne Bailey Rae, Selena Gomez, Destiny's Child depth,
+//   + harder questions for artists already present but shallow.
+// Guardrails: easy = casual listener knows it; medium = fan knows it;
+//   hard = requires real knowledge but always has an aha moment.
+//   Every song title in quotes. No artist more than 4 Qs in this pack.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_10 = [
+
+  // ── Kylie Minogue ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Can't Get You Out of My Head' was a 2001 worldwide #1 for:",a:["Kylie Minogue","Dannii Minogue","Delta Goodrem","Natalie Imbruglia"],c:0},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Spinning Around' relaunched Kylie Minogue's career in 2000 — she is originally from which country?",a:["New Zealand","England","South Africa","Australia"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Can't Get You Out of My Head' was co-written by Cathy Dennis, who also wrote which other major pop hit?",a:["...Baby One More Time","Toxic","Genie in a Bottle","Oops!... I Did It Again"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Love at First Sight' by Kylie Minogue was from which album?",a:["Light Years","Fever","Body Language","X"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Slow' by Kylie Minogue was performed live at the 2001 MTV VMAs — but the song was actually released in which year?",a:["2001","2002","2003","2004"],c:2},
+
+  // ── Robbie Williams ──
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Angels' is a 1997 power ballad by which former Take That member?",a:["Gary Barlow","Mark Owen","Robbie Williams","Howard Donald"],c:2},
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Rock DJ' by Robbie Williams famously features a music video where he does what?",a:["Dresses as a robot","Tears off his skin to reveal a skeleton","Falls from the sky","Transforms into a cartoon"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Millennium' by Robbie Williams samples the theme from which James Bond film?",a:["You Only Live Twice","Thunderball","Goldfinger","The Spy Who Loved Me"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Feel' was Robbie Williams' 2002 hit — his album 'Escapology' was recorded partly as a response to what?",a:["His departure from EMI","Pressure from his label to make more pop songs","His struggle with loneliness and fame","His rivalry with Gary Barlow"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Let Me Entertain You' by Robbie Williams was released in 1998 — the song's title and theatrical style was directly inspired by which classic song?",a:["Razzle Dazzle from Chicago","Let Me Entertain You from Gypsy","The Greatest Show","All That Jazz"],c:1},
+
+  // ── Craig David ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Fill Me In' was the debut single of which UK R&B artist who became a phenomenon in 2000?",a:["Craig David","Lemar","Damage","So Solid Crew"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'7 Days' by Craig David describes a romance that progresses through the week — what happens on Sunday in the song?",a:["He meets her","They go dancing","He makes love to her","They chill"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Re-Rewind' was a 1999 hit that launched Craig David's career — it was originally by which group that featured Craig?",a:["Artful Dodger","So Solid Crew","Ms Dynamite","Oxide & Neutrino"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Craig David's debut album 'Born to Do It' was released in 2000 and sold over 8 million copies — it was the fastest-selling debut album by a UK male solo artist at the time. The record he broke was held by:",a:["George Michael","Robbie Williams","Dario G","James Blunt"],c:1},
+
+  // ── Joss Stone ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'You Had Me' was a 2004 hit for which British soul singer who was only 16 when her debut album was released?",a:["Duffy","Amy Winehouse","Joss Stone","Corinne Bailey Rae"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Right to Be Wrong' is a Joss Stone song from which album?",a:["The Soul Sessions","Mind Body & Soul","Introducing Joss Stone","Colour Me Free"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Joss Stone's debut album 'The Soul Sessions' consisted entirely of covers — it was produced by Steve Greenberg. The album was recorded in how many days?",a:["2","5","10","14"],c:0},
+
+  // ── Macy Gray ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'I Try' is the signature song of which raspy-voiced singer who broke through in 1999?",a:["India.Arie","Macy Gray","Erykah Badu","Me'Shell Ndegeocello"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'I Try' by Macy Gray won a Grammy in 2001 for Best Female Pop Vocal Performance — her distinctive voice was compared to which classic soul singer?",a:["Billie Holiday","Etta James","Chaka Khan","Betty Davis"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Macy Gray's debut album 'On How Life Is' was released in 1999 after being initially rejected by her label. It eventually sold over 4 million copies. Which film used 'I Try' prominently, boosting its profile?",a:["Brown Sugar","Love Jones","Save the Last Dance","She's All That"],c:2},
+
+  // ── Brandy ──
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'Have You Ever?' was a 1998 ballad by which R&B star who also starred in the TV show 'Moesha'?",a:["Monica","Brandy","Aaliyah","SWV"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'The Boy Is Mine' was a 1998 duet between Brandy and Monica — how many weeks did it spend at #1?",a:["8","10","12","13"],c:3},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'Full Moon' by Brandy — her album of the same name was produced primarily by Rodney Jerkins, who was also known as:",a:["Darkchild","Rockwilder","Timbaland","The Neptunes"],c:0},
+
+  // ── Destiny's Child deep ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Independent Women Part I' was featured on the soundtrack to which 2000 film?",a:["Bring It On","Save the Last Dance","Charlie's Angels","Coyote Ugly"],c:2},
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'No No No' was Destiny's Child's debut single in 1997 — it featured a rap from which artist?",a:["Wyclef Jean","Jay-Z","Lil Kim","Missy Elliott"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Bootylicious' by Destiny's Child samples a classic rock guitar riff — from which Stevie Nicks song?",a:["Gold Dust Woman","Edge of Seventeen","Stand Back","Dreams"],c:1},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Killing Time' was an early Destiny's Child song — the original lineup before Beyoncé and Kelly was joined by LeToya Luckett and LeTavia Roberson. They were eventually replaced by:",a:["Michelle Williams and Farrah Franklin","Michelle Williams only","Farrah Franklin and Yvonne Boyd","Two members from another group"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Survivor' by Destiny's Child was directly inspired by a comment made on which TV show?",a:["The Real World","Survivor","Big Brother","The Apprentice"],c:1},
+
+  // ── Leona Lewis ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Bleeding Love' was a 2007 global #1 for Leona Lewis — she won which UK talent show?",a:["The Voice","Britain's Got Talent","Pop Idol","The X Factor"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Bleeding Love' was written by Jesse McCartney and Ryan Tedder — Ryan Tedder later went on to become the frontman and songwriter of which band?",a:["Maroon 5","OneRepublic","Train","The Script"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Bleeding Love' spent how many weeks at #1 in the UK?",a:["2","3","4","5"],c:3},
+
+  // ── Vanessa Carlton ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'A Thousand Miles' is the 2002 debut hit for which singer-pianist?",a:["Norah Jones","Michelle Branch","Vanessa Carlton","Colbie Caillat"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'A Thousand Miles' samples a classical piece in its piano intro — the song was also famously used in which comedy film?",a:["Legally Blonde","White Chicks","Mean Girls","Bring It On"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Vanessa Carlton wrote 'A Thousand Miles' when she was 16 — but it was reworked significantly for release. What was the original working title?",a:["White Houses","Ordinary Day","Carousel","Ringtone"],c:1},
+
+  // ── Colbie Caillat ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Bubbly' was a 2007 debut hit for Colbie Caillat — she first gained attention by posting her music on which platform?",a:["YouTube","Spotify","MySpace","SoundCloud"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Realize' was Colbie Caillat's second single — she co-wrote most of her debut album 'Coco' with which producer?",a:["John Shanks","Jason Reeves","John Mayer","Glen Ballard"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Colbie Caillat's 'Bubbly' spent how many weeks at #1 on the Adult Contemporary chart — making it one of the longest-running #1s on that chart?",a:["20","36","52","Over 60"],c:3},
+
+  // ── Natasha Bedingfield ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Unwritten' was a 2004 hit for Natasha Bedingfield — the song later became famous as the theme song for which reality TV show?",a:["The Hills","Laguna Beach","America's Next Top Model","The OC"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'These Words' by Natasha Bedingfield describes her struggle to write a love song — the song was written by Natasha along with which sibling?",a:["Her brother Daniel Bedingfield","Her sister","Her cousin","It was written alone"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Unwritten' by Natasha Bedingfield was used extensively in global advertising — the song was inspired by Natasha's study of which subject at university?",a:["Philosophy","Psychology","Journalism","Creative writing"],c:1},
+
+  // ── Corinne Bailey Rae ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Put Your Records On' is a 2006 debut hit by which British soul-pop singer?",a:["Duffy","Joss Stone","Corinne Bailey Rae","Adele"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Like a Star' was Corinne Bailey Rae's second single — her self-titled debut album was released in which year?",a:["2004","2005","2006","2007"],c:2},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Corinne Bailey Rae's debut album was recorded over how many years while she was still gigging on the Leeds music scene?",a:["1","2","3","4"],c:2},
+
+  // ── Selena Gomez ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Naturally' was a 2009 hit for Selena Gomez — she was also known at the time for which Disney Channel show?",a:["Lizzie McGuire","Hannah Montana","Wizards of Waverly Place","That's So Raven"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Falling Down' was Selena Gomez's debut single with her band — what was that band called?",a:["Selena Gomez & the Scene","Selena Gomez & the Stars","The Scene only","She debuted as a solo artist"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Selena Gomez's debut album 'Kiss & Tell' was released in 2009 — it debuted at #9 on the Billboard 200. Her label was a joint venture between which two companies?",a:["Disney and Interscope","Disney and Hollywood Records","Hollywood Records and Island","Universal and Walt Disney"],c:1},
+
+  // ── Shakira depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Whenever, Wherever' was Shakira's English-language breakthrough — her hips are described as doing what in the song?",a:["Swaying","Lying","Leading the way","The talking"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'La Tortura' was a Spanish-language hit for Shakira featuring Alejandro Sanz — the song won a Grammy for Best Urban/Alternative Album. Shakira writes her songs in which language first?",a:["English","Spanish","Both simultaneously","French"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"Shakira's breakthrough album in Colombia was 'Pies Descalzos' in 1995 — she was only 18. The album title means what in English?",a:["Bare Feet","Empty Hands","Shaking Hips","Broken Dreams"],c:0},
+
+  // ── Nelly Furtado depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Maneater' was a 2006 smash by Nelly Furtado — who produced it?",a:["Dr. Luke","Timbaland","RedOne","Max Martin"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'I'm Like a Bird' was Nelly Furtado's 2000 debut — what is unusual about the song's structure?",a:["It has no chorus","It changes time signature mid-song","It is entirely in a minor key","It has no verse — only a chorus and bridge"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Say It Right' by Nelly Furtado was produced by Timbaland — it was the third single from 'Loose'. The album represented a complete reinvention; her debut 'Whoa, Nelly!' was which genre?",a:["Dance-pop","Folk-pop","R&B","Latin pop"],c:1},
+
+  // ── Katy Perry depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Hot N Cold' was Katy Perry's 2008 follow-up — before pop, Katy Perry released a gospel album under which name?",a:["Katy Hudson","Katie Perry","Katheryn Hudson","Kate Perry"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Teenage Dream' by Katy Perry became the second album in history to produce five #1 singles — the first was by:",a:["Thriller by Michael Jackson","Bad by Michael Jackson","Born This Way by Lady Gaga","No Strings Attached by NSYNC"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'I Kissed a Girl' spent seven weeks at #1 in the US — it was Katy Perry's first #1. The song was originally written and intended to be recorded by which artist?",a:["Pink","Miley Cyrus","Alanis Morissette","Kelly Clarkson"],c:0},
+
+  // ── Avril Lavigne depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Sk8er Boi' by Avril Lavigne tells the story of a skater and a ballet dancer — who ends up with the skater in the song?",a:["The ballet dancer","Avril, as a rock star","Nobody","His childhood sweetheart"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Girlfriend' by Avril Lavigne was released in seven different languages — which one was NOT among them?",a:["Mandarin","Portuguese","Italian","Japanese"],c:2},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Avril Lavigne's 'Complicated' was written by The Matrix production team — Laureen Christy, Graham Edwards and Scott Spock. Avril's songwriting contribution was to:",a:["Write the bridge only","Co-write the lyrics with the team","Rewrite the entire melody","Add the guitar parts"],c:1},
+
+  // ── Pink depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'So What' was a 2008 breakup anthem by Pink — the song references her then-separated husband Carey Hart and his career as a:",a:["Skateboarder","Motocross racer","Pro wrestler","Tattoo artist"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Raise Your Glass' by Pink was released in 2010 as a standalone single — it was written as an anthem for which group?",a:["Teenagers","The misfit outsiders and underdogs","Gay rights supporters","Music fans"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Pink's 'Stupid Girls' was a satirical music video that mocked celebrity culture — the video parody included a jab at which specific music video?",a:["Toxic","Hollaback Girl","My Humps","Since U Been Gone"],c:2},
+
+  // ── Ashanti depth ──
+  {diff:'easy',decade:'00s',genre:'R&B',q:"'Foolish' was a 2002 smash for Ashanti — it was on her self-titled debut album. Ashanti was signed to which label?",a:["Bad Boy","Def Jam","Murder Inc.","Roc-A-Fella"],c:2},
+  {diff:'medium',decade:'00s',genre:'R&B',q:"'Always on Time' was a Ja Rule and Ashanti duet — in 2002 Ashanti simultaneously held the top two positions on the Billboard Hot 100. The two songs were 'Foolish' and:",a:["Always on Time","What's Luv","Down 4 U","Rock Wit U"],c:0},
+  {diff:'hard',decade:'00s',genre:'R&B',q:"Ashanti's self-titled debut album broke a record in 2002 — it debuted with the highest first-week sales ever for a debut female R&B artist at the time. How many copies did it sell in its first week?",a:["363,000","463,000","563,000","663,000"],c:0},
+
+  // ── Ciara depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Goodies' was Ciara's 2004 debut — she was signed to which label after producer Jazze Pha discovered her?",a:["Atlantic","LaFace","Jive","Def Jam"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'1, 2 Step' by Ciara featuring Missy Elliott was from her debut album — Ciara is known for her dancing and was trained in which dance style before her music career?",a:["Ballet","Hip-hop and crump","Tap","Jazz dance"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Ciara's debut 'Goodies' stayed at #1 for how many weeks — making it one of the longest-running debut #1s of the 2000s?",a:["5","7","9","11"],c:2},
+
+  // ── Fergie depth ──
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Fergalicious' was a 2006 solo hit — Fergie was the female vocalist in which group before going solo?",a:["Destiny's Child","TLC","Black Eyed Peas","Pussycat Dolls"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Big Girls Don't Cry' was Fergie's 2007 ballad — which actor starred in the music video alongside her?",a:["Justin Timberlake","Milo Ventimiglia","Channing Tatum","Ryan Reynolds"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"Before joining Black Eyed Peas, Fergie was a member of a children's TV musical group in the early 1990s — what was that group?",a:["Kids Incorporated","The Mickey Mouse Club","Party of Five","Out of the Box"],c:0},
+
+  // ── Monica depth ──
+  {diff:'easy',decade:'90s',genre:'R&B',q:"'The First Night' was a 1998 hit for Monica — it was on her album 'The Boy Is Mine', named after her duet with:",a:["Brandy","Aaliyah","Mariah Carey","Whitney Houston"],c:0},
+  {diff:'medium',decade:'90s',genre:'R&B',q:"'Angel of Mine' by Monica was a cover of an Eternal song — Monica had her first #1 at age 14 with which song?",a:["Why I Love You So Much","Don't Take It Personal","Before You Walk Out of My Life","Miss Thang"],c:1},
+  {diff:'hard',decade:'00s',genre:'R&B',q:"Monica's 'So Gone' from 2003 was produced by Jermaine Dupri — it was certified platinum and became one of her most critically praised tracks. The album it appeared on was:",a:["After the Storm","All Eyez on Me","Still Standing","The Makings of Me"],c:0},
+
+  // ── 90s pop depth questions — medium and hard ──
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Quit Playing Games (With My Heart)' by the Backstreet Boys was their US breakthrough — the group was assembled in Orlando in 1993 by which manager?",a:["Lou Pearlman","Johnny Wright","Scott Storch","Simon Fuller"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Tearin' Up My Heart' by NSYNC — the group's members included Justin Timberlake, JC Chasez, Chris Kirkpatrick, Joey Fatone and:",a:["AJ McLean","Lance Bass","Nick Lachey","Howie Dorough"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Waterfalls' by TLC — Left Eye's rap verse was written by Left Eye herself. The song has been called one of the first mainstream pop songs to address which issues?",a:["Drug abuse and racism","HIV/AIDS and drug-related crime","Gang violence and poverty","Domestic violence and mental health"],c:1},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'My Heart Will Go On' was initially not going to be in Titanic — James Cameron only relented after hearing the demo. Celine Dion recorded the final version in how many takes?",a:["One take — her guide vocal became the master","Two takes","Three takes","Five takes — the first was unusable"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Spice Up Your Life' by the Spice Girls was released in 1997 — the accompanying album 'Spiceworld' sold how many copies in its first week in the UK?",a:["500,000","850,000","Over 1 million","Over 1.5 million"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Say You'll Be There' was the Spice Girls' second single — the music video was filmed in the Mojave Desert and featured the Spice Girls as:",a:["Superheroes","Superheroines in a desert action sequence","Angels","Futuristic warriors"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'I Want It That Way' by the Backstreet Boys — the lyrics were famously criticized for being nonsensical. The song's writer Max Martin later admitted that:",a:["The lyrics were intentionally meaningless","He wrote them in ten minutes","English was not his first language and he misunderstood the meaning","The label changed the original lyrics"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Crazy' by Britney Spears was her second single — the video was directed by Nigel Dick, who also directed which other major pop video that year?",a:["...Baby One More Time","Quit Playing Games","Everybody (Backstreet's Back)","MMMBop"],c:0},
+
+  // ── 2000s pop depth questions — medium and hard ──
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Cry Me a River' by Justin Timberlake was produced by Timbaland and samples which artist's vocal?",a:["Björk","Malia","A Gregorian chant","There is no sample"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Beautiful' by Christina Aguilera was written by Linda Perry, who was previously the lead singer of which 90s band?",a:["Hole","4 Non Blondes","No Doubt","Letters to Cleo"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Milkshake' by Kelis was produced by The Neptunes — the song's suggestive meaning was explained by Kelis as being about:",a:["Her dancing ability","Her cooking skills","Her personality and confidence","Her physical appearance"],c:2},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Since U Been Gone' by Kelly Clarkson was written by Max Martin and Lukasz Gottwald — it was initially offered to which pop star who turned it down?",a:["Hilary Duff","Pink","Britney Spears","Avril Lavigne"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Halo' by Beyoncé was co-written by Ryan Tedder, who originally wrote it for:",a:["Leona Lewis","Kelly Clarkson","Katy Perry","Jordin Sparks"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Just Dance' by Lady Gaga — before her pop career, Gaga wrote songs for which artists?",a:["Britney Spears and The Pussycat Dolls","New Kids on the Block and Fergie","Pussycat Dolls and Akon","Britney Spears and Fergie"],c:0},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Umbrella' by Rihanna was turned down by several artists before her — it was originally intended for:",a:["Beyoncé","Britney Spears","Mary J Blige","Ciara"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Bad Romance' by Lady Gaga was inspired by which author she was reading at the time?",a:["Sylvia Plath","Rainer Maria Rilke","Franz Kafka","Albert Camus"],c:3},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Toxic' by Britney Spears sampled an Asha Bhosle song — but the specific film the song was from was not 'Solva Sawan' as sometimes reported. The actual Bollywood sample source is from the song 'Tere Mere Beech Mein' from which film?",a:["Satte Pe Satta","Shaan","Sanam Teri Kasam","Silsila"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Single Ladies (Put a Ring on It)' by Beyoncé was choreographed to reference a 1969 Bob Fosse television performance — Fosse's routine was for which song?",a:["Mexican Breakfast","Walk on the Wild Side","Big Spender","All That Jazz"],c:0},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Telephone' by Lady Gaga featuring Beyoncé was intended to be a sequel music video to which earlier Gaga video?",a:["Poker Face","Paparazzi","Just Dance","Bad Romance"],c:1},
+
+  // ── Whitney Houston 90s depth ──
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'I Will Always Love You' was originally written and recorded by which country singer decades before Whitney's version?",a:["Tammy Wynette","Loretta Lynn","Dolly Parton","Crystal Gayle"],c:2},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'I'm Every Woman' was recorded by Whitney Houston for the Bodyguard soundtrack — the original version was recorded in 1978 by:",a:["Donna Summer","Diana Ross","Chaka Khan","Gloria Gaynor"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'I Will Always Love You' spent 14 weeks at #1 in the US — the a cappella opening Whitney adds before the first verse was improvised during the recording session. The producer who encouraged her to keep it was:",a:["Clive Davis","David Foster","Babyface","Narada Michael Walden"],c:1},
+
+  // ── Mariah Carey 90s depth ──
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Dreamlover' by Mariah Carey samples which classic 1970s funk track for its beat?",a:["Good Times by Chic","Funky Drummer by James Brown","Impeach the President by The Honey Drippers","Give It Up or Turnit a Loose by James Brown"],c:2},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'Emotions' by Mariah Carey — the song showcases her whistle register. The note she hits is approximately what pitch?",a:["C7","D7","E7","G7"],c:0},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Fantasy' by Mariah Carey was the first song by a female artist to debut at #1 on the Billboard Hot 100 — in which year did this happen?",a:["1993","1994","1995","1996"],c:2},
+
+  // ── Miscellaneous 90s/00s pop depth ──
+  {diff:'easy',decade:'90s',genre:'Pop',q:"'Lovefool' by The Cardigans was featured on the soundtrack to which 1996 film?",a:["Clueless","Romeo + Juliet","10 Things I Hate About You","She's All That"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Underneath Your Clothes' was a 2001 ballad by Shakira — it appeared on which album?",a:["Laundry Service","She Wolf","She Wolf","Oral Fixation"],c:0},
+  {diff:'medium',decade:'90s',genre:'Pop',q:"'No Scrubs' by TLC — the song defines a 'scrub' as a man who does what?",a:["Spends too much money","Hangs out the passenger side of his best friend's ride","Has no job and lives with his mom","All of the above"],c:3},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'Dilemma' by Nelly featuring Kelly Rowland spent ten weeks at #1 — Kelly Rowland's character in the video sends a text message using which application that caused much amusement?",a:["AOL Instant Messenger","Microsoft Excel","Nokia SMS","BlackBerry Messenger"],c:1},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Ray of Light' by Madonna was co-written by William Orbit and also co-written with Clive Muldoon and Dave Curtis — but the melody was based on a 1973 song called 'Sepheryn' by British folk artist:",a:["Nick Drake","Christine Leach","Cat Stevens","Sandy Denny"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'SexyBack' by Justin Timberlake — the song was recorded quickly and cheaply in a hotel room. Timbaland compared the production to which genre he was deliberately channeling?",a:["Punk","Industrial rock","Electro-clash","New wave"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Vogue' by Madonna reached #1 in 30 countries — the ballroom vogue scene it referenced had been documented in which 1990 film that introduced mainstream audiences to the culture?",a:["Truth or Dare","Paris Is Burning","The Birdcage","Wigstock"],c:1},
+  {diff:'easy',decade:'00s',genre:'Pop',q:"'Don't Know Why' was Norah Jones's signature song from her debut album — it was written by:",a:["Norah Jones herself","Jesse Harris","John Mayer","Jack Johnson"],c:1},
+  {diff:'medium',decade:'00s',genre:'Pop',q:"'White Flag' by Dido was a 2003 hit — the song uses an extended metaphor about not surrendering despite heartbreak. Dido's last name is:",a:["Armstrong","Florian","Scott","Simons"],c:0},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Don't Speak' by No Doubt spent 16 weeks at #1 on the Hot 100 Airplay chart — it was ineligible for the Hot 100 itself because of a chart rule that existed at the time. That rule was:",a:["Singles had to be commercially released to chart","International acts needed a US label to chart","Airplay-only singles could not appear on the Hot 100","Songs over 4 minutes could not chart"],c:0},
+];
+
+EXPANSION_PACK_10.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions (90s/00s Pop deep dive).');
+
 
 
 
@@ -9595,13 +10390,10 @@ console.log('EXPANSION_PACK_7: added ' + EXPANSION_PACK_7.length + ' questions.'
     f=>`Pick the artist most closely tied to ${f[4]}.`,
     f=>`Who would most likely be introduced with the clue ${f[4]}?`
   ];
-  function shuffledAnswers(correct,wrong){ const arr=[correct,...wrong]; for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return {a:arr,c:arr.indexOf(correct)}; }
-  const NEW_500_QUESTIONS=[];
-  for(let i=0;i<500;i++){
-    const f=factPool[i%factPool.length]; const diff=(i%7===0)?'hard':(i%3===0?'medium':f[2]); const qa=shuffledAnswers(f[3],f[5]);
-    NEW_500_QUESTIONS.push({diff,decade:f[0],genre:f[1],q:templates[Math.floor(i/factPool.length)%templates.length](f),a:qa.a,c:qa.c});
-  }
-  NEW_500_QUESTIONS.forEach(q=>{ if(TRIVIA[q.diff]&&TRIVIA[q.diff][q.decade]) TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c}); });
+  // NOTE: The generated 500-question loop was removed. It cycled ~40 facts through
+  // 10 phrasing templates producing near-identical questions that collapsed to ~40
+  // unique signatures after deduplication — wasteful bloat. Replaced by hand-authored
+  // Expansion Pack 8 below with proper difficulty calibration and variety.
 
 
   // ── 90s & 2000s EXPANSION — 250 MORE QUESTIONS ──
@@ -18741,7 +19533,7 @@ DIVERSE_90S_2000S_EXPANSION_200.forEach(q=>{
 });
 console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.length+' questions added');
 
-  console.log('LOW-CREDIT EXPANSION: added '+NEW_500_QUESTIONS.length+' regular trivia questions + '+SAFE_LYRIC_BANK.length+' safe lyric questions + 6 new cards.');
+  console.log('LOW-CREDIT EXPANSION: added '+SAFE_LYRIC_BANK.length+' safe lyric questions + 6 new cards. (Generated 500-Q loop removed — see Expansion Pack 8).');
 })();
 </script>
 
