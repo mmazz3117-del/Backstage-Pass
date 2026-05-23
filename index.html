@@ -5996,11 +5996,18 @@ function _buildPool(){
     : [...selectedDecades];
 
   let pool=[];
-  decadeIds.forEach(did=>{
+  // Always include all decade IDs when building so Lilith's Choice questions
+  // (stored under '00s') are never excluded by decade selection.
+  const allDecadeIds = Object.keys(TRIVIA[difficulty]||{});
+  const buildIds = (selectedGenres.has("Lilith's Choice") && !selectedDecades.has('all'))
+    ? [...new Set([...decadeIds, ...allDecadeIds])]
+    : decadeIds;
+
+  buildIds.forEach(did=>{
     const qs=(TRIVIA[difficulty]||{})[did]||[];
     const filtered = (selectedGenres.has('all')
       ? qs
-      : qs.filter(q=>selectedGenres.has(q.genre))).filter(isPartySafeQuestion);
+      : qs.filter(q=>selectedGenres.has(q.genre) || q.genre === "Lilith's Choice")).filter(isPartySafeQuestion);
 
     filtered.forEach(q=>{
       const copy={...q,_sourceDid:did,_did:getActualDecadeId(q,did)};
@@ -6079,7 +6086,8 @@ function bpPickQuestion(candidates){
 
 function getQ(did){
   let avail=gameQueue.filter(q=>!seenThisGame.has(q.q));
-  let decadeAvail=avail.filter(q=>q._did===did);
+  // Lilith's Choice questions are decade-agnostic; always include them in the available pool.
+  let decadeAvail=avail.filter(q=>q._did===did || q.genre==="Lilith's Choice");
   if(decadeAvail.length===0) decadeAvail=avail;
   if(decadeAvail.length===0){ _refillQueue(); return getQ(did); }
   return bpPickQuestion(decadeAvail);
@@ -6154,8 +6162,10 @@ function getActualDecadeId(q, fallbackId){
 
 function questionMatchesActiveFilters(q){
   if(!q) return false;
+  // Lilith's Choice questions bypass decade filtering — available in any decade selection.
+  const isLilith = q.genre === "Lilith's Choice";
   const qDecade=getActualDecadeId(q, q._did || q.decade);
-  const decadeOK=selectedDecades.has('all') || selectedDecades.has(qDecade);
+  const decadeOK=isLilith || selectedDecades.has('all') || selectedDecades.has(qDecade);
   const genreOK=selectedGenres.has('all') || selectedGenres.has(q.genre);
   return decadeOK && genreOK;
 }
