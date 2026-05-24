@@ -1641,7 +1641,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
         <button class="diff-btn" onclick="setDiff('easy',this)">EASY<small>+1 pt</small></button>
         <button class="diff-btn sel" onclick="setDiff('medium',this)">MEDIUM<small>+2 pts</small></button>
         <button class="diff-btn" onclick="setDiff('hard',this)">HARD<small>+3 pts · BONUS ROLL</small></button>
-        <button class="diff-btn" data-diff="all" onclick="setDiff('all',this)" style="border-color:#a78bfa;color:#a78bfa;">ALL<small>RANDOM · 1-3 pts</small></button>
+        <button class="diff-btn" data-diff="all" onclick="setDiff('all',this)">ALL<small>RANDOM · 1-3 pts</small></button>
       </div>
     </div>
 
@@ -3428,7 +3428,7 @@ const EXPANSION_1=[
 ];
 EXPANSION_1.forEach(q=>{
   const {diff,decade,genre,...qData}=q;
-  if(TRIVIA[diff]&&TRIVIA[diff][decade]) TRIVIA[diff][decade].push({genre,...qData});
+  if(TRIVIA[diff]&&TRIVIA[diff][decade]) TRIVIA[diff][decade].push({genre,...qData,_pack:'EXPANSION_1'});
 });
 console.log('EXPANSION_1: '+EXPANSION_1.length+' questions added');
 
@@ -3574,7 +3574,7 @@ const MASTER_BANK=[
 ];
 MASTER_BANK.forEach(q=>{
   const {diff,decade,genre,...qData}=q;
-  if(TRIVIA[diff]&&TRIVIA[diff][decade]) TRIVIA[diff][decade].push({genre,...qData});
+  if(TRIVIA[diff]&&TRIVIA[diff][decade]) TRIVIA[diff][decade].push({genre,...qData,_pack:'MASTER_BANK'});
 });
 console.log('MASTER_BANK: '+MASTER_BANK.length+' questions added');
 
@@ -10021,7 +10021,7 @@ console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions
 //   hard = requires real knowledge but always has an aha moment.
 //   Every song title in quotes. No artist more than 4 Qs in this pack.
 // ════════════════════════════════════════════════════════════════════════════
-const EXPANSION_PACK_10 = [
+const EXPANSION_PACK_10B = [
 
   // ── Kylie Minogue ──
   {diff:'easy',decade:'00s',genre:'Pop',q:"'Can't Get You Out of My Head' was a 2001 worldwide #1 for:",a:["Kylie Minogue","Dannii Minogue","Delta Goodrem","Natalie Imbruglia"],c:0},
@@ -10186,12 +10186,12 @@ const EXPANSION_PACK_10 = [
   {diff:'hard',decade:'90s',genre:'Pop',q:"'Don't Speak' by No Doubt spent 16 weeks at #1 on the Hot 100 Airplay chart — it was ineligible for the Hot 100 itself because of a chart rule that existed at the time. That rule was:",a:["Singles had to be commercially released to chart","International acts needed a US label to chart","Airplay-only singles could not appear on the Hot 100","Songs over 4 minutes could not chart"],c:0},
 ];
 
-EXPANSION_PACK_10.forEach(q => {
+EXPANSION_PACK_10B.forEach(q => {
   if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
     TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
   }
 });
-console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions (90s/00s Pop deep dive).');
+console.log('EXPANSION_PACK_10B: added ' + EXPANSION_PACK_10B.length + ' questions (90s/00s Pop deep dive).');
 
 
 
@@ -13693,7 +13693,7 @@ console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions
 ];
   NINETIES_2000S_EXPANSION_250.forEach(q=>{
     if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
-      TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c});
+      TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c,_pack:'NINETIES_2000S_EXPANSION_250'});
     }
   });
   console.log('90s/2000s expansion: '+NINETIES_2000S_EXPANSION_250.length+' questions added');
@@ -16955,7 +16955,7 @@ console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions
 ];
   EIGHTIES_NINETIES_2000S_EXPANSION_250.forEach(q=>{
     if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
-      TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c});
+      TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c,_pack:'EIGHTIES_NINETIES_2000S_EXPANSION_250'});
     }
   });
   console.log('80s/90s/2000s expansion: '+EIGHTIES_NINETIES_2000S_EXPANSION_250.length+' questions added');
@@ -19569,7 +19569,7 @@ const DIVERSE_90S_2000S_EXPANSION_200 = [
 ];
 DIVERSE_90S_2000S_EXPANSION_200.forEach(q=>{
   if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
-    TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c});
+    TRIVIA[q.diff][q.decade].push({genre:q.genre,q:q.q,a:q.a,c:q.c,_pack:'DIVERSE_90S_2000S_EXPANSION_200'});
   }
 });
 console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.length+' questions added');
@@ -20028,7 +20028,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   // 4) Clean up question pool: remove obvious year/date questions and avoid hard/niche-feeling pools.
   function easyMainstreamQuestion(q){
     if(!q || !q.q) return false;
-    if(q.genre==='LILITH') return true;
+    if(q.genre==='LILITH' || q._pack) return true;
     const txt=q.q.toLowerCase();
     if(/\b(what|which)\s+year\b|in what year|what year did|what year was|which year did|released in which year|peaked at #|peaked at number/.test(txt)) return false;
     if(/\b(19\d\d|20\d\d)\b/.test(txt) && /\b(year|released|won|grammy|oscar|peaked|chart|debut|formed)\b/.test(txt)) return false;
@@ -20121,7 +20121,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function keepMainstreamParty(q){
     if(!q || !q.q) return false;
-    if(q.genre==='LILITH') return true;
+    if(q.genre==='LILITH' || q._pack) return true;
     if(q.diff==='hard') return false;
     if(isTooSpecific(q)) return false;
     if(GIVEAWAY_WORDS.test(q.q)) return false;
@@ -20357,7 +20357,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function sanitizeQuestion(q, fallbackDid){
     if(!q||!q.q||!Array.isArray(q.a)||q.a.length<4) return null;
-    if(q.genre==='LILITH') return q; // Lilith's Choice questions skip sanitization
+    if(q.genre==='LILITH' || q._pack) return q;
     if(BANNED_Q_RE.test(q.q)) return null;
     q.q=cleanPrompt(q.q);
     if(GIVEAWAY_RE.test(q.q)) q.q=cleanPrompt(q.q);
@@ -20748,7 +20748,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function partySafe(q,dec){
     if(!q || !q.q || !Array.isArray(q.a)) return false;
-    if(q.genre==='LILITH') return true; // Lilith's Choice questions bypass party-safe filtering
+    if(q.genre==='LILITH' || q._pack) return true; // tagged questions bypass filtering
     const text=String(q.q);
     if(V21_BAD_PATTERNS.some(rx=>rx.test(text))) return false;
     if(q.a.filter(a=>NUMERIC_ANS.test(String(a))).length>=3) return false;
@@ -20916,7 +20916,9 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   try{
     if(typeof TRIVIA !== 'undefined'){
       V27_PACK.forEach(q=>{
-        if(TRIVIA[q.decade]) TRIVIA[q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c, v27:true});
+        const dec = q.decade==='2000s'?'00s':q.decade;
+        const diff = q.diff||'medium';
+        if(TRIVIA[diff]&&TRIVIA[diff][dec]) TRIVIA[diff][dec].push({genre:q.genre,q:q.q,a:q.a,c:q.c,_pack:'V27_PACK'});
       });
       console.log('v27 question pack loaded: '+V27_PACK.length+' questions');
     }
@@ -21034,8 +21036,8 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     if(!window.TRIVIA && typeof TRIVIA==='undefined') return;
     const bank = window.TRIVIA || TRIVIA;
     REQUESTED_90S_BOOST.forEach(({diff,decade,genre,q,a,c})=>{
-      if(bank[diff] && bank[diff][decade]){
-        bank[diff][decade].push({genre,q,a,c, requested90s:true});
+      if(TRIVIA[diff] && TRIVIA[diff][decade]){
+        TRIVIA[diff][decade].push({genre,q,a,c,_pack:'REQUESTED_90S_BOOST'});
       }
     });
     console.log('V29 requested 90s band boost added:', REQUESTED_90S_BOOST.length);
@@ -21053,8 +21055,9 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     const bank = window.TRIVIA || (typeof TRIVIA !== 'undefined' ? TRIVIA : null);
     if(!bank) return;
     POP_PUNK_EMO_BOOST.forEach(({diff,decade,genre,q,a,c})=>{
-      if(bank[diff] && bank[diff][decade]){
-        bank[diff][decade].push({genre,q,a,c, requestedPopPunkEmo:true});
+      const dec = decade==='2000s'?'00s':decade;
+      if(TRIVIA[diff] && TRIVIA[diff][dec]){
+        TRIVIA[diff][dec].push({genre,q,a,c,_pack:'POP_PUNK_EMO_BOOST'});
       }
     });
     console.log('V30 pop-punk/emo boost added:', POP_PUNK_EMO_BOOST.length);
@@ -21071,8 +21074,8 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     const bank = window.TRIVIA || (typeof TRIVIA !== 'undefined' ? TRIVIA : null);
     if(!bank) return;
     EIGHTIES_ONE_HIT_BOOST.forEach(({diff,decade,genre,q,a,c})=>{
-      if(bank[diff] && bank[diff][decade]){
-        bank[diff][decade].push({genre,q,a,c, eightiesOneHitBoost:true});
+      if(TRIVIA[diff] && TRIVIA[diff][decade]){
+        TRIVIA[diff][decade].push({genre,q,a,c,_pack:'EIGHTIES_ONE_HIT_BOOST'});
       }
     });
     console.log('V31 80s one-hit/radio boost added:', EIGHTIES_ONE_HIT_BOOST.length);
@@ -21424,7 +21427,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
 
   function proofQuestion(q, decade){
     if(!q||!q.q||!Array.isArray(q.a)||q.a.length<4) return null;
-    if(q.genre==='LILITH') return q;
+    if(q.genre==='LILITH' || q._pack) return q;
     q.q=rewritePrompt(q);
     const full=(q.q+' '+q.a.join(' ')).replace(/[’‘]/g,"'");
     if(hardReject.some(re=>re.test(full))) return null;
