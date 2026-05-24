@@ -6633,42 +6633,59 @@ function handlePostAnswer(){
     // Stop any running timer first
     try{ stopTimer(); }catch(e){}
 
-    // Reset state BEFORE rebuilding buttons so any click that fires
-    // during innerHTML rebuild already sees the correct state
+    // Reset ALL relevant state synchronously before anything else
     answeredCorrect=false;
     stealMode=false;
     stealerIdx=null;
-    window._bpRetryTransition = false; // ensure guard is clear
-    waitingAnswer=true; // set synchronously — checkAns guard handles everything
+    window._bpRetryTransition = false;
+    waitingAnswer=true;
 
-    // Rebuild answer buttons fresh
+    // Ensure the question overlay is fully visible and interactive
+    const overlay = document.getElementById('qOverlay');
+    if(overlay){
+      overlay.classList.remove('hidden');
+      overlay.style.pointerEvents='';
+      overlay.style.opacity='';
+    }
+
+    // Force qAnswers container to be interactive
+    qa.style.pointerEvents='';
+    qa.style.opacity='';
+    qa.style.display='';
+
+    // Rebuild answer buttons completely fresh
     qa.innerHTML = curQ.a.map((ans,i)=>
       `<button class="ans-btn" type="button" data-ans-idx="${i}">${['A','B','C','D'][i]}. ${ans}</button>`
     ).join('');
 
-    // Force-enable every button — belt-and-suspenders
-    qa.querySelectorAll('.ans-btn').forEach(b=>{
+    // Explicitly enable every new button
+    Array.from(qa.querySelectorAll('.ans-btn')).forEach(b=>{
       b.disabled=false;
+      b.removeAttribute('disabled');
       b.classList.remove('correct','wrong','sel');
       b.style.pointerEvents='';
       b.style.opacity='';
+      b.style.display='';
       try{ b.blur(); }catch(e){}
     });
 
+    // Reset feedback
     const fb = document.getElementById('qFb') || document.getElementById('qFeedback');
     if(fb){
       fb.textContent='💚 Free Life used — try the same question again.';
       fb.className='q-feedback ok';
     }
 
+    // Hide anything that shouldn't be showing
     const stealPrompt = document.getElementById('stealPrompt');
     if(stealPrompt) stealPrompt.classList.add('hidden');
-
     const contBtn = document.getElementById('contBtn');
     if(contBtn) contBtn.classList.add('hidden');
 
+    // Restart timer for retry
     try{ startTimer(); }catch(e){}
     try{ updateUI(); }catch(e){}
+
     return true;
   }
 
@@ -25837,10 +25854,13 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     }
   }catch(e){}
 
+  let _bpFsbRunning=false;
   function filterSwapButtons(){
+    if(_bpFsbRunning) return; // re-entrancy guard — prevents MutationObserver loop
+    _bpFsbRunning=true;
     try{
       const targets=window.__bpV77MoshTargets;
-      if(!targets||!targets.length) return;
+      if(!targets||!targets.length){ _bpFsbRunning=false; return; }
       const names=new Set(targets.map(p=>String(p.name||'')));
       document.querySelectorAll('.swap-opt').forEach(btn=>{
         const txt=btn.textContent||'';
@@ -25849,6 +25869,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
         if(!ok) btn.style.display='none';
       });
     }catch(e){}
+    _bpFsbRunning=false;
   }
   try{new MutationObserver(filterSwapButtons).observe(document.body,{childList:true,subtree:true});}catch(e){}
 })();
@@ -26021,13 +26042,17 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }catch(e){}
 
   // If old poll modal somehow appears, auto-close/hide it.
+  let _bpHpuRunning=false;
   function hidePollUI(){
+    if(_bpHpuRunning) return; // re-entrancy guard — prevents MutationObserver loop
+    _bpHpuRunning=true;
     try{
       document.querySelectorAll(".poll-overlay,#pollOverlay").forEach(function(el){
         el.classList.add("hidden");
         el.style.display = "none";
       });
     }catch(e){}
+    _bpHpuRunning=false;
   }
 
   try{
