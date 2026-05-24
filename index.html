@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#06060c">
 <meta name="description" content="Backstage Pass — Music Trivia Race to the Stage">
 <link rel="manifest" id="pwaManifest">
-<title>Backstage Pass v2.0.0</title>
+<title>Backstage Pass v2.1.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Permanent+Marker&display=swap');
 :root {
@@ -96,6 +96,104 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
 .piece-disp{font-size:1.5rem;line-height:1;width:30px;text-align:center;flex-shrink:0;filter:drop-shadow(0 0 6px currentColor);}
 .player-card.active .piece-disp{animation:ppulse 1.4s ease-in-out infinite;}
 @keyframes ppulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2) rotate(5deg);}}
+
+/* ── Per-instrument idle animations (active player) ── */
+/* Guitar — strumming rock */
+.player-card.active .p-avatar[data-piece="guitar"] span{
+  display:inline-block;
+  animation:anim-guitar 0.5s ease-in-out infinite alternate;
+}
+@keyframes anim-guitar{
+  0%{transform:rotate(-18deg) scale(1);}
+  100%{transform:rotate(12deg) scale(1.1);}
+}
+/* Drums — alternating stick hits */
+.player-card.active .p-avatar[data-piece="drums"] span{
+  display:inline-block;
+  animation:anim-drums 0.35s ease-in-out infinite alternate;
+}
+@keyframes anim-drums{
+  0%{transform:translateY(-4px) scale(1.12);}
+  100%{transform:translateY(3px) scale(0.95);}
+}
+/* Piano — keys pressing down */
+.player-card.active .p-avatar[data-piece="piano"] span{
+  display:inline-block;
+  animation:anim-piano 0.6s cubic-bezier(.4,0,.6,1) infinite alternate;
+}
+@keyframes anim-piano{
+  0%{transform:scaleY(1) translateY(0);}
+  40%{transform:scaleY(0.88) translateY(3px);}
+  100%{transform:scaleY(1) translateY(0);}
+}
+/* Trumpet — blowing puff */
+.player-card.active .p-avatar[data-piece="trumpet"] span{
+  display:inline-block;
+  animation:anim-trumpet 0.7s ease-in-out infinite;
+}
+@keyframes anim-trumpet{
+  0%,100%{transform:rotate(-8deg) scale(1);}
+  25%{transform:rotate(-8deg) scale(1.15) translateX(2px);}
+  50%{transform:rotate(-8deg) scale(1);}
+  75%{transform:rotate(-8deg) scale(1.08) translateX(2px);}
+}
+/* Sax — swaying soul */
+.player-card.active .p-avatar[data-piece="sax"] span{
+  display:inline-block;
+  animation:anim-sax 0.9s ease-in-out infinite alternate;
+}
+@keyframes anim-sax{
+  0%{transform:rotate(-12deg) translateX(-2px);}
+  100%{transform:rotate(8deg) translateX(2px);}
+}
+/* Violin — bowing back and forth */
+.player-card.active .p-avatar[data-piece="violin"] span{
+  display:inline-block;
+  animation:anim-violin 0.55s linear infinite alternate;
+}
+@keyframes anim-violin{
+  0%{transform:rotate(-20deg) translateX(-3px);}
+  100%{transform:rotate(10deg) translateX(3px);}
+}
+/* Mic — held up with subtle pulse on beat */
+.player-card.active .p-avatar[data-piece="mic"] span{
+  display:inline-block;
+  animation:anim-mic 0.5s ease-in-out infinite;
+}
+@keyframes anim-mic{
+  0%,100%{transform:scale(1) rotate(-5deg);}
+  20%{transform:scale(1.2) rotate(-5deg);}
+  40%{transform:scale(1) rotate(-5deg);}
+  60%{transform:scale(1.15) rotate(-5deg);}
+  80%{transform:scale(1) rotate(-5deg);}
+}
+/* DJ Headphones — nodding to the beat */
+.player-card.active .p-avatar[data-piece="dj"] span{
+  display:inline-block;
+  animation:anim-dj 0.45s ease-in-out infinite alternate;
+}
+@keyframes anim-dj{
+  0%{transform:rotate(-8deg) translateY(-2px);}
+  100%{transform:rotate(8deg) translateY(2px);}
+}
+/* Banjo — strumming twang */
+.player-card.active .p-avatar[data-piece="banjo"] span{
+  display:inline-block;
+  animation:anim-banjo 0.6s ease-in-out infinite alternate;
+}
+@keyframes anim-banjo{
+  0%{transform:rotate(-15deg) scale(1);}
+  100%{transform:rotate(10deg) scale(1.08);}
+}
+/* Accordion — breathing in and out */
+.player-card.active .p-avatar[data-piece="acc"] span{
+  display:inline-block;
+  animation:anim-acc 0.8s ease-in-out infinite alternate;
+}
+@keyframes anim-acc{
+  0%{transform:scaleX(0.88) scaleY(1.06);}
+  100%{transform:scaleX(1.08) scaleY(0.95);}
+}
 .p-info{flex:1;min-width:0;}
 .p-name{font-weight:800;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 8px currentColor;letter-spacing:.02em;}
 .p-loc{font-size:.7rem;color:var(--muted);}
@@ -1615,7 +1713,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
       1950s · 1960s · 1970s · 1980s · 1990s · 2000s
     </div>
     <div style="margin-top:8px;font-size:.6rem;color:#f5c518;letter-spacing:.14em;text-transform:uppercase;font-family:'Rajdhani',sans-serif;">
-      v2.0.0 &nbsp;·&nbsp; Backstage Pass
+      v2.1.0 &nbsp;·&nbsp; Backstage Pass
     </div>
   </div>
 </div>
@@ -1950,8 +2048,8 @@ const SPECIALS={
 
 // QUESTION POOLS — 20 per decade per difficulty = 360 total
 // ── VERSION ─────────────────────────────────────────────────────────────────
-const BP_VERSION = '2.0.0';
-const BP_BUILD_DATE = '2025-05-24';
+const BP_VERSION = '2.1.0';
+const BP_BUILD_DATE = '2025-05-25';
 window.BP_VERSION = BP_VERSION;
 console.log('%c🎸 Backstage Pass v' + BP_VERSION + ' (' + BP_BUILD_DATE + ')', 'color:#f5c518;font-weight:bold;font-size:14px;');
 // ─────────────────────────────────────────────────────────────────────────────
@@ -5531,7 +5629,7 @@ function renderPlayers(){
     const multBadge=p.streakMultiplierActive?`<span class="streak-badge" style="background:#f5c51833;color:#f5c518;border-color:#f5c51866">×2!</span>`:'';
     const pc=hexToRgb(p.color);
     return `<div class="player-card${active?' active':''}${p.finished?' finished':''}">
-      <div class="p-avatar" style="--pc:${p.color};box-shadow:0 0 0 2.5px ${p.color},0 0 12px ${p.color}55">
+      <div class="p-avatar" data-piece="${p.piece.id}" style="--pc:${p.color};box-shadow:0 0 0 2.5px ${p.color},0 0 12px ${p.color}55">
         <span>${p.piece.emoji}</span>
       </div>
       <div class="p-info">
@@ -5706,15 +5804,58 @@ function animatePlayerMove(player, fromIdx, toIdx, onDone){
       player.animY=startY+(target.y-startY)*eased-hop;
 
       // ── Piece rotation while moving ──
-      // Rotate based on direction of travel + hop phase
       const dx=target.x-startX;
       const dy=target.y-startY;
       const travelAngle=Math.atan2(dy,dx);
-      // Spin proportional to hop — full rotation per hop
-      player.animAngle = travelAngle + Math.sin(t*Math.PI)*0.5;
-      // Squash on takeoff, stretch at peak, squash on landing
       const hopT=Math.sin(t*Math.PI);
-      player.animScale = 1 + hopT*0.25 - (1-hopT)*0.1;
+
+      // ── Instrument-specific movement animation ──
+      const pieceId = player.piece ? player.piece.id : '';
+      switch(pieceId){
+        case 'guitar':  // strum — rotate back and forth rapidly
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*6)*0.4;
+          player.animScale = 1 + hopT*0.28;
+          break;
+        case 'drums':   // stick hit — bob up-down aggressively
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*4)*0.2;
+          player.animScale = 1 + Math.abs(Math.sin(t*Math.PI*4))*0.3;
+          break;
+        case 'piano':   // press — squash vertically on each step
+          player.animAngle = travelAngle * 0.3;
+          player.animScale = 1 + hopT*0.2 - Math.abs(Math.sin(t*Math.PI*3))*0.1;
+          break;
+        case 'trumpet': // blow — puff forward with slight lean
+          player.animAngle = travelAngle - 0.15 + Math.sin(t*Math.PI*3)*0.15;
+          player.animScale = 1 + hopT*0.22 + Math.sin(t*Math.PI*3)*0.08;
+          break;
+        case 'sax':     // sway — smooth pendulum
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*2.5)*0.45;
+          player.animScale = 1 + hopT*0.25;
+          break;
+        case 'violin':  // bow — linear side-to-side sweep
+          player.animAngle = travelAngle + (t < 0.5 ? -0.4 : 0.4);
+          player.animScale = 1 + hopT*0.2;
+          break;
+        case 'mic':     // pulse — throb on the beat
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*1.5)*0.12;
+          player.animScale = 1 + Math.sin(t*Math.PI*4)*0.18 + hopT*0.15;
+          break;
+        case 'dj':      // nod — forward lean on beat
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*3)*0.25;
+          player.animScale = 1 + hopT*0.22;
+          break;
+        case 'banjo':   // twang — fast strum like guitar but bouncier
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*5)*0.35;
+          player.animScale = 1 + hopT*0.3;
+          break;
+        case 'acc':     // squeeze — alternating wide-narrow
+          player.animAngle = travelAngle + Math.sin(t*Math.PI*2)*0.2;
+          player.animScale = 1 + Math.sin(t*Math.PI*2)*0.2 + hopT*0.15;
+          break;
+        default:
+          player.animAngle = travelAngle + Math.sin(t*Math.PI)*0.5;
+          player.animScale = 1 + hopT*0.25 - (1-hopT)*0.1;
+      }
 
       // Trail — music notes that float upward
       if(Math.random()<0.35){
@@ -5735,7 +5876,13 @@ function animatePlayerMove(player, fromIdx, toIdx, onDone){
         sectionFlashes.push({idx:target.idx, color:player.color, timeLeft:1});
         sectionPulse = {idx:target.idx, color:player.color, age:0};
         player.animScale=0.7;
-        player.animAngle=0;
+        // Instrument-specific landing tilt
+        const landPiece = player.piece ? player.piece.id : '';
+        player.animAngle = landPiece==='guitar' ? 0.3 :
+                           landPiece==='drums'  ? 0 :
+                           landPiece==='sax'    ? -0.25 :
+                           landPiece==='violin' ? -0.3 :
+                           landPiece==='trumpet'? -0.15 : 0;
         renderPlayers();
         stepIdx++;
         if(stepIdx>=steps.length){
@@ -6308,6 +6455,7 @@ function revealAnswer(){
 }
 
 function timeOut(){
+  window._bpRetryTransition = false; // clear retry guard on timeout
   if(!waitingAnswer) return;
   waitingAnswer=false;
   try {
@@ -6336,6 +6484,7 @@ function timeOut(){
 
 function checkAns(idx){
   if(!waitingAnswer) return;
+  if(window._bpRetryTransition) return; // ignore clicks during free life retry transition
   waitingAnswer=false;
   try {
     document.querySelectorAll('.ans-btn').forEach(b=>b.disabled=true);
@@ -6482,13 +6631,20 @@ function handlePostAnswer(){
     const qa = document.getElementById('qAnswers');
     if(!qa) return false;
 
+    // Stop any running timer first to prevent timeOut() firing mid-transition
+    try{ stopTimer(); }catch(e){}
+
+    // Rebuild answer buttons fresh — no stale disabled/class state
     qa.innerHTML = curQ.a.map((ans,i)=>
       `<button class="ans-btn" type="button" data-ans-idx="${i}">${['A','B','C','D'][i]}. ${ans}</button>`
     ).join('');
 
-    document.querySelectorAll('#qAnswers .ans-btn').forEach(b=>{
+    // Force-enable all buttons in the new DOM (belt-and-suspenders)
+    qa.querySelectorAll('.ans-btn').forEach(b=>{
       b.disabled=false;
-      b.classList.remove('correct','wrong');
+      b.classList.remove('correct','wrong','sel');
+      b.style.pointerEvents='';
+      b.style.opacity='';
       try{ b.blur(); }catch(e){}
     });
 
@@ -6504,12 +6660,29 @@ function handlePostAnswer(){
     const contBtn = document.getElementById('contBtn');
     if(contBtn) contBtn.classList.add('hidden');
 
-    waitingAnswer=true;
+    // Defer state reset to next tick so current event fully resolves first,
+    // preventing handleAnswerPointer's capture phase from reading stale state
     answeredCorrect=false;
     stealMode=false;
     stealerIdx=null;
-    try{ startTimer(); }catch(e){}
-    try{ updateUI(); }catch(e){}
+
+    // Small delay before re-enabling answer acceptance — prevents double-fire
+    waitingAnswer=false;
+    window._bpRetryTransition = true; // block stale clicks during transition
+    setTimeout(()=>{
+      window._bpRetryTransition = false;
+      waitingAnswer=true;
+      // Re-verify buttons are enabled after async gap
+      if(qa){
+        qa.querySelectorAll('.ans-btn').forEach(b=>{
+          b.disabled=false;
+          b.style.pointerEvents='';
+        });
+      }
+      try{ startTimer(); }catch(e){}
+      try{ updateUI(); }catch(e){}
+    }, 80);
+
     return true;
   }
 
@@ -6547,6 +6720,9 @@ function handlePostAnswer(){
       </div>
     `;
 
+    // Stop timer while player decides — prevents timeOut() firing during decision
+    try{ stopTimer(); }catch(e){}
+
     const cont = document.getElementById('contBtn');
     const box = document.querySelector('.q-box') || document.getElementById('qOverlay') || document.body;
     if(cont && cont.parentNode) cont.parentNode.insertBefore(prompt, cont);
@@ -6558,23 +6734,36 @@ function handlePostAnswer(){
       fb.className='q-feedback bad';
     }
 
-    document.getElementById('bpV102UseFreeLife').addEventListener('pointerdown', function(e){
+    function onUseFreeLife(e){
       e.preventDefault();
       e.stopPropagation();
+      const btn = document.getElementById('bpV102UseFreeLife');
+      if(btn) btn.disabled = true; // prevent double-fire
       if(v102ConsumeFreeLife(player)){
         try{ addLog(`💚 ${player.name} used a Free Life and retries the same question.`); }catch(err){}
         v102RemoveAllFreeLifePrompts();
         v102RetrySameQuestion();
       }
-    }, {passive:false});
-
-    document.getElementById('bpV102DeclineFreeLife').addEventListener('pointerdown', function(e){
+    }
+    function onDeclineFreeLife(e){
       e.preventDefault();
       e.stopPropagation();
+      const btn = document.getElementById('bpV102DeclineFreeLife');
+      if(btn) btn.disabled = true; // prevent double-fire
       try{ addLog(`💚 ${player.name} declined Free Life — Steal may be offered.`); }catch(err){}
       v102RemoveAllFreeLifePrompts();
       v102ContinueToStealOrReveal();
-    }, {passive:false});
+    }
+    const useBtn = document.getElementById('bpV102UseFreeLife');
+    const declineBtn = document.getElementById('bpV102DeclineFreeLife');
+    if(useBtn){
+      useBtn.addEventListener('pointerdown', onUseFreeLife, {passive:false});
+      useBtn.addEventListener('click', onUseFreeLife); // fallback for mobile
+    }
+    if(declineBtn){
+      declineBtn.addEventListener('pointerdown', onDeclineFreeLife, {passive:false});
+      declineBtn.addEventListener('click', onDeclineFreeLife);
+    }
 
     return;
   }
@@ -6675,6 +6864,7 @@ function declineSteal(){
 }
 
 function closeQ(){
+  window._bpRetryTransition = false; // clear retry guard on question close
   document.getElementById('qOverlay').classList.add('hidden');
   document.getElementById('stealPrompt').classList.add('hidden');
   document.getElementById('contBtn').classList.add('hidden');
