@@ -25871,7 +25871,9 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     }catch(e){}
     _bpFsbRunning=false;
   }
-  try{new MutationObserver(filterSwapButtons).observe(document.body,{childList:true,subtree:true});}catch(e){}
+  // MutationObserver removed — caused infinite loop when any DOM changed during gameplay.
+  // filterSwapButtons is called explicitly when swap UI is built instead.
+  try{ filterSwapButtons(); }catch(e){}
 })();
 </script>
 
@@ -26055,9 +26057,9 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
     _bpHpuRunning=false;
   }
 
-  try{
-    new MutationObserver(hidePollUI).observe(document.body, {childList:true, subtree:true});
-  }catch(e){}
+  // MutationObserver removed — caused infinite loop when any DOM changed during gameplay.
+  // hidePollUI is called once on setup instead.
+  try{ hidePollUI(); }catch(e){}
 
   window.BP_AUDIENCE_POLL_MODE = "simplified-crowd-boost";
   console.log("v85 Audience Poll simplified into Crowd Boost");
