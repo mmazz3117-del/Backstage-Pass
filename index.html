@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#06060c">
 <meta name="description" content="Backstage Pass — Music Trivia Race to the Stage">
 <link rel="manifest" id="pwaManifest">
-<title>Backstage Pass 🎸</title>
+<title>Backstage Pass v2.0.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Permanent+Marker&display=swap');
 :root {
@@ -1614,6 +1614,9 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
     <div style="margin-top:14px;font-size:.7rem;color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase">
       1950s · 1960s · 1970s · 1980s · 1990s · 2000s
     </div>
+    <div style="margin-top:10px;font-size:.6rem;color:rgba(255,255,255,.18);letter-spacing:.14em;text-transform:uppercase;font-family:'Rajdhani',sans-serif;">
+      v2.0.0 &nbsp;·&nbsp; Backstage Pass
+    </div>
   </div>
 </div>
 
@@ -1946,6 +1949,13 @@ const SPECIALS={
 };
 
 // QUESTION POOLS — 20 per decade per difficulty = 360 total
+// ── VERSION ─────────────────────────────────────────────────────────────────
+const BP_VERSION = '2.0.0';
+const BP_BUILD_DATE = '2025-05-24';
+window.BP_VERSION = BP_VERSION;
+console.log('%c🎸 Backstage Pass v' + BP_VERSION + ' (' + BP_BUILD_DATE + ')', 'color:#f5c518;font-weight:bold;font-size:14px;');
+// ─────────────────────────────────────────────────────────────────────────────
+
 const TRIVIA={
   easy:{
     '50s':[
