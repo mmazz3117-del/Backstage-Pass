@@ -6484,7 +6484,6 @@ function timeOut(){
 
 function checkAns(idx){
   if(!waitingAnswer) return;
-  if(window._bpRetryTransition) return; // ignore clicks during free life retry transition
   waitingAnswer=false;
   try {
     document.querySelectorAll('.ans-btn').forEach(b=>b.disabled=true);
@@ -6631,15 +6630,23 @@ function handlePostAnswer(){
     const qa = document.getElementById('qAnswers');
     if(!qa) return false;
 
-    // Stop any running timer first to prevent timeOut() firing mid-transition
+    // Stop any running timer first
     try{ stopTimer(); }catch(e){}
 
-    // Rebuild answer buttons fresh — no stale disabled/class state
+    // Reset state BEFORE rebuilding buttons so any click that fires
+    // during innerHTML rebuild already sees the correct state
+    answeredCorrect=false;
+    stealMode=false;
+    stealerIdx=null;
+    window._bpRetryTransition = false; // ensure guard is clear
+    waitingAnswer=true; // set synchronously — checkAns guard handles everything
+
+    // Rebuild answer buttons fresh
     qa.innerHTML = curQ.a.map((ans,i)=>
       `<button class="ans-btn" type="button" data-ans-idx="${i}">${['A','B','C','D'][i]}. ${ans}</button>`
     ).join('');
 
-    // Force-enable all buttons in the new DOM (belt-and-suspenders)
+    // Force-enable every button — belt-and-suspenders
     qa.querySelectorAll('.ans-btn').forEach(b=>{
       b.disabled=false;
       b.classList.remove('correct','wrong','sel');
@@ -6660,29 +6667,8 @@ function handlePostAnswer(){
     const contBtn = document.getElementById('contBtn');
     if(contBtn) contBtn.classList.add('hidden');
 
-    // Defer state reset to next tick so current event fully resolves first,
-    // preventing handleAnswerPointer's capture phase from reading stale state
-    answeredCorrect=false;
-    stealMode=false;
-    stealerIdx=null;
-
-    // Small delay before re-enabling answer acceptance — prevents double-fire
-    waitingAnswer=false;
-    window._bpRetryTransition = true; // block stale clicks during transition
-    setTimeout(()=>{
-      window._bpRetryTransition = false;
-      waitingAnswer=true;
-      // Re-verify buttons are enabled after async gap
-      if(qa){
-        qa.querySelectorAll('.ans-btn').forEach(b=>{
-          b.disabled=false;
-          b.style.pointerEvents='';
-        });
-      }
-      try{ startTimer(); }catch(e){}
-      try{ updateUI(); }catch(e){}
-    }, 80);
-
+    try{ startTimer(); }catch(e){}
+    try{ updateUI(); }catch(e){}
     return true;
   }
 
