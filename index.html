@@ -8692,6 +8692,228 @@ EXPANSION_PACK_11.forEach(q => {
 });
 console.log("EXPANSION_PACK_11: added " + EXPANSION_PACK_11.length + " LILITH questions (Taylor Swift, Olivia Rodrigo, Selena Gomez, Gracie Abrams, Sabrina Carpenter).");
 
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 12 — Phase 2/3/4
+// Phase 2: 70s deep cuts — reggae, jazz fusion, prog rock, country, early punk, Philly soul
+// Phase 3: Lilith's Choice expansion — ~20 new questions per artist (Taylor, Olivia,
+//          Selena, Gracie, Sabrina) for replay safety
+// Phase 4: Hard difficulty boost — 8 hard questions per decade across all six decades
+// All guardrails: easy=casual listener, medium=fan, hard=deep cut with aha-moment
+// Song title in quotes for deduplication fingerprinting. No artist >3x per decade.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_12 = [
+
+  // ══════════════════════════════════════════════════════
+  // PHASE 2 — 70s DEEP CUTS (~100 questions)
+  // ══════════════════════════════════════════════════════
+
+  // ── REGGAE & ROOTS (was 2 questions — major gap) ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'No Woman, No Cry' is a Bob Marley song — he is from which Caribbean island?",a:["Trinidad","Jamaica","Barbados","Haiti"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Redemption Song' by Bob Marley is notable because it features him performing with just:",a:["A full orchestra","An acoustic guitar","A steel drum","A piano"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'I Shot the Sheriff' was a Bob Marley song that became a major hit for which rock guitarist?",a:["Carlos Santana","Eric Clapton","Jimmy Page","Peter Frampton"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'The Harder They Come' was a 1972 reggae film featuring which Jamaican singer?",a:["Toots Hibbert","Jimmy Cliff","Peter Tosh","Burning Spear"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Pressure Drop' is a classic reggae song — it was first performed by Toots and the Maytals and later covered by which British band?",a:["The Police","The Clash","The Specials","UB40"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Exodus' is a 1977 Bob Marley album — Time magazine named it album of the century in 1999. It was recorded partly in which city after Marley survived an assassination attempt?",a:["New York","Miami","London","Kingston"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Legalize It' was a controversial 1976 solo debut by which Wailer who split from Bob Marley?",a:["Junior Braithwaite","Bunny Wailer","Peter Tosh","Toots Hibbert"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Many Rivers to Cross' is a soulful 1969 song by which Jamaican singer who later appeared in the film 'Lifestyles of the Rich and Famous'?",a:["Jimmy Cliff","Burning Spear","Desmond Dekker","Delroy Wilson"],c:0},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'The Israelites' by Desmond Dekker was one of the first reggae songs to reach the top 10 in the US — it peaked at #9 in which year?",a:["1968","1969","1970","1971"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Catch a Fire' was the first Bob Marley and the Wailers album released internationally — it was packaged in a unique sleeve shaped like:",a:["A marijuana leaf","A Zippo lighter","A chalice","A flame"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Pressure Drop' — Toots Hibbert of Toots and the Maytals is credited with coining which word that became the genre's name?",a:["Ska","Rocksteady","Reggae","Dub"],c:2},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Trenchtown Rock' — Bob Marley's Trenchtown is a neighborhood in which part of Kingston, Jamaica?",a:["The wealthy hills","A government housing project in West Kingston","The tourist district","The harbor area"],c:1},
+
+  // ── JAZZ FUSION (was 1 question — essentially zero) ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Birdland' is a 1977 jazz fusion track by which band named after a meteorological phenomenon?",a:["Thunderstorm","Weather Report","Lightning Strike","Tornado"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Head Hunters' is a landmark 1973 jazz fusion album by which pianist and bandleader?",a:["Chick Corea","Herbie Hancock","Keith Jarrett","McCoy Tyner"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Chameleon' is the opening track on 'Head Hunters' — it became one of the most sampled jazz tracks in hip-hop history. Its funky bass-led groove was inspired by which band?",a:["Sly and the Family Stone","James Brown","Earth Wind and Fire","Kool and the Gang"],c:0},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Spain' is a jazz fusion classic by which pianist who also led the group Return to Forever?",a:["Herbie Hancock","Keith Jarrett","Chick Corea","McCoy Tyner"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Bitches Brew' by Miles Davis is considered the foundational jazz fusion album — it was released in 1970. Which guitarist on the album later formed his own legendary band, the Mahavishnu Orchestra?",a:["Larry Coryell","John McLaughlin","Pat Metheny","Al Di Meola"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Heavy Weather' by Weather Report is their best-selling album — its biggest track 'Birdland' was named after which jazz club?",a:["Charlie Parker's nickname","A club in New York named for Charlie Parker","A bird sanctuary in New Jersey","A club in New Orleans"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Romantic Warrior' by Return to Forever was a 1976 concept album inspired by which literary work?",a:["Don Quixote","The Lord of the Rings","Arthurian legend","Dante's Inferno"],c:2},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Mysterious Traveller' by Weather Report features Joe Zawinul and Jaco Pastorius — Pastorius was known for playing a fretless bass. He removed the frets himself from which type of instrument?",a:["A Fender Jazz Bass","A Gibson EB-2","A Rickenbacker 4001","A Music Man StingRay"],c:0},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'The Mahavishnu Orchestra' was led by guitarist John McLaughlin — he had previously played on Miles Davis albums 'Bitches Brew' and 'A Tribute to Jack Johnson'. McLaughlin is from which country?",a:["USA","India","England","Canada"],c:2},
+
+  // ── PROGRESSIVE ROCK (had 16 but mostly Pink Floyd — filling Yes, Genesis, ELP, King Crimson) ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Roundabout' is a signature progressive rock song by which band?",a:["Genesis","King Crimson","Yes","Emerson Lake and Palmer"],c:2},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Tubular Bells' — the opening theme of which horror film was based on this 1973 instrumental album by Mike Oldfield?",a:["The Omen","Carrie","The Exorcist","Halloween"],c:2},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'In the Court of the Crimson King' was the debut album of which pioneering progressive rock band?",a:["Yes","Genesis","King Crimson","ELP"],c:2},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Selling England by the Pound' is a 1973 album by which band that featured Peter Gabriel as vocalist?",a:["Yes","Genesis","King Crimson","Gentle Giant"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Close to the Edge' is a 1972 Yes album — the title track takes up the entire first side of the album, running approximately how long?",a:["12 minutes","14 minutes","18 minutes","23 minutes"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Karn Evil 9' is the centerpiece of Emerson Lake and Palmer's 'Brain Salad Surgery' — the album cover was designed by which Swiss surrealist artist?",a:["Salvador Dali","H.R. Giger","Roger Dean","Storm Thorgerson"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'The Lamb Lies Down on Broadway' was a 1974 Genesis double album and the last to feature Peter Gabriel — he left to pursue a solo career. Phil Collins then took over as lead vocalist. How many drummers auditioned to replace Collins on drums?",a:["Around 50","Around 100","Around 400","Over 700"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Supper's Ready' by Genesis runs for nearly 23 minutes and appears on which 1972 album?",a:["Nursery Cryme","Foxtrot","Selling England by the Pound","The Lamb Lies Down on Broadway"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Close to the Edge' by Yes — the band recorded the album at Advision Studios in London. Drummer Bill Bruford quit immediately after finishing it to join which other band?",a:["Genesis","King Crimson","ELP","Gentle Giant"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Tarkus' by Emerson Lake and Palmer opens with a side-long suite — the album cover depicts a creature that is half armadillo and half what?",a:["Tank","Scorpion","Crab","Turtle"],c:0},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Starless' closes King Crimson's 'Red' album — the album was recorded in 1974 and is widely considered the band's masterpiece. Robert Fripp then disbanded King Crimson for how long?",a:["2 years","5 years","7 years","10 years"],c:1},
+
+  // ── COUNTRY CROSSOVER (had 9 — mostly pop references) ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Jolene' is a 1973 Dolly Parton song about a woman she begs not to steal her man — who inspired it?",a:["A character in a novel","A real red-haired bank teller her husband flirted with","A childhood friend","A character from a TV show"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Coal Miner's Daughter' is a signature song of which country legend?",a:["Tammy Wynette","Dolly Parton","Loretta Lynn","Crystal Gayle"],c:2},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'The Gambler' was Kenny Rogers' signature hit in 1978 — the song advises knowing when to:",a:["Bet everything","Hold 'em and fold 'em","Bluff","Raise the stakes"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Waylon and Willie' was a 1978 duet album by Waylon Jennings and Willie Nelson — their movement was known as Outlaw Country. Where did they record most of their albums instead of the traditional Nashville studios?",a:["Austin Texas","New York","Los Angeles","Memphis"],c:0},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Take Me Home, Country Roads' is a 1971 song by John Denver — the lyrics reference which US state?",a:["Tennessee","Kentucky","West Virginia","Virginia"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Behind Closed Doors' won Charlie Rich the CMA Award for Entertainer of the Year in 1974 — at the ceremony he famously set fire to the envelope revealing the next year's winner. Who was that winner?",a:["Dolly Parton","Glen Campbell","John Denver","John Denver"],c:2},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Rhinestone Cowboy' was Glen Campbell's signature hit in 1975 — it was written by which songwriter who had offered it unsuccessfully to several other artists first?",a:["Jimmy Webb","Larry Weiss","Kris Kristofferson","Roger Miller"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Lucille' by Kenny Rogers reached #1 on both country and pop charts in 1977 — in the song, how many children does the woman leaving her husband have?",a:["Two","Three","Four","Five"],c:2},
+
+  // ── EARLY PUNK (had 30 — boosting underrepresented acts beyond Pistols/Clash/Ramones) ──
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Because the Night' was co-written by Patti Smith and Bruce Springsteen — it reached the top 15 in 1978. Patti Smith is known as the:",a:["Queen of Punk","Godmother of Punk","First Lady of CBGBs","Mother of Rock"],c:1},
+  {diff:'easy',decade:'70s',genre:'Rock',q:"'Blondie' was fronted by which singer who became a pop icon of the late 70s?",a:["Siouxsie Sioux","Poly Styrene","Debbie Harry","Patti Smith"],c:2},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Marquee Moon' is the debut album by Television — the band's twin guitar interplay was pioneered by Tom Verlaine and which other guitarist?",a:["Richard Hell","Richard Lloyd","Billy Ficca","Fred Smith"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'Ever Fallen in Love' is a 1978 single by The Buzzcocks — the band is from which English city?",a:["London","Manchester","Birmingham","Leeds"],c:1},
+  {diff:'medium',decade:'70s',genre:'Rock',q:"'(White Man) In Hammersmith Palais' by The Clash is often cited as one of the greatest punk singles — it blends punk with reggae and was inspired by Joe Strummer attending a reggae concert. The venue in the title is in which city?",a:["Manchester","Birmingham","London","Bristol"],c:2},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'New Rose' by The Damned is widely cited as the first UK punk single — released in October 1976, it came out weeks before the Sex Pistols' 'Anarchy in the UK'. The Damned were produced by which musician on this debut?",a:["Malcolm McLaren","Nick Lowe","Tony Wilson","Pete Shelley"],c:1},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Anarchy in the UK' was the Sex Pistols' debut single — manager Malcolm McLaren had previously managed which US proto-punk band he tried to model the Pistols after?",a:["Television","The Stooges","The New York Dolls","Patti Smith Group"],c:2},
+
+  // ── PHILADELPHIA SOUL (had 13 — boosting the genre itself) ──
+  {diff:'easy',decade:'70s',genre:'Soul',q:"'Me and Mrs. Jones' is a 1972 Philadelphia soul ballad about an affair — it was a #1 hit for:",a:["Teddy Pendergrass","Billy Paul","Lou Rawls","Harold Melvin"],c:1},
+  {diff:'easy',decade:'70s',genre:'Soul',q:"'If You Don't Know Me by Now' was a hit for Harold Melvin and the Blue Notes — the original lead singer before Teddy Pendergrass was:",a:["Marvin Gaye","Eddie Levert","Teddy Pendergrass","Sharon Paige"],c:2},
+  {diff:'easy',decade:'70s',genre:'Soul',q:"'TSOP (The Sound of Philadelphia)' was the theme song for which popular TV music show?",a:["American Bandstand","Soul Train","Midnight Special","The Midnight Special"],c:1},
+  {diff:'medium',decade:'70s',genre:'Soul',q:"'Back Stabbers' by the O'Jays was produced by Gamble and Huff — Philadelphia International Records was distributed by which major label?",a:["Motown","Columbia","Atlantic","Epic"],c:1},
+  {diff:'medium',decade:'70s',genre:'Soul',q:"'Then Came You' was a 1974 collaboration between Dionne Warwick and which group?",a:["The O'Jays","The Spinners","The Stylistics","The Delfonics"],c:1},
+  {diff:'medium',decade:'70s',genre:'Soul',q:"'Betcha by Golly Wow' and 'I'm Stone in Love with You' were hits for which Philadelphia vocal group produced by Thom Bell?",a:["The Spinners","The Delfonics","The Stylistics","The Intruders"],c:2},
+  {diff:'hard',decade:'70s',genre:'Soul',q:"'Cowboys to Girls' was the first #1 R&B hit for Philadelphia International — it was by The Intruders in 1968. Kenny Gamble and Leon Huff founded the label after leaving which earlier label they had started?",a:["Neptune Records","Cameo-Parkway","Arctic Records","Philly Groove"],c:0},
+  {diff:'hard',decade:'70s',genre:'Soul',q:"'Wake Up Everybody' by Harold Melvin and the Blue Notes was one of the last recordings to feature Teddy Pendergrass as lead vocalist before he went solo. Pendergrass was discovered playing drums in which group?",a:["The Blue Notes themselves","The Cadillacs","Grandmaster Flash's backing band","A church choir"],c:0},
+
+  // ══════════════════════════════════════════════════════
+  // PHASE 3 — LILITH'S CHOICE EXPANSION (~100 questions)
+  // Target: ~20 new questions per artist for replay safety
+  // ══════════════════════════════════════════════════════
+
+  // ── TAYLOR SWIFT — focusing on eras not yet covered ──
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Mean' by Taylor Swift won the Grammy for Best Country Song — it appears on which album?",a:["Fearless","Speak Now","Red","1989"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Mine' was the lead single from Taylor Swift's 'Speak Now' — the album was notable because:",a:["It was her first #1 album","She wrote every song entirely alone","It debuted at #1 in 15 countries","It was recorded in secret"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Back to December' from Taylor Swift's 'Speak Now' is widely believed to be about which actor?",a:["Jake Gyllenhaal","Taylor Lautner","John Mayer","Harry Styles"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'We Are Never Ever Getting Back Together' — which label did Taylor Swift sign to as a teenager?",a:["Columbia","Atlantic","Big Machine Records","RCA"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'22' by Taylor Swift is from which album?",a:["Speak Now","Red","1989","Lover"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Delicate' by Taylor Swift is from which album and features a music video where she dances invisibly in:",a:["1989 — a concert hall","reputation — a hotel","Lover — Times Square","folklore — a forest"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Paper Rings' — Taylor Swift's 'Lover' album was released in which year?",a:["2017","2018","2019","2020"],c:2},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Long Live' closes Taylor Swift's 'Speak Now' album — she later released a 10-year anniversary edition. How many songs did she write alone for 'Speak Now'?",a:["All 14 songs","All 16 songs","13 of 14","12 of 16"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Red' by Taylor Swift — the album was described as her first to fully embrace pop. It was re-released as 'Red (Taylor's Version)' running how many tracks?",a:["20","25","30","Over 30"],c:3},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Getaway Car' from Taylor Swift's 'reputation' references the end of a relationship and the beginning of the reputation era — she collaborated on this song with which duo?",a:["Jack Antonoff and St. Vincent","Fun. and Bleachers","Jack Antonoff only","fun. only"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Lover' — the title track of Taylor Swift's seventh album — she described the album as a contrast to 'reputation'. Which producer worked with her on most of 'Lover'?",a:["Max Martin","Jack Antonoff","Joel Little","Frank Dukes"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Betty' on Taylor Swift's 'folklore' uses a male perspective — the name Betty is one of a trio of names Taylor used. The other two are:",a:["James and August","James and Inez","James and Augustine","Jake and August"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'marjorie' on Taylor Swift's 'evermore' is written as a tribute to her grandmother — Marjorie Finlay was a:",a:["Poet","Opera singer","Broadway actress","Classical violinist"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Cornelia Street' from 'Lover' is about a specific address in New York — Taylor Swift rented an apartment on this street. In which part of Manhattan is Cornelia Street located?",a:["Upper East Side","The West Village","SoHo","Tribeca"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'this is me trying' from 'folklore' was co-written with William Bowery — who is William Bowery?",a:["A pseudonym for Jack Antonoff","Joe Alwyn's stage name","Aaron Dessner's pseudonym","A session musician"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'no body no crime' from 'evermore' features which band as guest vocalists?",a:["Paramore","Haim","Boygenius","The Chicks"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'The Eras Tour' became the highest-grossing concert tour in history — approximately how much did it gross?",a:["Over $500 million","Over $750 million","Over $1 billion","Over $2 billion"],c:3},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Florida!!!' features Post Malone and appears on 'The Tortured Poets Department' — Taylor Swift has broken which Billboard record more times than any other artist?",a:["Most #1 albums","Most weeks at #1 on Hot 100","Most simultaneous Hot 100 entries","All three"],c:2},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'right where you left me' is a bonus track on 'evermore' — it tells the story of a woman frozen at a restaurant table. Taylor Swift has said it is one of the few songs she wrote:",a:["In one sitting in under 30 minutes","During a nightmare","While on a plane","In a different language first"],c:0},
+
+  // ── OLIVIA RODRIGO ──
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'happier' appears on Olivia Rodrigo's debut album 'SOUR' — how old was she when 'drivers license' came out?",a:["16","17","18","19"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'favorite crime' by Olivia Rodrigo — she starred alongside which actor in 'High School Musical: The Musical: The Series'?",a:["Joshua Bassett","Jake Short","Frankie A. Rodriguez","Matt Cornett"],c:0},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'good 4 u' by Olivia Rodrigo interpolates which 2002 Paramore song?",a:["Decode","Ignorance","Misery Business","The Only Exception"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'all-american bitch' opens Olivia Rodrigo's 'GUTS' album — she described 'GUTS' as being more influenced by which decade's music?",a:["70s","80s","90s and 2000s","2010s"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'get him back!' by Olivia Rodrigo is from which album?",a:["SOUR","GUTS","Drivers License EP","LIVID"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'the grudge' by Olivia Rodrigo closes 'GUTS' — the album's title is a reference to which feeling she said she had turning 20?",a:["Fear of failure","Stomach-punching anxiety","Guts — literal courage","Loss of her teenage self"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'teenage dream' by Olivia Rodrigo — 'GUTS' debuted at #1 in 23 countries. She performed the album in full on the GUTS World Tour, which began in which year?",a:["2023","2024","2025","2026"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'logical' from 'SOUR' — Olivia Rodrigo co-wrote most of 'SOUR' in her bedroom. Approximately how long did it take to write the album?",a:["3 months","6 months","1 year","18 months"],c:0},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'drivers license' spent 8 consecutive weeks at #1 on the Hot 100 — it broke the single-week streaming record at the time with how many streams in its first week?",a:["45 million","65 million","76 million","Over 90 million"],c:2},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'GUTS' features production from Dan Nigro — he previously worked with which other artist on their debut before Olivia Rodrigo?",a:["Gracie Abrams","Caroline Polachek","Conan Gray","Lennon Stella"],c:2},
+
+  // ── SELENA GOMEZ ──
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Same Old Love' — Selena Gomez's 'Revival' marked a new sonic direction. Which producer co-wrote the album title track 'Revival'?",a:["Max Martin","Sia","Stargate","Ryan Tedder"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Fetish' is a Selena Gomez single featuring Gucci Mane — it was from which era?",a:["Revival","Rare","Stars Dance","Bad Liar EP"],c:0},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Hands to Myself' by Selena Gomez was a 2016 single — the music video was directed by which filmmaker known for provocative visuals?",a:["Hype Williams","Director X","Petra Collins","Hannah Lux Davis"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Slow Down' was a 2013 Selena Gomez single — she performed at the MTV VMAs that year. Which artist's performance overshadowed it in controversy?",a:["Lady Gaga","Miley Cyrus","Katy Perry","Rihanna"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Lose You to Love Me' debuted at #1 the same night as Justin Bieber's 'Yummy' — it was the first time two former partners topped the chart simultaneously in the same week. True or false?",a:["True — it was noted as unprecedented","False — it happened one week apart","False — Yummy never charted #1","True but it was different charts"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Only Murders in the Building' — Selena Gomez stars in the Hulu series alongside which two actors?",a:["Steve Martin and Martin Short","Bill Murray and Bill Hader","Jack Black and Owen Wilson","Adam Sandler and Steve Martin"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Love You Like a Love Song' was a 2011 Selena Gomez hit — it was from her album with the Stars Dance band name era. What was her band called?",a:["The Disney Gang","The Scene","The Revival","The Stars"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Kill Em with Kindness' from 'Revival' — Selena Gomez was the most-followed person on Instagram for several years. She stepped back from social media in 2018 citing mental health — she gave her phone to a friend for how long initially?",a:["One week","One month","Three months","Six months"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Rare Beauty' launched in 2020 — the brand's name comes from a 2020 Selena Gomez album. What percentage of sales goes to the Rare Impact Fund for mental health?",a:["0.5%","1%","2%","5%"],c:1},
+
+  // ── GRACIE ABRAMS ──
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Close to You' by Gracie Abrams features a stripped-back sound — she is primarily known for which kind of songwriting approach?",a:["Big pop productions","Quiet introspective indie pop","Heavy rock","Dance-pop"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Best Friend' by Gracie Abrams — her father J.J. Abrams directed which blockbuster franchise films?",a:["The Marvel Avengers films","Star Wars and Star Trek films","The Fast and Furious franchise","The Mission Impossible franchise"],c:1},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Unlearn' by Gracie Abrams — 'The Secret of Us' debuted at #1 in the UK. Which country is she from?",a:["UK","Canada","Australia","USA"],c:3},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Minor' is Gracie Abrams' debut EP — how many tracks does it contain?",a:["4","5","6","7"],c:2},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Feels Like' by Gracie Abrams was an early fan favorite — she built her fanbase primarily through which platform before her wider breakthrough?",a:["YouTube","TikTok","Instagram Reels","SoundCloud"],c:1},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'The Secret of Us' — Gracie Abrams has cited which artist as one of her primary songwriting influences alongside Taylor Swift?",a:["Phoebe Bridgers","Lana Del Rey","Alanis Morissette","Fiona Apple"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'After Talking' is a song on 'Good Riddance' — when was that album released?",a:["2021","2022","2023","2024"],c:2},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Difficult' by Gracie Abrams was featured on a major TV show soundtrack — 'The Secret of Us' debuted at #1 in the UK making Gracie the first American woman to debut at #1 in the UK with her second studio album. The record previously held by which artist?",a:["Taylor Swift","Ariana Grande","Billie Eilish","Beyoncé"],c:1},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'I told you I was trouble' — Gracie Abrams opened for Taylor Swift on specific Eras Tour dates. In which year did her Eras Tour opening slot occur?",a:["2022","2023","2024","2025"],c:1},
+
+  // ── SABRINA CARPENTER ──
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Cinderella' is a classic Sabrina Carpenter song from her early career — she appeared on Disney Channel starting at what age?",a:["12","13","14","15"],c:0},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Sue Me' by Sabrina Carpenter — her 'emails i can't send' album was released in which year?",a:["2020","2021","2022","2023"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Vicious' by Sabrina Carpenter — 'Short n' Sweet' debuted at #1 in how many countries?",a:["5","10","15","Over 20"],c:3},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Lonesome' from 'Short n' Sweet' — Sabrina Carpenter is from which US state?",a:["California","Florida","Pennsylvania","New York"],c:2},
+  {diff:'easy',decade:'00s',genre:'LILITH',q:"'Bed Chem' from 'Short n' Sweet' — Sabrina Carpenter's 'Espresso' stayed in the top 10 of the Hot 100 for how many weeks?",a:["10 weeks","15 weeks","20 weeks","Over 25 weeks"],c:3},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Thumbs' was an early Sabrina Carpenter hit from 2017 — before her pop breakthrough, she was primarily known as which type of performer?",a:["Actress and singer on Disney","Broadway actress","YouTube singer","Country artist"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Pricing' by Sabrina Carpenter — she has cited which two artists as major inspirations for her retro-influenced pop sound on 'Short n' Sweet'?",a:["Britney Spears and Kylie Minogue","Madonna and Janet Jackson","Carly Simon and Carole King","Olivia Newton-John and Agnetha Fältskog"],c:0},
+  {diff:'medium',decade:'00s',genre:'LILITH',q:"'Tornado Warnings' — producer Julian Bunetta co-produced 'Short n' Sweet'. He previously won Grammy Awards working with which group?",a:["One Direction","BTS","Jonas Brothers","5 Seconds of Summer"],c:0},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Juno' from 'Short n' Sweet' — in 2024 Sabrina Carpenter became the first artist since The Beatles to achieve which chart milestone?",a:["Top 5 with 5 songs simultaneously","Three consecutive #1 debut singles","Hold the #1 and #2 spots with back-to-back singles","Have a song chart for 52 consecutive weeks"],c:2},
+  {diff:'hard',decade:'00s',genre:'LILITH',q:"'Manchild' closes 'Short n' Sweet' — the album's deluxe edition added several tracks. Before major label success Sabrina was on which independent label?",a:["Island","Hollywood Records","Epic","Virgin"],c:1},
+
+  // ══════════════════════════════════════════════════════
+  // PHASE 4 — HARD DIFFICULTY BOOST (8 per decade)
+  // Targeting 50s and 60s which have the fewest hard questions.
+  // All must have clear, satisfying answers — no trivia for trivia's sake.
+  // ══════════════════════════════════════════════════════
+
+  // ── 50s HARD (thinnest decade) ──
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Whole Lotta Shakin' Goin On' — Jerry Lee Lewis had 'The Killer' as his nickname. He was also Myra Gale Brown's:",a:["Manager","Guitar teacher","First cousin once removed (who he married)","Neighbor"],c:2},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Johnny B. Goode' was written about which person?",a:["A fictional everyman","Chuck Berry himself","Little Richard","A janitor at Chess Records"],c:0},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'That'll Be the Day' — Buddy Holly took the phrase from which John Wayne film he saw as a teenager?",a:["The Searchers","Rio Bravo","Stagecoach","True Grit"],c:0},
+  {diff:'hard',decade:'50s',genre:'Pop',q:"'Hound Dog' was recorded by Elvis Presley in 1956 — he recorded it in one session but required how many takes?",a:["3","7","31","50"],c:2},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Blue Suede Shoes' was written and first recorded by which Sun Records artist before Elvis covered it?",a:["Carl Perkins","Johnny Cash","Roy Orbison","Jerry Lee Lewis"],c:0},
+  {diff:'hard',decade:'50s',genre:'Pop',q:"'Heartbreak Hotel' was Elvis Presley's first #1 — it was inspired by a newspaper article about a man who left a suicide note reading:",a:["I walk a lonely street","Nobody cares for me","I am so alone","The world has turned away"],c:0},
+  {diff:'hard',decade:'50s',genre:'Rock',q:"'Long Tall Sally' — Little Richard's vocal style was partly a deliberate attempt to sing too fast for white artists to cover him. Which label released his early hits?",a:["Sun Records","Specialty Records","Chess Records","Atlantic Records"],c:1},
+  {diff:'hard',decade:'50s',genre:'Pop',q:"'Earth Angel' by The Penguins was one of the first doo-wop songs to top the pop chart — it was later famously used in which 1985 film?",a:["Ferris Bueller's Day Off","Back to the Future","The Breakfast Club","Sixteen Candles"],c:1},
+
+  // ── 60s HARD ──
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'Good Vibrations' — Brian Wilson originally started writing it in 1963 as a simple pop song. He later said the song's concept of 'vibrations' came from his mother explaining why dogs bark at some people. True or false?",a:["True","False — he invented this story","True — she called them auras","False — it came from a science teacher"],c:0},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'A Day in the Life' ends with a piano chord held for 40 seconds — how many pianos were used to play it?",a:["One","Two","Three","Four"],c:2},
+  {diff:'hard',decade:'60s',genre:'Soul',q:"'Respect' by Aretha Franklin — she changed Otis Redding's original lyric from a man demanding respect to a woman demanding it. Redding reportedly said after hearing her version:",a:["She murdered my song","That little girl just stole my song","I don't know what to say","That's what I was trying to say"],c:1},
+  {diff:'hard',decade:'60s',genre:'Folk',q:"'The Times They Are A-Changin'' — Bob Dylan wrote the song as a deliberate anthem. He described it as being written with which specific intention?",a:["To protest Vietnam","To write his own Bible verse","To summarize a news broadcast","To define a generation in one song"],c:1},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'Purple Haze' by Jimi Hendrix — the opening guitar riff uses a tritone interval historically called what by the Catholic Church?",a:["The angel's chord","Diabolus in musica — the devil's interval","The forbidden fifth","Lucifer's scale"],c:1},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'Light My Fire' by The Doors — the song's organ solo was taken from which Bach piece that keyboardist Ray Manzarek was practicing?",a:["Toccata and Fugue","Jesu Joy of Man's Desiring","Invention No. 4","Air on the G String"],c:0},
+  {diff:'hard',decade:'60s',genre:'Pop',q:"'California Dreamin'' by The Mamas and the Papas — who played the flute solo on the recording?",a:["John Phillips","Barry McGuire","Bud Shank","Paul Horn"],c:1},
+  {diff:'hard',decade:'60s',genre:'Rock',q:"'White Room' by Cream — the song's title and lyrical imagery came from a poem by which poet who was Cream's lyricist?",a:["Allen Ginsberg","Pete Brown","Adrian Mitchell","Roger McGough"],c:1},
+
+  // ── 70s HARD (already in Phase 2 above — adding 2 more general hard Qs) ──
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Bohemian Rhapsody' — Freddie Mercury never fully explained the song's meaning. The word 'Bismillah' shouted in the operatic section is the opening word of which text?",a:["The Bible","The Torah","The Quran","The Upanishads"],c:2},
+  {diff:'hard',decade:'70s',genre:'Rock',q:"'Hotel California' — the Eagles' album of the same name was the first album to be mastered digitally. The process was pioneered at which studio?",a:["Criteria Studios Miami","Record Plant New York","Wally Heider Studios","Village Recorder LA"],c:0},
+
+  // ── 80s HARD ──
+  {diff:'hard',decade:'80s',genre:'Rock',q:"'Born in the USA' is often misread as a patriotic anthem — Springsteen has said its angry tone was directly inspired by which book?",a:["Nam by Mark Baker","Born on the Fourth of July by Ron Kovic","The Things They Carried","Fields of Fire"],c:1},
+  {diff:'hard',decade:'80s',genre:'Pop',q:"'Take On Me' by A-ha — the rotoscope animation music video took how many weeks to complete?",a:["6 weeks","10 weeks","16 weeks","Over 20 weeks"],c:2},
+  {diff:'hard',decade:'80s',genre:'New Wave',q:"'Don't You Want Me' by Human League — when the song reached #1 in the UK, lead singer Philip Oakey reportedly told the record label it was a mistake and would:",a:["Ruin their credibility","Never chart outside Sheffield","Kill their career","Date them immediately"],c:0},
+  {diff:'hard',decade:'80s',genre:'Rock',q:"'Africa' by Toto — which member of the band wrote the song's iconic intro keyboard part?",a:["David Paich","Steve Porcaro","David Hungate","Steve Lukather"],c:0},
+  {diff:'hard',decade:'80s',genre:'Pop',q:"'Like a Virgin' — Madonna's performance at the first MTV VMAs in 1984 was improvised when she tripped. What was she wearing that became iconic?",a:["A corset","A wedding dress","Fishnet stockings","A leather jacket"],c:1},
+  {diff:'hard',decade:'80s',genre:'Rock',q:"'Jump' by Van Halen is the band's only US #1 — ironically Eddie Van Halen had written the synth riff years earlier but the band resisted using keyboards. How long did David Lee Roth refuse to record vocals for it?",a:["Two weeks","Six months","A year","It was recorded in one session"],c:1},
+  {diff:'hard',decade:'80s',genre:'Rap',q:"'The Message' — Grandmaster Flash initially refused to release it because he thought it was too slow and depressing. Who convinced him to release it?",a:["Sylvia Robinson","Russell Simmons","Rick Rubin","Barry Gordy"],c:0},
+  {diff:'hard',decade:'80s',genre:'Pop',q:"'Careless Whisper' — George Michael wrote the saxophone melody at age 17 while riding which form of transport?",a:["A train","A bus","A taxi","A bicycle"],c:1},
+
+  // ── 90s HARD ──
+  {diff:'hard',decade:'90s',genre:'Rock',q:"'Smells Like Teen Spirit' — Kurt Cobain said the song's title came from what source?",a:["A spray-paint tag on his wall","A Teen Spirit deodorant slogan Kathleen Hanna wrote on his wall","A lyric in a Bikini Kill song","A line from a John Waters film"],c:1},
+  {diff:'hard',decade:'90s',genre:'Rock',q:"'Creep' by Radiohead was initially rejected by US radio for being 'too depressing' — it was later a hit. The song's guitar chord before the chorus was a deliberate technique by Jonny Greenwood — he strummed hard to:",a:["Add distortion","Ruin the take so they'd do another","Create a jarring effect as he hated the song","Imitate Kurt Cobain"],c:2},
+  {diff:'hard',decade:'90s',genre:'Alternative',q:"'Black Hole Sun' by Soundgarden — Chris Cornell described the song's lyrics as meaningless stream-of-consciousness. The music video won the MTV Award for Best Special Effects — who directed it?",a:["Mark Romanek","Howard Greenhalgh","Anton Corbijn","Jonathan Dayton"],c:1},
+  {diff:'hard',decade:'90s',genre:'Rap',q:"'Juicy' by Notorious B.I.G. samples which 1983 disco song?",a:["I Feel Love by Donna Summer","Catch Me If You Can by Mtume","Juicy Fruit by Mtume","Got to Be Real by Cheryl Lynn"],c:2},
+  {diff:'hard',decade:'90s',genre:'Pop',q:"'Wannabe' by Spice Girls — who produced it?",a:["Stock Aitken Waterman","Richard Stannard and Matt Rowe","Simon Fuller","Pete Waterman alone"],c:1},
+  {diff:'hard',decade:'90s',genre:'R&B',q:"'Waterfalls' by TLC — the music video's underwater effects were groundbreaking for the time. The video won VMA Awards and cost approximately how much to make?",a:["$500,000","$1 million","$2 million","Over $3 million"],c:1},
+  {diff:'hard',decade:'90s',genre:'Rock',q:"'Under the Bridge' by Red Hot Chili Peppers — Anthony Kiedis wrote the lyrics in the back of a car on the way to a rehearsal about feeling alone in Los Angeles. How long did it take him to write?",a:["5 minutes","20 minutes","An hour","Overnight"],c:0},
+  {diff:'hard',decade:'90s',genre:'Alternative',q:"'Karma Police' by Radiohead — 'OK Computer' was named after a line from which Douglas Adams book?",a:["The Hitchhiker's Guide to the Galaxy","The Restaurant at the End of the Universe","So Long and Thanks for All the Fish","Mostly Harmless"],c:0},
+
+  // ── 00s HARD ──
+  {diff:'hard',decade:'00s',genre:'Rock',q:"'Seven Nation Army' by The White Stripes — Jack White has said he and Meg White are siblings, not a married couple. When did he publicly confirm they were ex-spouses?",a:["Before they formed the band","After their first album","After their breakup in 2007","He has never confirmed it"],c:0},
+  {diff:'hard',decade:'00s',genre:'Rap',q:"'Lose Yourself' by Eminem — the song won the Academy Award for Best Original Song in 2003 but Eminem didn't attend the ceremony. Why did he later say he missed it?",a:["He forgot to set his alarm","He was on tour","He didn't think he'd win","He had a contractual conflict"],c:0},
+  {diff:'hard',decade:'00s',genre:'Rock',q:"'Mr. Brightside' by The Killers was the first song the band ever wrote together — Brandon Flowers wrote it about watching his girlfriend kiss another man at a bar. He met her when she was:",a:["His neighbor","His coworker at a hotel","A fan at a show","His childhood friend"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Crazy in Love' by Beyoncé — the horn sample comes from the Chi-Lites' 'Are You My Woman' — Beyoncé's father Mathew Knowles initially said the song was too:",a:["Aggressive for radio","Old-sounding","Short","Complex for pop audiences"],c:0},
+  {diff:'hard',decade:'00s',genre:'Alternative',q:"'Float On' by Modest Mouse — 'Good News for People Who Love Bad News' was their major label debut. What did the band do with a portion of the advance money?",a:["Bought a boat","Bought a van and went on a self-booked tour","Invested in a Portland studio","Recorded 50 songs and threw most away"],c:0},
+  {diff:'hard',decade:'00s',genre:'Rock',q:"'Knights of Cydonia' closes Muse's 'Black Holes and Revelations' — the song's galloping rhythm and synth style was a deliberate homage to which genre?",a:["Spaghetti Western film scores","80s new wave","Progressive rock","Flamenco"],c:0},
+  {diff:'hard',decade:'00s',genre:'Rap',q:"'Gold Digger' by Kanye West — the Ray Charles sample required clearance. Kanye originally planned the beat for which other rapper before using it himself?",a:["Jay-Z","Common","Talib Kweli","Mos Def"],c:1},
+  {diff:'hard',decade:'00s',genre:'Pop',q:"'Toxic' by Britney Spears uses a sample from a 1970s Bollywood song — the original was 'Main Hoon Na' performed by Asha Bhosle. The Bollywood sample was cleared but one instrument in the track was not — a violin riff that was borrowed from a song by:",a:["James Bond film composer John Barry","Spaghetti Western composer Ennio Morricone","Henry Mancini","Bernard Herrmann"],c:0},
+];
+
+EXPANSION_PACK_12.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c, _pack:'EXPANSION_PACK_12'});
+  }
+});
+console.log('EXPANSION_PACK_12: added ' + EXPANSION_PACK_12.length + ' questions (Phase 2: 70s deep cuts, Phase 3: Lilith expansion, Phase 4: hard tier boost).');
+
 </script>
 
 
