@@ -133,6 +133,10 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
 .diff-btn small{font-size:.55rem;letter-spacing:.12em;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--muted);text-transform:uppercase;}
 .cnt-btn.sel,.cnt-btn:hover,.diff-btn.sel,.diff-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(245,197,24,.1);}
 .diff-btn.sel small,.diff-btn:hover small{color:var(--gold);}
+.diff-btn[data-diff="all"].sel,.diff-btn[data-diff="all"]:hover{border-color:#a78bfa !important;color:#a78bfa !important;background:rgba(167,139,250,.15) !important;}
+.diff-btn[data-diff="all"].sel small,.diff-btn[data-diff="all"]:hover small{color:#a78bfa !important;}
+
+.diff-btn[data-diff="all"].sel{border-color:#a78bfa !important;color:#a78bfa !important;background:rgba(167,139,250,.15) !important;}
 
 .timer-row{display:flex;gap:8px;justify-content:center;}
 .timer-btn{padding:8px 14px;border-radius:8px;border:2px solid var(--border);background:transparent;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;}
@@ -496,6 +500,10 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
 .genre-pick-btn[data-genre="Soundtrack"].sel{
   background:linear-gradient(135deg,#ffd700,#ff8c00) !important;
   box-shadow:0 4px 16px rgba(255,215,0,.5);color:#080808 !important;
+}
+.genre-pick-btn[data-genre="LILITH"].sel{
+  background:linear-gradient(135deg,#e879f9,#a21caf) !important;
+  box-shadow:0 4px 16px rgba(232,121,249,.55);
 }
 
 /* ── TEAM MODE ── */
@@ -1633,6 +1641,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
         <button class="diff-btn" onclick="setDiff('easy',this)">EASY<small>+1 pt</small></button>
         <button class="diff-btn sel" onclick="setDiff('medium',this)">MEDIUM<small>+2 pts</small></button>
         <button class="diff-btn" onclick="setDiff('hard',this)">HARD<small>+3 pts · BONUS ROLL</small></button>
+        <button class="diff-btn" data-diff="all" onclick="setDiff('all',this)" style="border-color:#a78bfa;color:#a78bfa;">ALL<small>RANDOM · 1-3 pts</small></button>
       </div>
     </div>
 
@@ -1662,7 +1671,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
           <button class="genre-pick-btn" data-genre="Top 40" onclick="toggleGenre('Top 40',this)">📻 Top 40</button>
           <button class="genre-pick-btn" data-genre="Rap" onclick="toggleGenre('Rap',this)">🎧 Rap</button>
           <button class="genre-pick-btn" data-genre="Soundtrack" onclick="toggleGenre('Soundtrack',this)">🎬 Soundtrack</button>
-          <button class="genre-pick-btn" data-genre="Lilith's Choice" onclick="toggleGenre('Lilith\'s Choice',this)" style="border-color:#e879f9;color:#e879f9;background:rgba(232,121,249,.08);">🌸 Lilith's Choice</button>
+          <button class="genre-pick-btn" id="lilithGenreBtn" data-genre="LILITH" onclick="toggleGenre('LILITH',this)">🌸 Lilith's Choice</button>
         </div>
         <div id="filterSummary" style="text-align:center;margin-top:8px;font-size:.72rem;color:var(--muted);min-height:18px;"></div>
       </div>
@@ -1762,7 +1771,7 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
       <button class="genre-wc-btn" onclick="wcPickGenre('Top 40',this)">📻 Top 40</button>
       <button class="genre-wc-btn" onclick="wcPickGenre('Rap',this)">🎧 Rap</button>
       <button class="genre-wc-btn" onclick="wcPickGenre('Soundtrack',this)">🎬 Soundtrack</button>
-      <button class="genre-wc-btn" onclick="wcPickGenre('Lilith\'s Choice',this)" style="border-color:#e879f9;color:#e879f9;">🌸 Lilith's Choice</button>
+      <button class="genre-wc-btn" onclick="wcPickGenre('LILITH',this)">🌸 Lilith's Choice</button>
     </div>
     <button class="splash-start-btn" style="font-size:1.1rem;padding:12px 28px" onclick="wcConfirm()">🎲 Ask This!</button>
   </div>
@@ -4996,16 +5005,24 @@ function toggleGenre(id, btn){
 function updateFilterSummary(){
   // Count available questions for current selection + difficulty
   let total=0;
-  const diff = difficulty || 'medium';
-  const decades = selectedDecades.has('all')
-    ? Object.keys(TRIVIA[diff]||{})
-    : [...selectedDecades];
-  decades.forEach(did=>{
-    const pool=(TRIVIA[diff]||{})[did]||[];
-    const filtered=selectedGenres.has('all')
-      ? pool
-      : pool.filter(q=>selectedGenres.has(q.genre));
-    total+=filtered.length;
+  const diffs = difficulty === 'all' ? ['easy','medium','hard'] : [difficulty || 'medium'];
+  const diff = diffs[0]; // used for Object.keys below — all diffs share same decade keys
+  const allDecades = Object.keys(TRIVIA[diff]||{});
+  const decades = selectedDecades.has('all') ? allDecades : [...selectedDecades];
+  const seenQs = new Set();
+  diffs.forEach(activeDiff=>{
+    allDecades.forEach(did=>{
+      const pool=(TRIVIA[activeDiff]||{})[did]||[];
+      pool.forEach(q=>{
+        if(seenQs.has(q.q)) return;
+        seenQs.add(q.q);
+        const inDecade = decades.includes(did);
+        const isLilith = q.genre === 'LILITH';
+        const decadeOK = inDecade || isLilith;
+        const genreOK = selectedGenres.has('all') || selectedGenres.has(q.genre);
+        if(decadeOK && genreOK) total++;
+      });
+    });
   });
 
   const summaryEl=document.getElementById('filterSummary');
@@ -5015,8 +5032,8 @@ function updateFilterSummary(){
     ? 'All 6 decades'
     : [...selectedDecades].join(', ');
   const genreLabel=selectedGenres.has('all')
-    ? 'all genres'
-    : [...selectedGenres].join(', ');
+    ? 'all 7 genres'
+    : [...selectedGenres].map(g=>g==='LILITH'?"Lilith's Choice":g).join(', ');
 
   if(total===0){
     summaryEl.innerHTML=`<span style="color:#e63946">⚠️ No questions match — try different filters</span>`;
@@ -5457,7 +5474,7 @@ function triggerCrowdWave(player){
 function animateScore(playerIdx){
   if(playerIdx<0||playerIdx>=players.length) return;
   const p=players[playerIdx];
-  const pts={easy:1,medium:2,hard:3}[difficulty];
+  const pts={easy:1,medium:2,hard:3}[curQ&&curQ._diff||difficulty] || {easy:1,medium:2,hard:3}[difficulty];
   scoreAnimations[playerIdx]={
     from:p.score-pts, to:p.score,
     current:p.score-pts, t:0
@@ -5991,29 +6008,36 @@ function buildQueues(){
 }
 
 function _buildPool(){
+  // When difficulty='all', pull from all three tiers and tag each question with its own diff.
+  const diffs = difficulty === 'all' ? ['easy','medium','hard'] : [difficulty];
+
   const decadeIds = selectedDecades.has('all')
-    ? Object.keys(TRIVIA[difficulty]||{})
+    ? Object.keys(TRIVIA[diffs[0]]||{})
     : [...selectedDecades];
 
   let pool=[];
-  // Always include all decade IDs when building so Lilith's Choice questions
-  // (stored under '00s') are never excluded by decade selection.
-  const allDecadeIds = Object.keys(TRIVIA[difficulty]||{});
-  const buildIds = (selectedGenres.has("Lilith's Choice") && !selectedDecades.has('all'))
+  const allDecadeIds = Object.keys(TRIVIA[diffs[0]]||{});
+  // Always include all decade IDs when LILITH is selected OR when All Genres is active,
+  // so LILITH questions (stored under 00s) are never excluded by decade selection.
+  const needsAllDecades = !selectedDecades.has('all') &&
+    (selectedGenres.has("LILITH") || selectedGenres.has('all'));
+  const buildIds = needsAllDecades
     ? [...new Set([...decadeIds, ...allDecadeIds])]
     : decadeIds;
 
-  buildIds.forEach(did=>{
-    const qs=(TRIVIA[difficulty]||{})[did]||[];
-    const filtered = (selectedGenres.has('all')
-      ? qs
-      : qs.filter(q=>selectedGenres.has(q.genre) || q.genre === "Lilith's Choice")).filter(isPartySafeQuestion);
+  diffs.forEach(diff=>{
+    buildIds.forEach(did=>{
+      const qs=(TRIVIA[diff]||{})[did]||[];
+      const filtered = (selectedGenres.has('all')
+        ? qs
+        : qs.filter(q=>selectedGenres.has(q.genre) || q.genre === "LILITH")).filter(isPartySafeQuestion);
 
-    filtered.forEach(q=>{
-      const copy={...q,_sourceDid:did,_did:getActualDecadeId(q,did)};
-      copy._sig=bpSubjectSig(copy);
-      copy._artistSig=bpTopicArtist(copy);
-      pool.push(copy);
+      filtered.forEach(q=>{
+        const copy={...q,_sourceDid:did,_did:getActualDecadeId(q,did),_diff:diff};
+        copy._sig=bpSubjectSig(copy);
+        copy._artistSig=bpTopicArtist(copy);
+        pool.push(copy);
+      });
     });
   });
 
@@ -6086,8 +6110,8 @@ function bpPickQuestion(candidates){
 
 function getQ(did){
   let avail=gameQueue.filter(q=>!seenThisGame.has(q.q));
-  // Lilith's Choice questions are decade-agnostic; always include them in the available pool.
-  let decadeAvail=avail.filter(q=>q._did===did || q.genre==="Lilith's Choice");
+  // LILITH questions are decade-agnostic; always include them in the available pool.
+  let decadeAvail=avail.filter(q=>q._did===did || q.genre==="LILITH");
   if(decadeAvail.length===0) decadeAvail=avail;
   if(decadeAvail.length===0){ _refillQueue(); return getQ(did); }
   return bpPickQuestion(decadeAvail);
@@ -6162,8 +6186,8 @@ function getActualDecadeId(q, fallbackId){
 
 function questionMatchesActiveFilters(q){
   if(!q) return false;
-  // Lilith's Choice questions bypass decade filtering — available in any decade selection.
-  const isLilith = q.genre === "Lilith's Choice";
+  // LILITH questions bypass decade filtering — available in any decade selection.
+  const isLilith = q.genre === "LILITH";
   const qDecade=getActualDecadeId(q, q._did || q.decade);
   const decadeOK=isLilith || selectedDecades.has('all') || selectedDecades.has(qDecade);
   const genreOK=selectedGenres.has('all') || selectedGenres.has(q.genre);
@@ -6316,7 +6340,7 @@ function checkAns(idx){
       // ── CORRECT ──
       const btns=document.querySelectorAll('.ans-btn');
       if(btns[idx]) btns[idx].classList.add('correct');
-      const pts={easy:1,medium:2,hard:3}[difficulty];
+      const pts={easy:1,medium:2,hard:3}[curQ&&curQ._diff||difficulty] || {easy:1,medium:2,hard:3}[difficulty];
       answeringPlayer.score+=pts;
       answeredCorrect=true;
       // Speed bonus
@@ -6334,7 +6358,7 @@ function checkAns(idx){
         document.getElementById('qFb').textContent=`✅ Correct! +${pts} pts — Advancing!`;
         document.getElementById('qFb').className='q-feedback ok';
         addLog(`✅ ${answeringPlayer.name} correct! +${pts} pts`);
-        if(difficulty==='hard'){
+        if(difficulty==='hard' || (difficulty==='all' && curQ && curQ._diff==='hard')){
           bonusRollPending=true;
           addLog(`⭐ ${answeringPlayer.name} earned a BONUS ROLL!`);
         }
@@ -6971,7 +6995,7 @@ function showScorePop(player){
   const rect=cardEl.getBoundingClientRect();
   const pop=document.createElement('div');
   pop.className='score-pop';
-  const pts={easy:1,medium:2,hard:3}[difficulty];
+  const pts={easy:1,medium:2,hard:3}[curQ&&curQ._diff||difficulty] || {easy:1,medium:2,hard:3}[difficulty];
   pop.textContent='+'+pts;
   pop.style.left=rect.right-30+'px';
   pop.style.top=rect.top+'px';
@@ -8551,6 +8575,123 @@ REPLACEMENT_PACK.forEach(q => {
 console.log('REPLACEMENT_PACK: added ' + REPLACEMENT_PACK.length + ' quality questions across all decades.');
 
 
+// ════════════════════════════════════════════════════════════════════════════
+// EXPANSION PACK 11 — LILITH'S CHOICE
+// Genre: "LILITH" — dedicated category for Taylor Swift, Olivia Rodrigo,
+//   Selena Gomez, Gracie Abrams, and Sabrina Carpenter.
+// All questions use decade '00s' (the board's most recent decade) so they
+//   appear on the right section of the board. The genre tag is what makes
+//   them selectable as a dedicated filter.
+// Does not duplicate the 5 existing Taylor Swift or 3 Selena Gomez questions.
+// Difficulty guardrails same as all other packs.
+// ════════════════════════════════════════════════════════════════════════════
+const EXPANSION_PACK_11 = [
+
+  // ══ TAYLOR SWIFT ══
+  // (5 existing: Love Story, You Belong with Me, Our Song, Tim McGraw, AOTY record)
+  // Adding broad era coverage — Fearless through Eras Tour
+
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Shake It Off' by Taylor Swift was the lead single from which album?",a:["Red","1989","Reputation","Lover"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Blank Space' by Taylor Swift plays on her media reputation for writing songs about:",a:["Heartbreak and exes","Fame and money","Being misunderstood","All of the above"],c:0},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Bad Blood' by Taylor Swift features which rapper in the music video version?",a:["Nicki Minaj","Kendrick Lamar","Cardi B","Iggy Azalea"],c:0},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Look What You Made Me Do' was the lead single from which Taylor Swift album?",a:["1989","Reputation","Lover","Folklore"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'cardigan' was the lead single from Taylor Swift's 'folklore' — it was released alongside which other single on the same day?",a:["exile","the 1","august","seven"],c:3},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Anti-Hero' by Taylor Swift spent a record 8 weeks at #1 — it is from which album?",a:["Lover","folklore","evermore","Midnights"],c:3},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Cruel Summer' by Taylor Swift became a viral hit years after release — it originally appeared on which 2019 album?",a:["Reputation","Lover","folklore","evermore"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'You Belong with Me' — Taylor Swift famously won a VMA for this video but her speech was interrupted by which artist?",a:["Beyoncé","Jay-Z","Kanye West","Lady Gaga"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'All Too Well' — the 10-minute version of Taylor Swift's song was re-released on 'Red (Taylor's Version)'. The short film she directed for it starred which actor?",a:["Jake Gyllenhaal","Dylan O'Brien","Dylan Sprouse","Paul Mescal"],c:0},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'exile' from Taylor Swift's 'folklore' is a duet with which artist?",a:["Justin Vernon","Justin Bieber","Ed Sheeran","Bon Iver"],c:3},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Fearless' won Taylor Swift the Album of the Year Grammy in 2010 — making her the youngest artist to win the award at the time. How old was she?",a:["18","19","20","21"],c:2},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'We Are Never Ever Getting Back Together' was Taylor Swift's first #1 on the Hot 100 — it debuted at #1 based on downloads alone, setting a record for first-week downloads of how many?",a:["Over 200,000","Over 300,000","Over 400,000","Over 623,000"],c:3},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'willow' was the lead single from Taylor Swift's 'evermore' — 'folklore' and 'evermore' were both produced in collaboration with Aaron Dessner of which band?",a:["Bon Iver","The National","Fleet Foxes","Sufjan Stevens' band"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Love Story' — Taylor Swift re-recorded her first six albums under 'Taylor's Version' after her masters were sold. Who originally owned those masters?",a:["Republic Records","Big Machine Records","Interscope","Columbia"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Style' from Taylor Swift's '1989' is widely believed to be about which celebrity ex?",a:["Jake Gyllenhaal","Harry Styles","John Mayer","Ed Sheeran"],c:1},
+
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'The Tortured Poets Department' by Taylor Swift — how many versions of the album were released on its launch date?",a:["2","3","4","5"],c:2},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'champagne problems' from 'evermore' — Taylor Swift has stated the album was written as a companion piece to 'folklore'. Both albums were recorded during which period?",a:["Post-Reputation tour","COVID-19 lockdown","During filming of Miss Americana","While on the Lover Fest tour"],c:1},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Treacherous' from Taylor Swift's 'Red' was voted by fans as a fan favorite — 'Red (Taylor's Version)' included how many previously unreleased vault tracks?",a:["5","7","9","10"],c:2},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'All Too Well' (10 Minute Version) became the longest song ever to reach #1 on the Hot 100. Before it, the record was held by which song?",a:["MacArthur Park","American Pie","Hey Jude","In-A-Gadda-Da-Vida"],c:1},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Down Bad' from 'The Tortured Poets Department' — Taylor Swift became the first artist to have all top 14 spots on the Hot 100 simultaneously. How many total songs from the album charted in the top 100 in its debut week?",a:["14","18","24","All 31 tracks"],c:3},
+
+  // ══ OLIVIA RODRIGO ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'drivers license' by Olivia Rodrigo debuted at #1 and broke the record for most streams in a single week — it was from which debut album?",a:["GUTS","SOUR","Livie","Drivers License EP"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'good 4 u' by Olivia Rodrigo — before her music career she was known for starring in which Disney+ series?",a:["Andi Mack","High School Musical: The Musical: The Series","Bizaardvark","Stuck in the Middle"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'brutal' is the opening track of Olivia Rodrigo's debut album — the song's guitar riff interpolates which Elvis Costello song?",a:["Pump It Up","Oliver's Army","Alison","Watching the Detectives"],c:0},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'vampire' was the lead single from Olivia Rodrigo's second album 'GUTS' — what year was it released?",a:["2021","2022","2023","2024"],c:2},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'traitor' by Olivia Rodrigo — 'SOUR' won the Grammy for Best Pop Vocal Album. How many Grammys did Olivia win at the 2022 ceremony?",a:["1","2","3","4"],c:2},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'deja vu' by Olivia Rodrigo — she is from which US state?",a:["New York","California","Florida","Texas"],c:1},
+
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'drivers license' — Olivia Rodrigo wrote the song drawing from personal experience. The bridge references a specific location — what?",a:["A movie theater","A suburb with houses she'll never own","Her high school","A grocery store parking lot"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'1 step forward, 3 steps back' from 'SOUR' interpolates which Taylor Swift song in its melody?",a:["New Year's Day","Call It What You Want","Delicate","False God"],c:0},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'lacy' from 'GUTS' — Olivia described the album as being more influenced by which musical era than her debut?",a:["90s grunge","2000s pop-punk","80s new wave","70s singer-songwriter"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'making the bed' from 'GUTS' — Olivia Rodrigo produced or co-produced several tracks. Her main collaborator and producer across both albums is:",a:["Dan Nigro","Jack Antonoff","Max Martin","Finneas"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'brutal' — Taylor Swift was given a songwriting credit on 'drivers license' because of an interpolation. Which Swift song did it reference?",a:["New Year's Day","Death By a Thousand Cuts","The Archer","Afterglow"],c:0},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'enough for you' from 'SOUR' — Olivia Rodrigo's debut album was recorded and written largely during COVID lockdown. The song 'hope ur ok' closes the album and was written about:",a:["Her own mental health","Friends from different backgrounds she lost touch with","A specific ex-boyfriend","The isolation of quarantine"],c:1},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'ballad of a homeschooled girl' from 'GUTS' — Olivia was homeschooled while filming. 'GUTS' debuted at #1 in how many countries?",a:["12","16","21","Over 25"],c:3},
+
+  // ══ SELENA GOMEZ ══
+  // (3 existing: Naturally, Falling Down band name, Kiss & Tell debut)
+  // Adding: Stars Dance era, solo career, Revival, mental health journey
+
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Come & Get It' was Selena Gomez's breakthrough solo single in 2013 — it debuted at #1 on the US Pop Songs chart. The song has a distinctive sound influenced by which musical tradition?",a:["Bollywood and bhangra","Latin pop","K-pop","Reggaeton"],c:0},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'The Heart Wants What It Wants' by Selena Gomez was widely believed to be about her on-again off-again relationship with which artist?",a:["Nick Jonas","Justin Bieber","The Weeknd","Zedd"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Lose You to Love Me' by Selena Gomez became her first #1 on the Hot 100 in 2019 — she said the song was about finding herself after a painful breakup. It debuted at #1 the same week which artist released a competing single?",a:["Ariana Grande","Taylor Swift","Billie Eilish","Dua Lipa"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Bad Liar' by Selena Gomez samples the bass line from which classic rock song?",a:["Under Pressure by Queen","Psycho Killer by Talking Heads","Fame by David Bowie","Once in a Lifetime by Talking Heads"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Wolves' by Selena Gomez is a duet with which DJ and producer?",a:["Zedd","Marshmello","Kygo","Marshmello"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Revival' was Selena Gomez's second studio album — she took a break from music before its release to deal with a health condition. What condition did she publicly reveal?",a:["Depression","Lupus","Anxiety disorder","Bipolar disorder"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Same Old Love' from 'Revival' was written and produced by which hitmaking team?",a:["Max Martin and Shellback","Stargate and Sia","Charli XCX","Antonina Armato and Tim James"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Rare' — Selena Gomez's 2020 album title track was written partly as a response to feeling undervalued. She underwent a kidney transplant in 2017 — her donor was:",a:["Her mother Mandy","Her best friend Francia Raisa","Her cousin","A stranger"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Single Soon' was a 2023 Selena Gomez single — she launched her beauty brand Rare Beauty in 2020. What percentage of profits does she donate to mental health causes through the Rare Impact Fund?",a:["1%","2%","5%","10%"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Who Says' by Selena Gomez was her first major statement about self-acceptance — the song was partly inspired by a conversation with which superstar who encouraged her to embrace her voice?",a:["Taylor Swift","Katy Perry","Demi Lovato","Lady Gaga"],c:0},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'De Una Vez' was Selena Gomez's first Spanish-language single — it was released in January 2021 and debuted at #2 on which chart?",a:["Latin Pop Airplay","Hot Latin Songs","Regional Mexican","Tropical Airplay"],c:0},
+
+  // ══ GRACIE ABRAMS ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'That's So True' by Gracie Abrams became a viral sleeper hit in 2024 — she is the daughter of which famous film director?",a:["Steven Spielberg","J.J. Abrams","James Cameron","Christopher Nolan"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'I Love You, I'm Sorry' by Gracie Abrams is from which 2024 album?",a:["This Is What It Feels Like","Minor","The Secret of Us","Good Riddance"],c:2},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'21' by Gracie Abrams — she gained wider attention after being selected as the opening act for which artist's Eras Tour?",a:["Olivia Rodrigo","Billie Eilish","Taylor Swift","Sabrina Carpenter"],c:2},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Stay' by Gracie Abrams and Intention — her debut EP was released in which year?",a:["2019","2020","2021","2022"],c:2},
+
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'amelie' by Gracie Abrams — her debut album 'Good Riddance' was produced by which Taylor Swift collaborator?",a:["Aaron Dessner","Jack Antonoff","Dan Nigro","Justin Tranter"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Block Me Out' from 'The Secret of Us' — Gracie Abrams co-wrote the album's title track with which other artist, who also appears on it as a featured vocalist?",a:["Olivia Rodrigo","Taylor Swift","Sabrina Carpenter","Billie Eilish"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Where do we go now' by Gracie Abrams — 'The Secret of Us' debuted at #1 in the UK, making her the first American woman to do what with a debut UK #1?",a:["Debut at #1 with a second album","Have consecutive #1s on both UK and US","Debut at #1 in the UK with her second album as a solo debut","Outsell a Taylor Swift album in the UK in its debut week"],c:0},
+
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Full machine' by Gracie Abrams — before 'The Secret of Us' she released 'Good Riddance'. Which music publication called it one of the best albums of 2023?",a:["NME","Pitchfork","Rolling Stone","All three"],c:2},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Risk' from 'The Secret of Us' — Gracie Abrams attended which performing arts college before dropping out to pursue music full time?",a:["Berklee College of Music","NYU Tisch","USC Thornton","Emerson College"],c:3},
+
+  // ══ SABRINA CARPENTER ══
+  // (0 existing questions)
+
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Espresso' by Sabrina Carpenter became a massive global hit in 2024 — the song was written and co-produced by Sabrina herself and which producer?",a:["Jack Antonoff","Amy Allen","Julian Bunetta","Max Martin"],c:2},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Please Please Please' by Sabrina Carpenter features a music video co-starring her then-boyfriend — who is he?",a:["Barry Keoghan","Jacob Elordi","Austin Butler","Timothée Chalamet"],c:0},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Short n' Sweet' is Sabrina Carpenter's 2024 album — which Disney Channel show did she star in from 2014?",a:["Andi Mack","Girl Meets World","K.C. Undercover","Best Friends Whenever"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Feather' by Sabrina Carpenter — she opened for which artist on the Eras Tour, significantly boosting her profile?",a:["Olivia Rodrigo","Taylor Swift","Gracie Abrams","Harry Styles"],c:1},
+  {diff:'easy',decade:'00s',genre:"LILITH",q:"'Nonsense' by Sabrina Carpenter became known for its customized endings at live shows — what does she change at every performance?",a:["The key","The outro lyrics","The bridge","The intro"],c:1},
+
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'because i liked a boy' by Sabrina Carpenter was believed to reference a love triangle involving which two other artists?",a:["Olivia Rodrigo and Joshua Bassett","Olivia Rodrigo and Adam Faze","Shawn Mendes and Camila Cabello","Harry Styles and Olivia Wilde"],c:0},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Skin' by Sabrina Carpenter was released as a response record — she wrote and released it within how long of the song she was responding to?",a:["24 hours","3 days","One week","Two weeks"],c:1},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'Espresso' — Sabrina Carpenter has said the track was recorded very quickly. The song spent multiple weeks at #1 globally and made her the first solo female artist to achieve what milestone in 2024?",a:["Three simultaneous top-5 hits in the US","Two consecutive #1 debuts","Top 5 in 30 countries in the same week","All three"],c:0},
+  {diff:'medium',decade:'00s',genre:"LILITH",q:"'email i can't send' by Sabrina Carpenter — her album 'emails i can't send' from 2022 was a breakup album. She co-wrote it primarily with:",a:["Jack Antonoff","Amy Allen","John Mayer","Julia Michaels"],c:1},
+
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Tornado Warnings' from 'Short n' Sweet' — the album debuted at #1 in the US and UK simultaneously. It was co-produced largely by Julian Bunetta who also produced hits for which boy band?",a:["BTS","One Direction","The Jonas Brothers","NSYNC"],c:1},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Read your Mind' by Sabrina Carpenter — before 'Short n' Sweet' she signed to which label imprint?",a:["Interscope","Island","Virgin","Hollywood"],c:3},
+  {diff:'hard',decade:'00s',genre:"LILITH",q:"'Taste' features Jenna Ortega in the music video — Sabrina Carpenter originally auditioned for which role that went to Ortega in Wednesday?",a:["Wednesday Addams","Enid Sinclair","Bianca Barclay","The role of a different character on the show"],c:0},
+];
+
+EXPANSION_PACK_11.forEach(q => {
+  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
+    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
+  }
+});
+console.log("EXPANSION_PACK_11: added " + EXPANSION_PACK_11.length + " LILITH questions (Taylor Swift, Olivia Rodrigo, Selena Gomez, Gracie Abrams, Sabrina Carpenter).");
+
 </script>
 
 
@@ -9868,122 +10009,7 @@ EXPANSION_PACK_10.forEach(q => {
 });
 console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions (90s & 00s pop deep dive).');
 
-// ════════════════════════════════════════════════════════════════════════════
-// EXPANSION PACK 11 — LILITH'S CHOICE
-// Genre: "Lilith's Choice" — dedicated category for Taylor Swift, Olivia Rodrigo,
-//   Selena Gomez, Gracie Abrams, and Sabrina Carpenter.
-// All questions use decade '00s' (the board's most recent decade) so they
-//   appear on the right section of the board. The genre tag is what makes
-//   them selectable as a dedicated filter.
-// Does not duplicate the 5 existing Taylor Swift or 3 Selena Gomez questions.
-// Difficulty guardrails same as all other packs.
-// ════════════════════════════════════════════════════════════════════════════
-const EXPANSION_PACK_11 = [
 
-  // ══ TAYLOR SWIFT ══
-  // (5 existing: Love Story, You Belong with Me, Our Song, Tim McGraw, AOTY record)
-  // Adding broad era coverage — Fearless through Eras Tour
-
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Shake It Off' by Taylor Swift was the lead single from which album?",a:["Red","1989","Reputation","Lover"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Blank Space' by Taylor Swift plays on her media reputation for writing songs about:",a:["Heartbreak and exes","Fame and money","Being misunderstood","All of the above"],c:0},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Bad Blood' by Taylor Swift features which rapper in the music video version?",a:["Nicki Minaj","Kendrick Lamar","Cardi B","Iggy Azalea"],c:0},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Look What You Made Me Do' was the lead single from which Taylor Swift album?",a:["1989","Reputation","Lover","Folklore"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'cardigan' was the lead single from Taylor Swift's 'folklore' — it was released alongside which other single on the same day?",a:["exile","the 1","august","seven"],c:3},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Anti-Hero' by Taylor Swift spent a record 8 weeks at #1 — it is from which album?",a:["Lover","folklore","evermore","Midnights"],c:3},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Cruel Summer' by Taylor Swift became a viral hit years after release — it originally appeared on which 2019 album?",a:["Reputation","Lover","folklore","evermore"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'You Belong with Me' — Taylor Swift famously won a VMA for this video but her speech was interrupted by which artist?",a:["Beyoncé","Jay-Z","Kanye West","Lady Gaga"],c:2},
-
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'All Too Well' — the 10-minute version of Taylor Swift's song was re-released on 'Red (Taylor's Version)'. The short film she directed for it starred which actor?",a:["Jake Gyllenhaal","Dylan O'Brien","Dylan Sprouse","Paul Mescal"],c:0},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'exile' from Taylor Swift's 'folklore' is a duet with which artist?",a:["Justin Vernon","Justin Bieber","Ed Sheeran","Bon Iver"],c:3},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Fearless' won Taylor Swift the Album of the Year Grammy in 2010 — making her the youngest artist to win the award at the time. How old was she?",a:["18","19","20","21"],c:2},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'We Are Never Ever Getting Back Together' was Taylor Swift's first #1 on the Hot 100 — it debuted at #1 based on downloads alone, setting a record for first-week downloads of how many?",a:["Over 200,000","Over 300,000","Over 400,000","Over 623,000"],c:3},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'willow' was the lead single from Taylor Swift's 'evermore' — 'folklore' and 'evermore' were both produced in collaboration with Aaron Dessner of which band?",a:["Bon Iver","The National","Fleet Foxes","Sufjan Stevens' band"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Love Story' — Taylor Swift re-recorded her first six albums under 'Taylor's Version' after her masters were sold. Who originally owned those masters?",a:["Republic Records","Big Machine Records","Interscope","Columbia"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Style' from Taylor Swift's '1989' is widely believed to be about which celebrity ex?",a:["Jake Gyllenhaal","Harry Styles","John Mayer","Ed Sheeran"],c:1},
-
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'The Tortured Poets Department' by Taylor Swift — how many versions of the album were released on its launch date?",a:["2","3","4","5"],c:2},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'champagne problems' from 'evermore' — Taylor Swift has stated the album was written as a companion piece to 'folklore'. Both albums were recorded during which period?",a:["Post-Reputation tour","COVID-19 lockdown","During filming of Miss Americana","While on the Lover Fest tour"],c:1},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Treacherous' from Taylor Swift's 'Red' was voted by fans as a fan favorite — 'Red (Taylor's Version)' included how many previously unreleased vault tracks?",a:["5","7","9","10"],c:2},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'All Too Well' (10 Minute Version) became the longest song ever to reach #1 on the Hot 100. Before it, the record was held by which song?",a:["MacArthur Park","American Pie","Hey Jude","In-A-Gadda-Da-Vida"],c:1},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Down Bad' from 'The Tortured Poets Department' — Taylor Swift became the first artist to have all top 14 spots on the Hot 100 simultaneously. How many total songs from the album charted in the top 100 in its debut week?",a:["14","18","24","All 31 tracks"],c:3},
-
-  // ══ OLIVIA RODRIGO ══
-  // (0 existing questions)
-
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'drivers license' by Olivia Rodrigo debuted at #1 and broke the record for most streams in a single week — it was from which debut album?",a:["GUTS","SOUR","Livie","Drivers License EP"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'good 4 u' by Olivia Rodrigo — before her music career she was known for starring in which Disney+ series?",a:["Andi Mack","High School Musical: The Musical: The Series","Bizaardvark","Stuck in the Middle"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'brutal' is the opening track of Olivia Rodrigo's debut album — the song's guitar riff interpolates which Elvis Costello song?",a:["Pump It Up","Oliver's Army","Alison","Watching the Detectives"],c:0},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'vampire' was the lead single from Olivia Rodrigo's second album 'GUTS' — what year was it released?",a:["2021","2022","2023","2024"],c:2},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'traitor' by Olivia Rodrigo — 'SOUR' won the Grammy for Best Pop Vocal Album. How many Grammys did Olivia win at the 2022 ceremony?",a:["1","2","3","4"],c:2},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'deja vu' by Olivia Rodrigo — she is from which US state?",a:["New York","California","Florida","Texas"],c:1},
-
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'drivers license' — Olivia Rodrigo wrote the song drawing from personal experience. The bridge references a specific location — what?",a:["A movie theater","A suburb with houses she'll never own","Her high school","A grocery store parking lot"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'1 step forward, 3 steps back' from 'SOUR' interpolates which Taylor Swift song in its melody?",a:["New Year's Day","Call It What You Want","Delicate","False God"],c:0},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'lacy' from 'GUTS' — Olivia described the album as being more influenced by which musical era than her debut?",a:["90s grunge","2000s pop-punk","80s new wave","70s singer-songwriter"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'making the bed' from 'GUTS' — Olivia Rodrigo produced or co-produced several tracks. Her main collaborator and producer across both albums is:",a:["Dan Nigro","Jack Antonoff","Max Martin","Finneas"],c:0},
-
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'brutal' — Taylor Swift was given a songwriting credit on 'drivers license' because of an interpolation. Which Swift song did it reference?",a:["New Year's Day","Death By a Thousand Cuts","The Archer","Afterglow"],c:0},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'enough for you' from 'SOUR' — Olivia Rodrigo's debut album was recorded and written largely during COVID lockdown. The song 'hope ur ok' closes the album and was written about:",a:["Her own mental health","Friends from different backgrounds she lost touch with","A specific ex-boyfriend","The isolation of quarantine"],c:1},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'ballad of a homeschooled girl' from 'GUTS' — Olivia was homeschooled while filming. 'GUTS' debuted at #1 in how many countries?",a:["12","16","21","Over 25"],c:3},
-
-  // ══ SELENA GOMEZ ══
-  // (3 existing: Naturally, Falling Down band name, Kiss & Tell debut)
-  // Adding: Stars Dance era, solo career, Revival, mental health journey
-
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Come & Get It' was Selena Gomez's breakthrough solo single in 2013 — it debuted at #1 on the US Pop Songs chart. The song has a distinctive sound influenced by which musical tradition?",a:["Bollywood and bhangra","Latin pop","K-pop","Reggaeton"],c:0},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'The Heart Wants What It Wants' by Selena Gomez was widely believed to be about her on-again off-again relationship with which artist?",a:["Nick Jonas","Justin Bieber","The Weeknd","Zedd"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Lose You to Love Me' by Selena Gomez became her first #1 on the Hot 100 in 2019 — she said the song was about finding herself after a painful breakup. It debuted at #1 the same week which artist released a competing single?",a:["Ariana Grande","Taylor Swift","Billie Eilish","Dua Lipa"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Bad Liar' by Selena Gomez samples the bass line from which classic rock song?",a:["Under Pressure by Queen","Psycho Killer by Talking Heads","Fame by David Bowie","Once in a Lifetime by Talking Heads"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Wolves' by Selena Gomez is a duet with which DJ and producer?",a:["Zedd","Marshmello","Kygo","Marshmello"],c:2},
-
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Revival' was Selena Gomez's second studio album — she took a break from music before its release to deal with a health condition. What condition did she publicly reveal?",a:["Depression","Lupus","Anxiety disorder","Bipolar disorder"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Same Old Love' from 'Revival' was written and produced by which hitmaking team?",a:["Max Martin and Shellback","Stargate and Sia","Charli XCX","Antonina Armato and Tim James"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Rare' — Selena Gomez's 2020 album title track was written partly as a response to feeling undervalued. She underwent a kidney transplant in 2017 — her donor was:",a:["Her mother Mandy","Her best friend Francia Raisa","Her cousin","A stranger"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Single Soon' was a 2023 Selena Gomez single — she launched her beauty brand Rare Beauty in 2020. What percentage of profits does she donate to mental health causes through the Rare Impact Fund?",a:["1%","2%","5%","10%"],c:0},
-
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Who Says' by Selena Gomez was her first major statement about self-acceptance — the song was partly inspired by a conversation with which superstar who encouraged her to embrace her voice?",a:["Taylor Swift","Katy Perry","Demi Lovato","Lady Gaga"],c:0},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'De Una Vez' was Selena Gomez's first Spanish-language single — it was released in January 2021 and debuted at #2 on which chart?",a:["Latin Pop Airplay","Hot Latin Songs","Regional Mexican","Tropical Airplay"],c:0},
-
-  // ══ GRACIE ABRAMS ══
-  // (0 existing questions)
-
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'That's So True' by Gracie Abrams became a viral sleeper hit in 2024 — she is the daughter of which famous film director?",a:["Steven Spielberg","J.J. Abrams","James Cameron","Christopher Nolan"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'I Love You, I'm Sorry' by Gracie Abrams is from which 2024 album?",a:["This Is What It Feels Like","Minor","The Secret of Us","Good Riddance"],c:2},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'21' by Gracie Abrams — she gained wider attention after being selected as the opening act for which artist's Eras Tour?",a:["Olivia Rodrigo","Billie Eilish","Taylor Swift","Sabrina Carpenter"],c:2},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Stay' by Gracie Abrams and Intention — her debut EP was released in which year?",a:["2019","2020","2021","2022"],c:2},
-
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'amelie' by Gracie Abrams — her debut album 'Good Riddance' was produced by which Taylor Swift collaborator?",a:["Aaron Dessner","Jack Antonoff","Dan Nigro","Justin Tranter"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Block Me Out' from 'The Secret of Us' — Gracie Abrams co-wrote the album's title track with which other artist, who also appears on it as a featured vocalist?",a:["Olivia Rodrigo","Taylor Swift","Sabrina Carpenter","Billie Eilish"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Where do we go now' by Gracie Abrams — 'The Secret of Us' debuted at #1 in the UK, making her the first American woman to do what with a debut UK #1?",a:["Debut at #1 with a second album","Have consecutive #1s on both UK and US","Debut at #1 in the UK with her second album as a solo debut","Outsell a Taylor Swift album in the UK in its debut week"],c:0},
-
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Full machine' by Gracie Abrams — before 'The Secret of Us' she released 'Good Riddance'. Which music publication called it one of the best albums of 2023?",a:["NME","Pitchfork","Rolling Stone","All three"],c:2},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Risk' from 'The Secret of Us' — Gracie Abrams attended which performing arts college before dropping out to pursue music full time?",a:["Berklee College of Music","NYU Tisch","USC Thornton","Emerson College"],c:3},
-
-  // ══ SABRINA CARPENTER ══
-  // (0 existing questions)
-
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Espresso' by Sabrina Carpenter became a massive global hit in 2024 — the song was written and co-produced by Sabrina herself and which producer?",a:["Jack Antonoff","Amy Allen","Julian Bunetta","Max Martin"],c:2},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Please Please Please' by Sabrina Carpenter features a music video co-starring her then-boyfriend — who is he?",a:["Barry Keoghan","Jacob Elordi","Austin Butler","Timothée Chalamet"],c:0},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Short n' Sweet' is Sabrina Carpenter's 2024 album — which Disney Channel show did she star in from 2014?",a:["Andi Mack","Girl Meets World","K.C. Undercover","Best Friends Whenever"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Feather' by Sabrina Carpenter — she opened for which artist on the Eras Tour, significantly boosting her profile?",a:["Olivia Rodrigo","Taylor Swift","Gracie Abrams","Harry Styles"],c:1},
-  {diff:'easy',decade:'00s',genre:"Lilith's Choice",q:"'Nonsense' by Sabrina Carpenter became known for its customized endings at live shows — what does she change at every performance?",a:["The key","The outro lyrics","The bridge","The intro"],c:1},
-
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'because i liked a boy' by Sabrina Carpenter was believed to reference a love triangle involving which two other artists?",a:["Olivia Rodrigo and Joshua Bassett","Olivia Rodrigo and Adam Faze","Shawn Mendes and Camila Cabello","Harry Styles and Olivia Wilde"],c:0},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Skin' by Sabrina Carpenter was released as a response record — she wrote and released it within how long of the song she was responding to?",a:["24 hours","3 days","One week","Two weeks"],c:1},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'Espresso' — Sabrina Carpenter has said the track was recorded very quickly. The song spent multiple weeks at #1 globally and made her the first solo female artist to achieve what milestone in 2024?",a:["Three simultaneous top-5 hits in the US","Two consecutive #1 debuts","Top 5 in 30 countries in the same week","All three"],c:0},
-  {diff:'medium',decade:'00s',genre:"Lilith's Choice",q:"'email i can't send' by Sabrina Carpenter — her album 'emails i can't send' from 2022 was a breakup album. She co-wrote it primarily with:",a:["Jack Antonoff","Amy Allen","John Mayer","Julia Michaels"],c:1},
-
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Tornado Warnings' from 'Short n' Sweet' — the album debuted at #1 in the US and UK simultaneously. It was co-produced largely by Julian Bunetta who also produced hits for which boy band?",a:["BTS","One Direction","The Jonas Brothers","NSYNC"],c:1},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Read your Mind' by Sabrina Carpenter — before 'Short n' Sweet' she signed to which label imprint?",a:["Interscope","Island","Virgin","Hollywood"],c:3},
-  {diff:'hard',decade:'00s',genre:"Lilith's Choice",q:"'Taste' features Jenna Ortega in the music video — Sabrina Carpenter originally auditioned for which role that went to Ortega in Wednesday?",a:["Wednesday Addams","Enid Sinclair","Bianca Barclay","The role of a different character on the show"],c:0},
-];
-
-EXPANSION_PACK_11.forEach(q => {
-  if(TRIVIA[q.diff] && TRIVIA[q.diff][q.decade]){
-    TRIVIA[q.diff][q.decade].push({genre:q.genre, q:q.q, a:q.a, c:q.c});
-  }
-});
-console.log("EXPANSION_PACK_11: added " + EXPANSION_PACK_11.length + " Lilith's Choice questions (Taylor Swift, Olivia Rodrigo, Selena Gomez, Gracie Abrams, Sabrina Carpenter).");
 
 // ════════════════════════════════════════════════════════════════════════════
 // EXPANSION PACK 10 — 90s & 2000s Pop deep dive
@@ -10338,9 +10364,14 @@ console.log('EXPANSION_PACK_10: added ' + EXPANSION_PACK_10.length + ' questions
     if(curQ && actualDecadeId) curQ._did=actualDecadeId;
     const displayDecade=getDecadeMetaById(actualDecadeId, decade);
     const badge=document.getElementById('qBadge');
-    badge.textContent=curQ && curQ.type==='lyric'?'🎤 LYRIC':displayDecade.label;
-    badge.style.background=(curQ && curQ.type==='lyric')?'rgba(255,46,146,.18)':displayDecade.color+'22';
-    badge.style.color=(curQ && curQ.type==='lyric')?'#ff8fc5':displayDecade.light;
+    const isLilithQ = curQ && curQ.genre === 'LILITH';
+    // In ALL difficulty mode, append the question's own difficulty to the badge
+    const qDiffLabel = (difficulty==='all' && curQ && curQ._diff)
+      ? ' · ' + curQ._diff.toUpperCase()
+      : '';
+    badge.textContent=(isLilithQ ? "🌸 Lilith's Choice" : (curQ && curQ.type==='lyric'?'🎤 LYRIC':displayDecade.label)) + qDiffLabel;
+    badge.style.background=isLilithQ ? 'rgba(232,121,249,.18)' : (curQ && curQ.type==='lyric')?'rgba(255,46,146,.18)':displayDecade.color+'22';
+    badge.style.color=isLilithQ ? '#e879f9' : (curQ && curQ.type==='lyric')?'#ff8fc5':displayDecade.light;
     badge.style.borderColor=(curQ && curQ.type==='lyric')?'rgba(255,46,146,.55)':displayDecade.color+'66';
     badge.style.boxShadow=(curQ && curQ.type==='lyric')?'0 0 18px rgba(255,46,146,.65)':`0 0 16px ${displayDecade.color}66`;
     if(!(curQ && curQ.type==='lyric')) animateBadge(displayDecade);
@@ -19997,6 +20028,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   // 4) Clean up question pool: remove obvious year/date questions and avoid hard/niche-feeling pools.
   function easyMainstreamQuestion(q){
     if(!q || !q.q) return false;
+    if(q.genre==='LILITH') return true;
     const txt=q.q.toLowerCase();
     if(/\b(what|which)\s+year\b|in what year|what year did|what year was|which year did|released in which year|peaked at #|peaked at number/.test(txt)) return false;
     if(/\b(19\d\d|20\d\d)\b/.test(txt) && /\b(year|released|won|grammy|oscar|peaked|chart|debut|formed)\b/.test(txt)) return false;
@@ -20089,6 +20121,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function keepMainstreamParty(q){
     if(!q || !q.q) return false;
+    if(q.genre==='LILITH') return true;
     if(q.diff==='hard') return false;
     if(isTooSpecific(q)) return false;
     if(GIVEAWAY_WORDS.test(q.q)) return false;
@@ -20324,6 +20357,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function sanitizeQuestion(q, fallbackDid){
     if(!q||!q.q||!Array.isArray(q.a)||q.a.length<4) return null;
+    if(q.genre==='LILITH') return q; // Lilith's Choice questions skip sanitization
     if(BANNED_Q_RE.test(q.q)) return null;
     q.q=cleanPrompt(q.q);
     if(GIVEAWAY_RE.test(q.q)) q.q=cleanPrompt(q.q);
@@ -20714,6 +20748,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
   }
   function partySafe(q,dec){
     if(!q || !q.q || !Array.isArray(q.a)) return false;
+    if(q.genre==='LILITH') return true; // Lilith's Choice questions bypass party-safe filtering
     const text=String(q.q);
     if(V21_BAD_PATTERNS.some(rx=>rx.test(text))) return false;
     if(q.a.filter(a=>NUMERIC_ANS.test(String(a))).length>=3) return false;
@@ -21389,6 +21424,7 @@ console.log('DIVERSE_90S_2000S_EXPANSION_200: '+DIVERSE_90S_2000S_EXPANSION_200.
 
   function proofQuestion(q, decade){
     if(!q||!q.q||!Array.isArray(q.a)||q.a.length<4) return null;
+    if(q.genre==='LILITH') return q;
     q.q=rewritePrompt(q);
     const full=(q.q+' '+q.a.join(' ')).replace(/[’‘]/g,"'");
     if(hardReject.some(re=>re.test(full))) return null;
