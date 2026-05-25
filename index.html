@@ -1682,6 +1682,177 @@ header{position:relative;z-index:5;text-align:center;padding:10px 20px 6px;borde
       padding:11px 10px !important;
     }
   }
+
+/* ── LANDSCAPE MODE — question overlay optimised for horizontal screens ── */
+@media (orientation: landscape) and (max-height: 500px) {
+
+  /* Full-width overlay aligned to bottom */
+  .q-overlay{
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  /* q-box becomes a 2-column grid:
+     Left column  = question text
+     Right column = answer buttons
+     Header rows span both columns                */
+  .q-box{
+    border-radius: 14px 14px 0 0 !important;
+    padding: 8px 16px 10px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 98dvh !important;
+    overflow-y: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    column-gap: 14px !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+  }
+
+  /* Full-width rows: top bar, who's answering, lifeline bar, feedback, buttons */
+  .q-top-bar,
+  .who-answering,
+  #qWho,
+  #qLifelineBar,
+  .q-feedback,
+  #qFb,
+  #contBtn,
+  .steal-prompt,
+  #stealPrompt,
+  [id*="FreeLifePrompt"]{
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Top bar: shrink badges and timer */
+  .q-top-bar{
+    margin-bottom: 2px !important;
+  }
+  #qBadge, .q-decade-badge{
+    font-size: .72rem !important;
+    padding: 3px 9px !important;
+  }
+  .q-genre-badge{
+    font-size: .6rem !important;
+    padding: 2px 6px !important;
+  }
+  .timer-display{
+    font-size: .72rem !important;
+  }
+
+  /* Who's answering — compact */
+  #qWho{
+    font-size: .78rem !important;
+    margin: 2px 0 3px !important;
+  }
+
+  /* Lifeline bar — compact */
+  #qLifelineBar{
+    margin: 3px 0 5px !important;
+    gap: 5px !important;
+    flex-wrap: nowrap !important;
+  }
+  .q-life-btn{
+    padding: 4px 9px !important;
+    font-size: .72rem !important;
+  }
+  .q-life-note{
+    font-size: .6rem !important;
+  }
+
+  /* Question text — LEFT column */
+  .q-text{
+    grid-column: 1 !important;
+    font-size: .86rem !important;
+    line-height: 1.42 !important;
+    margin: 4px 0 !important;
+    align-self: center !important;
+  }
+
+  /* Answers — RIGHT column, keep 2×2 grid */
+  .answers{
+    grid-column: 2 !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+    margin: 4px 0 !important;
+    align-self: center !important;
+  }
+
+  .ans-btn{
+    padding: 7px 8px !important;
+    font-size: .78rem !important;
+    line-height: 1.22 !important;
+    border-radius: 8px !important;
+    min-height: 36px !important;
+  }
+
+  /* Feedback */
+  .q-feedback{
+    font-size: .85rem !important;
+    margin: 4px 0 !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Continue button */
+  #contBtn{
+    padding: 8px 20px !important;
+    font-size: .82rem !important;
+    margin-top: 4px !important;
+  }
+
+  /* Free life prompt */
+  [id*="FreeLifePrompt"]{
+    padding: 8px 12px !important;
+    margin-top: 4px !important;
+  }
+  [id*="FreeLifePrompt"] h3{
+    font-size: .85rem !important;
+    margin-bottom: 3px !important;
+  }
+  [id*="FreeLifePrompt"] p{
+    font-size: .75rem !important;
+    margin-bottom: 6px !important;
+  }
+  [id*="FreeLifePrompt"] button{
+    padding: 6px 12px !important;
+    font-size: .76rem !important;
+  }
+}
+
+/* Taller landscape (tablets, large phones) — just tighten vertical spacing */
+@media (orientation: landscape) and (min-height: 501px) and (max-height: 650px) {
+  .q-text{
+    font-size: .93rem !important;
+    line-height: 1.44 !important;
+    margin: 8px 0 10px !important;
+  }
+  .ans-btn{
+    padding: 9px 11px !important;
+    font-size: .86rem !important;
+  }
+  .q-box{
+    max-height: 94dvh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Wider landscape phones (iPhone landscape) — less aggressive */
+@media (orientation: landscape) and (min-height: 501px) and (max-height: 600px) {
+  .q-text{
+    font-size: .95rem !important;
+    line-height: 1.45 !important;
+    margin: 8px 0 10px !important;
+  }
+  .ans-btn{
+    padding: 10px 12px !important;
+    font-size: .88rem !important;
+  }
+  .q-box{
+    max-height: 92dvh !important;
+    overflow-y: auto !important;
+    padding: 12px 18px 16px !important;
+  }
+}
 </style>
 
 </head>
